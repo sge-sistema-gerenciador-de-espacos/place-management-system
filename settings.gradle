@@ -3,4 +3,4 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = 'place-management-system'
+rootProject.name = 'place-management-system-server-side'
