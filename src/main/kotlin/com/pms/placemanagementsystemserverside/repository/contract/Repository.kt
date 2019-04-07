@@ -7,5 +7,5 @@ interface Repository<T> {
 
     fun remove(item: T)
 
-    fun query(criteria: Criteria): List<T>
+//    fun query(criteria: Criteria): List<T>
 }
