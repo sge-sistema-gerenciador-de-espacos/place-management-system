@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/pms-api")
-abstract class BaseApiController : ApiController {
+class BaseApiController {
 
-    @GetMapping
+    @GetMapping(value = ["/"])
     fun home() = "HOME TEST"
 }
