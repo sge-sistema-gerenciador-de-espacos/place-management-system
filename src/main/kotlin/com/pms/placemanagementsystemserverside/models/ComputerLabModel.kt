@@ -2,6 +2,6 @@ package com.pms.placemanagementsystemserverside.models
 
 import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
 
-data class ComputerLabModel(private val name: String, private val numberOfChairs: Int,
+data class ComputerLabModel(private val id: Long, private val name: String, private val numberOfChairs: Int,
                             private val hasProjector: Boolean, private val numeberOfPcs: Int)
-    : SpaceModel(name, numberOfChairs, hasProjector, TypeOfSpaceEnum.COMPUTER_LAB)
+    : SpaceModel(id, name, numberOfChairs, hasProjector, TypeOfSpaceEnum.COMPUTER_LAB)
