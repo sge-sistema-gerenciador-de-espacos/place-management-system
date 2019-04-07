@@ -3,23 +3,29 @@ package com.pms.placemanagementsystemserverside.models
 import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
 
 //@Entity
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.SINGLE)
 open class SpaceModel(
 
 //        @Id
-//        @GeneratedValue(strategy = GenerationType.AUTO)
+//        @Generatedvalue(strategy = GenerationType.AUTO)
 //        @Column(name = "id", updatable = false, nullable = false)
-        private val id: Long,
+        var id: Long,
 
 //        @Column
-        private val name: String,
+        var name: String,
 
 //        @Column
-        private val numberOfChairs: Int,
+        var numberOfChairs: Int,
 
 //        @Column
-        private val hasProjector: Boolean,
+        var hasProjector: Boolean,
+
+        //        @Column
+        var hasBoard: Boolean,
+
+        //        @Column
+        var hasSmartBoard: Boolean,
 
 //        @Column
-        private val typeOfSpace: TypeOfSpaceEnum
+        var typeOfSpace: TypeOfSpaceEnum
 )

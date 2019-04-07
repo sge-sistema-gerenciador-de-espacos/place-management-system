@@ -3,7 +3,9 @@ package com.pms.placemanagementsystemserverside.models
 import com.pms.placemanagementsystemserverside.models.enums.Software
 import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
 
-data class ComputerLabModel(private val id: Long, private val name: String, private val numberOfChairs: Int,
-                            private val hasProjector: Boolean, private val numberOfPcs: Int,
-                            private val softwares: MutableList<Software>)
-    : SpaceModel(id, name, numberOfChairs, hasProjector, TypeOfSpaceEnum.COMPUTER_LAB)
+class ComputerLabModel(id: Long, name: String, numberOfChairs: Int,
+                       hasProjector: Boolean, hasBoard: Boolean,
+                       hasSmartBoard: Boolean, var numberOfPcs: Int,
+                       var softwares: MutableList<Software>)
+    : SpaceModel(id = id, name = name, numberOfChairs = numberOfChairs, hasProjector = hasProjector,
+        hasBoard = hasBoard, hasSmartBoard = hasSmartBoard, typeOfSpace = TypeOfSpaceEnum.COMPUTER_LAB)
