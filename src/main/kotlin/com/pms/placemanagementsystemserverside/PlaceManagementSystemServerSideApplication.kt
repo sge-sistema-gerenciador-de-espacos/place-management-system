@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class PlaceManagementSystemServerSideApplication
 
 fun main(args: Array<String>) {
-	runApplication<PlaceManagementSystemServerSideApplication>(*args)
+    runApplication<PlaceManagementSystemServerSideApplication>(*args)
 }
