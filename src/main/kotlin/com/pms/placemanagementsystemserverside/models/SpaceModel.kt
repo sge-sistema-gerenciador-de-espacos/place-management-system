@@ -9,23 +9,23 @@ open class SpaceModel(
 //        @Id
 //        @Generatedvalue(strategy = GenerationType.AUTO)
 //        @Column(name = "id", updatable = false, nullable = false)
-        var id: Long,
+        var id: Long = 0,
 
 //        @Column
-        var name: String,
+        var name: String = "",
 
 //        @Column
-        var numberOfChairs: Int,
+        var numberOfChairs: Int = 0,
 
 //        @Column
-        var hasProjector: Boolean,
+        var hasProjector: Boolean = false,
 
         //        @Column
-        var hasBoard: Boolean,
+        var hasBoard: Boolean = false,
 
         //        @Column
-        var hasSmartBoard: Boolean,
+        var hasSmartBoard: Boolean = false,
 
 //        @Column
-        var typeOfSpace: TypeOfSpaceEnum
+        var typeOfSpace: TypeOfSpaceEnum = TypeOfSpaceEnum.CLASSROOM
 )

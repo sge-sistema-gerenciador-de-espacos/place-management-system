@@ -40,7 +40,7 @@ class SpaceApiController : BaseApiController<SpaceModel>() {
     }
 
     private fun getSpaces(): MutableList<SpaceModel> {
-        val spaceModel = SpaceModel(id = 1L, name = "SalaA", numberOfChairs = 12, hasProjector = true,
+        val spaceModel = SpaceModel(name = "SalaA", numberOfChairs = 12, hasProjector = true,
                 hasBoard = true, hasSmartBoard = false, typeOfSpace = TypeOfSpaceEnum.CLASSROOM)
         return mutableListOf(spaceModel)
     }
