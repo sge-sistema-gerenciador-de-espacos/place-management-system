@@ -1,6 +1,8 @@
 package com.pms.placemanagementsystemserverside.apicontroller.space
 
 import com.pms.placemanagementsystemserverside.apicontroller.BaseApiController
+import com.pms.placemanagementsystemserverside.models.ComputerLabModel
+import com.pms.placemanagementsystemserverside.models.SoftwareModel
 import com.pms.placemanagementsystemserverside.models.SpaceModel
 import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
 import org.springframework.http.HttpStatus
@@ -26,10 +28,9 @@ class SpaceApiController : BaseApiController<SpaceModel>() {
 
     @PutMapping
     override fun put(item: SpaceModel): ResponseEntity<SpaceModel> {
-        getSpaces().forEach {
-            if (it.id == item.id) {
-                it.name = item.name
-            }
+        getSpaces().apply {
+            removeIf { it.id == item.id }
+            add(item)
         }
         return ResponseEntity.accepted().build()
     }
@@ -40,10 +41,19 @@ class SpaceApiController : BaseApiController<SpaceModel>() {
     }
 
     private fun getSpaces(): MutableList<SpaceModel> {
-        val spaceModel = SpaceModel(name = "SalaA", numberOfChairs = 12, hasProjector = true,
+
+        val spaceModel = SpaceModel(id = 1L, name = "SalaA", numberOfChairs = 12, hasProjector = true,
                 hasBoard = true, hasSmartBoard = false, typeOfSpace = TypeOfSpaceEnum.CLASSROOM)
+
+        val sparceModel = ComputerLabModel(id = 1L, name = "SalaA", numberOfChairs = 12, hasProjector = true,
+                hasBoard = true, hasSmartBoard = false, numberOfPcs = 20, softwares = getSoftwares())
+
         return mutableListOf(spaceModel)
     }
 
-
+    private fun getSoftwares(): MutableList<SoftwareModel> =
+            mutableListOf(
+                    SoftwareModel(id = 1L, name = "Intellij"),
+                    SoftwareModel(id = 2L, name = "AndroidStudio")
+            )
 }
