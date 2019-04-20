@@ -1,4 +1,4 @@
-package com.pms.placemanagementsystemserverside.models
+package com.pms.placemanagementsystemserverside.models.space
 
 import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
 

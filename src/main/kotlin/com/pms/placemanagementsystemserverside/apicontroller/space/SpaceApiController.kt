@@ -1,9 +1,9 @@
 package com.pms.placemanagementsystemserverside.apicontroller.space
 
 import com.pms.placemanagementsystemserverside.apicontroller.BaseApiController
-import com.pms.placemanagementsystemserverside.models.ComputerLabModel
-import com.pms.placemanagementsystemserverside.models.SoftwareModel
-import com.pms.placemanagementsystemserverside.models.SpaceModel
+import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
+import com.pms.placemanagementsystemserverside.models.space.SoftwareModel
+import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
