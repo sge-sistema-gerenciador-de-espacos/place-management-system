@@ -22,7 +22,6 @@ class SpaceApiController : BaseApiController<SpaceModel>() {
 
     private val logger = LoggerFactory.getLogger(SpaceApiController::class.java)
 
-
     override fun createResource(item: SpaceModel): ResponseEntity<SpaceModel> {
 
         getSpaces().add(item)
