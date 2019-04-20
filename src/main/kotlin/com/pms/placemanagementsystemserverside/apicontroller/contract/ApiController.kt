@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*
 interface ApiController<T> {
 
     @PostMapping
-    fun createResource(@RequestBody item: T): ResponseEntity<T>
+    fun createResource(@RequestBody item: T): ResponseEntity<Unit>
 
     @PostMapping(value = ["/filter"])
     fun selectResourcesByFilter(@RequestBody item: T): ResponseEntity<List<T>>
