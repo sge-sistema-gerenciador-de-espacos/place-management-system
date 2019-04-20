@@ -1,10 +1,10 @@
 package com.pms.placemanagementsystemserverside.apicontroller.space
 
 import com.pms.placemanagementsystemserverside.apicontroller.BaseApiController
+import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
 import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
 import com.pms.placemanagementsystemserverside.models.space.SoftwareModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
-import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -20,10 +20,10 @@ import java.net.URI
 class SpaceApiController : BaseApiController<SpaceModel>() {
 //class SpaceApiController : ApiController<SpaceModel> {
 
-    private val logger = LoggerFactory.getLogger(SpaceApiController::class.java)
+    private val LOGGER = LoggerFactory.getLogger(SpaceApiController::class.java)
 
     override fun createResource(item: SpaceModel): ResponseEntity<SpaceModel> {
-
+        LOGGER.info("SpaceModel: $item")
         getSpaces().add(item)
         return ResponseEntity.created(URI.create("/spaces")).build()
     }
