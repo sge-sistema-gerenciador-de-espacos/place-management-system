@@ -9,23 +9,30 @@ open class SpaceModel(
 //        @Id
 //        @Generatedvalue(strategy = GenerationType.AUTO)
 //        @Column(name = "id", updatable = false, nullable = false)
-        var id: Long = 0,
+        open var id: Long = 0,
 
 //        @Column
-        var name: String = "",
+        open var name: String = "",
 
 //        @Column
-        var numberOfChairs: Int = 0,
+        open var numberOfChairs: Int = 0,
 
 //        @Column
-        var hasProjector: Boolean = false,
+        open var hasProjector: Boolean = false,
 
         //        @Column
-        var hasBoard: Boolean = false,
+        open var hasBoard: Boolean = false,
 
         //        @Column
-        var hasSmartBoard: Boolean = false,
+        open var hasSmartBoard: Boolean = false,
 
 //        @Column
-        var typeOfSpace: TypeOfSpaceEnum = TypeOfSpaceEnum.CLASSROOM
-)
+        val typeOfSpace: TypeOfSpaceEnum = TypeOfSpaceEnum.CLASSROOM
+) {
+
+    override fun toString(): String {
+        return "SpaceModel(id=$id, name='$name', numberOfChairs=$numberOfChairs, hasProjector=$hasProjector, " +
+                "hasBoard=$hasBoard, hasSmartBoard=$hasSmartBoard, typeOfSpace=$typeOfSpace)"
+    }
+
+}
