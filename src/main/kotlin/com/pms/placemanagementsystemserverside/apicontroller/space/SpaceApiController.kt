@@ -1,6 +1,6 @@
 package com.pms.placemanagementsystemserverside.apicontroller.space
 
-import com.pms.placemanagementsystemserverside.apicontroller.BaseApiController
+import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
 import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
 import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
 import com.pms.placemanagementsystemserverside.models.space.SoftwareModel
@@ -13,39 +13,66 @@ import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 
 @RestController
-//TODO check if base request mapping is working
 @RequestMapping(
-        value = ["/pms-api/spaces"]
+        value = ["/pms-api/spaces"],
+        consumes = ["application/json"],
+        produces = ["application/json"]
 )
-class SpaceApiController : BaseApiController<SpaceModel>() {
-//class SpaceApiController : ApiController<SpaceModel> {
+class SpaceApiController : ApiController<SpaceModel> {
 
     private val LOGGER = LoggerFactory.getLogger(SpaceApiController::class.java)
+    private val spaceModelList = getSpaces()
 
-    override fun createResource(item: SpaceModel): ResponseEntity<SpaceModel> {
-        LOGGER.info("SpaceModel: $item")
-        getSpaces().add(item)
-        return ResponseEntity.created(URI.create("/spaces")).build()
+    override fun createResource(item: SpaceModel): ResponseEntity<Unit> {
+        try {
+            LOGGER.info("createResource::item: $item")
+            spaceModelList.add(item)
+            return ResponseEntity.created(URI.create("/spaces/${item.id}")).build()
+        } catch (e: Exception) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build()
+        }
     }
 
     override fun selectResourcesByFilter(item: SpaceModel): ResponseEntity<List<SpaceModel>> {
-        return ResponseEntity(getSpaces(), HttpStatus.OK)
+        val filteredSpaces = mutableListOf<SpaceModel>()
+
+        try {
+            LOGGER.info("selectResourcesByFilter::item: $item")
+            filteredSpaces.addAll(spaceModelList.filter { it.id == item.id })
+            LOGGER.info("selectResourcesByFilter::filteredSpaces: $filteredSpaces")
+            return ResponseEntity.ok(filteredSpaces)
+
+        } catch (e: Exception) {
+            return ResponseEntity(filteredSpaces, HttpStatus.NOT_FOUND)
+        }
+
     }
 
     override fun selectAllResources(): ResponseEntity<List<SpaceModel>> {
-        return ResponseEntity(getSpaces(), HttpStatus.OK)
+        LOGGER.info("selectAllResources::spaceModelList: $spaceModelList")
+        return ResponseEntity.ok(spaceModelList)
     }
 
     override fun updateResource(item: SpaceModel): ResponseEntity<SpaceModel> {
-        getSpaces().apply {
-            removeIf { it.id == item.id }
-            add(item)
+        try {
+            LOGGER.info("selectAllResources::updateResource: $item")
+            spaceModelList.apply {
+                removeIf { it.id == item.id }
+                add(item)
+            }
+            return ResponseEntity.noContent().build()
+        } catch (e: Exception) {
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.accepted().build()
     }
 
     override fun deleteResource(id: Long): ResponseEntity<Unit> {
-        return ResponseEntity.accepted().build()
+        try {
+            return ResponseEntity.noContent().build()
+        } catch (e: Exception) {
+            return ResponseEntity.notFound().build()
+        }
+
     }
 
     private fun getSpaces(): MutableList<SpaceModel> {
