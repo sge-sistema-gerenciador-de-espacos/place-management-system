@@ -1,11 +1,22 @@
 package com.pms.placemanagementsystemserverside.apicontroller.contract
 
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.*
 
 interface ApiController<T> {
-    fun post(@RequestBody item: T): ResponseEntity<T>
-    fun get(@RequestBody item: T): ResponseEntity<List<T>>
-    fun put(@RequestBody item: T): ResponseEntity<T>
-    fun delete(@RequestBody item: T): ResponseEntity<T>
+
+    @PostMapping
+    fun createResource(@RequestBody item: T): ResponseEntity<T>
+
+    @PostMapping(value = ["/filter"])
+    fun selectResourcesByFilter(@RequestBody item: T): ResponseEntity<List<T>>
+
+    @GetMapping
+    fun selectAllResources(): ResponseEntity<List<T>>
+
+    @PutMapping
+    fun updateResource(@RequestBody item: T): ResponseEntity<T>
+
+    @DeleteMapping
+    fun deleteResource(@PathVariable id: Long): ResponseEntity<Unit>
 }
