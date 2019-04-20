@@ -5,29 +5,39 @@ import com.pms.placemanagementsystemserverside.models.ComputerLabModel
 import com.pms.placemanagementsystemserverside.models.SoftwareModel
 import com.pms.placemanagementsystemserverside.models.SpaceModel
 import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 
-
 @RestController
-@RequestMapping(value = ["/spaces"])
+//TODO check if base request mapping is working
+@RequestMapping(
+        value = ["/pms-api/spaces"]
+)
 class SpaceApiController : BaseApiController<SpaceModel>() {
+//class SpaceApiController : ApiController<SpaceModel> {
 
-    @PostMapping
-    override fun post(item: SpaceModel): ResponseEntity<SpaceModel> {
+    private val logger = LoggerFactory.getLogger(SpaceApiController::class.java)
+
+
+    override fun createResource(item: SpaceModel): ResponseEntity<SpaceModel> {
+
         getSpaces().add(item)
         return ResponseEntity.created(URI.create("/spaces")).build()
     }
 
-    @GetMapping
-    override fun get(item: SpaceModel): ResponseEntity<List<SpaceModel>> {
+    override fun selectResourcesByFilter(item: SpaceModel): ResponseEntity<List<SpaceModel>> {
         return ResponseEntity(getSpaces(), HttpStatus.OK)
     }
 
-    @PutMapping
-    override fun put(item: SpaceModel): ResponseEntity<SpaceModel> {
+    override fun selectAllResources(): ResponseEntity<List<SpaceModel>> {
+        return ResponseEntity(getSpaces(), HttpStatus.OK)
+    }
+
+    override fun updateResource(item: SpaceModel): ResponseEntity<SpaceModel> {
         getSpaces().apply {
             removeIf { it.id == item.id }
             add(item)
@@ -35,20 +45,19 @@ class SpaceApiController : BaseApiController<SpaceModel>() {
         return ResponseEntity.accepted().build()
     }
 
-    @DeleteMapping
-    override fun delete(item: SpaceModel): ResponseEntity<SpaceModel> {
+    override fun deleteResource(id: Long): ResponseEntity<Unit> {
         return ResponseEntity.accepted().build()
     }
 
     private fun getSpaces(): MutableList<SpaceModel> {
 
         val spaceModel = SpaceModel(id = 1L, name = "SalaA", numberOfChairs = 12, hasProjector = true,
-                hasBoard = true, hasSmartBoard = false, typeOfSpace = TypeOfSpaceEnum.CLASSROOM)
+                hasBoard = false, hasSmartBoard = true, typeOfSpace = TypeOfSpaceEnum.CLASSROOM)
 
-        val sparceModel = ComputerLabModel(id = 1L, name = "SalaA", numberOfChairs = 12, hasProjector = true,
+        val computerLabelModel = ComputerLabModel(id = 2L, name = "SalaB", numberOfChairs = 20, hasProjector = true,
                 hasBoard = true, hasSmartBoard = false, numberOfPcs = 20, softwares = getSoftwares())
 
-        return mutableListOf(spaceModel)
+        return mutableListOf(spaceModel, computerLabelModel)
     }
 
     private fun getSoftwares(): MutableList<SoftwareModel> =
