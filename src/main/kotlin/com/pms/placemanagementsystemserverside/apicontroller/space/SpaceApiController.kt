@@ -62,7 +62,7 @@ class SpaceApiController : ApiController<SpaceModel> {
             }
             return ResponseEntity.noContent().build()
         } catch (e: Exception) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build()
         }
     }
 
