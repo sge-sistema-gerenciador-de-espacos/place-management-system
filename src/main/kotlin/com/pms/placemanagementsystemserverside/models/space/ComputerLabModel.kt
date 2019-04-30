@@ -2,25 +2,25 @@ package com.pms.placemanagementsystemserverside.models.space
 
 import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
 import com.pms.placemanagementsystemserverside.models.software.SoftwareModel
-import javax.persistence.Column
+import javax.persistence.Entity
 
-//@Entity(name = "ComputerLabModel")
-//@DiscriminatorValue(value = "ComputerLabModel")
-data class ComputerLabModel(
+@Entity
+class ComputerLabModel : SpaceModel {
 
-        override var id: Long,
-        override var name: String,
-        override var numberOfChairs: Int,
-        override var hasProjector: Boolean,
-        override var hasBoard: Boolean,
-        override var hasSmartBoard: Boolean,
+    //        @Column(name = "number_pc")
+    var numberOfPcs: Int = 0
 
-        @Column
-        var numberOfPcs: Int = 0,
+    //        @ManyToMany
+    var softwares: MutableList<SoftwareModel> = mutableListOf()
 
-        @Column
-        var softwares: MutableList<SoftwareModel> = mutableListOf()
-)
+    constructor() : super()
 
-    : SpaceModel(id = id, name = name, numberOfChairs = numberOfChairs, hasProjector = hasProjector,
-        hasBoard = hasBoard, hasSmartBoard = hasSmartBoard, typeOfSpace = TypeOfSpaceEnum.COMPUTER_LAB)
+    constructor(id: Long, name: String, numberOfChairs: Int, hasProjector: Boolean, hasBoard: Boolean,
+                hasSmartBoard: Boolean, typeOfSpace: TypeOfSpaceEnum) :
+            super(id, name, numberOfChairs, hasProjector, hasBoard, hasSmartBoard, typeOfSpace)
+
+    override fun toString(): String {
+        return "${super.toString()} ComputerLabModel(numberOfPcs=$numberOfPcs, softwares=$softwares)"
+    }
+
+}
