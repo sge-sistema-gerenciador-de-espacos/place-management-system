@@ -2,25 +2,26 @@ package com.pms.placemanagementsystemserverside.models.space
 
 import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
 import com.pms.placemanagementsystemserverside.models.software.SoftwareModel
+import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.ManyToMany
 
 @Entity
-class ComputerLabModel : SpaceModel {
+data class ComputerLabModel(
 
-    //        @Column(name = "number_pc")
-    var numberOfPcs: Int = 0
+        override var id: Long,
+        override var name: String,
+        override var numberOfChairs: Int,
+        override var hasProjector: Boolean,
+        override var hasBoard: Boolean,
+        override var hasSmartBoard: Boolean,
 
-    //        @ManyToMany
-    var softwares: MutableList<SoftwareModel> = mutableListOf()
+        @Column(name = "number_pc")
+        var numberOfPcs: Int = 0,
 
-    constructor() : super()
+        @ManyToMany
+        var softwares: MutableList<SoftwareModel> = mutableListOf()
+)
 
-    constructor(id: Long, name: String, numberOfChairs: Int, hasProjector: Boolean, hasBoard: Boolean,
-                hasSmartBoard: Boolean, typeOfSpace: TypeOfSpaceEnum) :
-            super(id, name, numberOfChairs, hasProjector, hasBoard, hasSmartBoard, typeOfSpace)
-
-    override fun toString(): String {
-        return "${super.toString()} ComputerLabModel(numberOfPcs=$numberOfPcs, softwares=$softwares)"
-    }
-
-}
+    : SpaceModel(id = id, name = name, numberOfChairs = numberOfChairs, hasProjector = hasProjector,
+        hasBoard = hasBoard, hasSmartBoard = hasSmartBoard, typeOfSpace = TypeOfSpaceEnum.COMPUTER_LAB)

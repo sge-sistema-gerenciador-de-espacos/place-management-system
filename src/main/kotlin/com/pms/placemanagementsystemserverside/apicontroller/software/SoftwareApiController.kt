@@ -24,9 +24,9 @@ class SoftwareApiController : ApiController<SoftwareModel> {
     @Autowired
     private lateinit var softwareService: SoftwareService
 
-    override fun createResource(item: SoftwareModel): ResponseEntity<Unit> {
+    override fun create(item: SoftwareModel): ResponseEntity<Unit> {
         return try {
-            logger.info("createResource::item: $item")
+            logger.info("create::item: $item")
             val itemUpdated = softwareService.create(item)
             ResponseEntity.created(URI.create("/softwares/${itemUpdated.id}")).build()
         } catch (e: Exception) {
@@ -34,13 +34,13 @@ class SoftwareApiController : ApiController<SoftwareModel> {
         }
     }
 
-    override fun selectResourcesByFilter(item: SoftwareModel): ResponseEntity<List<SoftwareModel>> {
+    override fun readByFilter(item: SoftwareModel): ResponseEntity<List<SoftwareModel>> {
         var filteredSoftwares: List<SoftwareModel>? = null
 
         return try {
-            logger.info("selectResourcesByFilter::item: $item")
+            logger.info("readByFilter::item: $item")
             filteredSoftwares = softwareService.read()
-            logger.info("selectResourcesByFilter::filteredSoftwares: $filteredSoftwares")
+            logger.info("readByFilter::filteredSoftwares: $filteredSoftwares")
             ResponseEntity.ok(filteredSoftwares)
 
         } catch (e: Exception) {
@@ -49,15 +49,15 @@ class SoftwareApiController : ApiController<SoftwareModel> {
 
     }
 
-    override fun selectAllResources(): ResponseEntity<List<SoftwareModel>> {
+    override fun read(): ResponseEntity<List<SoftwareModel>> {
         val softwareModelList = softwareService.read()
-        logger.info("selectAllResources::softwareModelList: $softwareModelList")
+        logger.info("read::softwareModelList: $softwareModelList")
         return ResponseEntity.ok(softwareModelList)
     }
 
-    override fun updateResource(item: SoftwareModel): ResponseEntity<SoftwareModel> {
+    override fun update(item: SoftwareModel): ResponseEntity<SoftwareModel> {
         return try {
-            logger.info("selectAllResources::updateResource: $item")
+            logger.info("read::update: $item")
             softwareService.update(item)
             ResponseEntity.noContent().build()
         } catch (e: Exception) {
@@ -65,7 +65,7 @@ class SoftwareApiController : ApiController<SoftwareModel> {
         }
     }
 
-    override fun deleteResource(id: Long): ResponseEntity<Unit> {
+    override fun delete(id: Long): ResponseEntity<Unit> {
         return try {
             softwareService.delete(id)
             ResponseEntity.noContent().build()

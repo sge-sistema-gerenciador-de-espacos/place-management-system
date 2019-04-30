@@ -24,9 +24,9 @@ class ComputerLabApiController : ApiController<ComputerLabModel> {
     @Autowired
     private lateinit var spaceService: SpaceService
 
-    override fun createResource(item: ComputerLabModel): ResponseEntity<Unit> {
+    override fun create(item: ComputerLabModel): ResponseEntity<Unit> {
         return try {
-            logger.info("createResource::item: $item")
+            logger.info("create::item: $item")
             spaceService.create(item)
             ResponseEntity.created(URI.create("/spaces/${item.id}")).build()
 
@@ -35,9 +35,9 @@ class ComputerLabApiController : ApiController<ComputerLabModel> {
         }
     }
 
-    override fun updateResource(item: ComputerLabModel): ResponseEntity<ComputerLabModel> {
+    override fun update(item: ComputerLabModel): ResponseEntity<ComputerLabModel> {
         return try {
-            logger.info("selectAllResources::updateResource: $item")
+            logger.info("read::update: $item")
             spaceService.update(item)
             ResponseEntity.noContent().build()
 
@@ -49,21 +49,21 @@ class ComputerLabApiController : ApiController<ComputerLabModel> {
     /**
      * Using from SpaceApiController
      */
-    override fun selectResourcesByFilter(item: ComputerLabModel): ResponseEntity<List<ComputerLabModel>> {
+    override fun readByFilter(item: ComputerLabModel): ResponseEntity<List<ComputerLabModel>> {
         return ResponseEntity(mutableListOf(), HttpStatus.NOT_FOUND)
     }
 
     /**
      * Using from SpaceApiController
      */
-    override fun selectAllResources(): ResponseEntity<List<ComputerLabModel>> {
+    override fun read(): ResponseEntity<List<ComputerLabModel>> {
         return ResponseEntity(mutableListOf(), HttpStatus.NOT_FOUND)
     }
 
     /**
      * Using from SpaceApiController
      */
-    override fun deleteResource(id: Long): ResponseEntity<Unit> {
+    override fun delete(id: Long): ResponseEntity<Unit> {
         return ResponseEntity.notFound().build()
     }
 

@@ -24,23 +24,24 @@ class SpaceApiController : ApiController<SpaceModel> {
     @Autowired
     private lateinit var spaceService: SpaceService
 
-    override fun createResource(item: SpaceModel): ResponseEntity<Unit> {
+    override fun create(item: SpaceModel): ResponseEntity<Unit> {
         return try {
-            logger.info("createResource::item: $item")
+            logger.info("create::item: $item")
             val itemUpdated = spaceService.create(item)
             ResponseEntity.created(URI.create("/spaces/${itemUpdated.id}")).build()
         } catch (e: Exception) {
+            logger.info("create::catch: ${e.message}")
             ResponseEntity.status(HttpStatus.CONFLICT).build()
         }
     }
 
-    override fun selectResourcesByFilter(item: SpaceModel): ResponseEntity<List<SpaceModel>> {
+    override fun readByFilter(item: SpaceModel): ResponseEntity<List<SpaceModel>> {
         var filteredSpaces: List<SpaceModel>? = null
 
         return try {
-            logger.info("selectResourcesByFilter::item: $item")
+            logger.info("readByFilter::item: $item")
             filteredSpaces = spaceService.read()
-            logger.info("selectResourcesByFilter::filteredSpaces: $filteredSpaces")
+            logger.info("readByFilter::filteredSpaces: $filteredSpaces")
             ResponseEntity.ok(filteredSpaces)
 
         } catch (e: Exception) {
@@ -49,15 +50,15 @@ class SpaceApiController : ApiController<SpaceModel> {
 
     }
 
-    override fun selectAllResources(): ResponseEntity<List<SpaceModel>> {
+    override fun read(): ResponseEntity<List<SpaceModel>> {
         val spaceModelList = spaceService.read()
-        logger.info("selectAllResources::spaceModelList: $spaceModelList")
+        logger.info("read::spaceModelList: $spaceModelList")
         return ResponseEntity.ok(spaceModelList)
     }
 
-    override fun updateResource(item: SpaceModel): ResponseEntity<SpaceModel> {
+    override fun update(item: SpaceModel): ResponseEntity<SpaceModel> {
         return try {
-            logger.info("selectAllResources::updateResource: $item")
+            logger.info("read::update: $item")
             spaceService.update(item)
             ResponseEntity.noContent().build()
         } catch (e: Exception) {
@@ -65,7 +66,7 @@ class SpaceApiController : ApiController<SpaceModel> {
         }
     }
 
-    override fun deleteResource(id: Long): ResponseEntity<Unit> {
+    override fun delete(id: Long): ResponseEntity<Unit> {
         return try {
             spaceService.delete(id)
             ResponseEntity.noContent().build()

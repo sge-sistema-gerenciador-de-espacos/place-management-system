@@ -4,13 +4,14 @@ import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.repository.space.SpaceJpaRepository
 import com.pms.placemanagementsystemserverside.repository.space.SpaceRepository
 import org.springframework.beans.BeanUtils
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
 
 @Repository
 class SpaceRepositoryImpl : SpaceRepository {
 
-    //    @Autowired
+    @Autowired
     private lateinit var spaceJpaRepository: SpaceJpaRepository
 
     override fun create(space: SpaceModel): SpaceModel {
