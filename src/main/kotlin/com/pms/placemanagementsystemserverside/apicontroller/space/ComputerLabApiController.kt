@@ -17,7 +17,7 @@ import java.net.URI
         consumes = ["application/json"],
         produces = ["application/json"]
 )
-class ComputerLabController : ApiController<ComputerLabModel> {
+class ComputerLabApiController : ApiController<ComputerLabModel> {
 
     private val logger = LoggerFactory.getLogger(SpaceApiController::class.java)
 
