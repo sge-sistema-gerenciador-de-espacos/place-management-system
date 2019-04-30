@@ -1,12 +1,12 @@
-package com.pms.placemanagementsystemserverside.models
+package com.pms.placemanagementsystemserverside.models.user.address
 
 import javax.persistence.*
 
 @Entity(name = "addresses")
-class AddressModel(
+data class AddressModel(
 
         @Id
-        @SequenceGenerator(name = "id", sequenceName = "address_id_seq",
+        @SequenceGenerator(name = "id", sequenceName = "addresses_id_seq",
                 allocationSize = 1)
         @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
         var id: Long = 0,
@@ -22,45 +22,32 @@ class AddressModel(
         var city: CityModel = CityModel()
 
 ) {
-    override fun toString() = "AddressModel(id=$id, neighborhood='$neighborhood', number=$number, " +
-            "complement='$complement', street='$street', city=$city)"
-
 
     @Entity(name = "city")
-    class CityModel(
+    data class CityModel(
             @Id
             @SequenceGenerator(name = "id", sequenceName = "city_id_seq",
                     allocationSize = 1)
             @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
             var id: Long = 0,
-            var name: String = "", var initials: String = "", var state: StateModel = StateModel()) {
-
-        override fun toString() = "CityModel(id='$id', name='$name', initials='$initials', state=$state)"
-    }
+            var name: String = "", var initials: String = "", var state: StateModel = StateModel())
 
     @Entity(name = "state")
-    class StateModel(
+    data class StateModel(
             @Id
             @SequenceGenerator(name = "id", sequenceName = "state_id_seq",
                     allocationSize = 1)
             @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
             var id: Long = 0,
-            var name: String = "", var initials: String = "", var state: CountryModel = CountryModel()) {
-
-        override fun toString() = "StateModel(id='$id', name='$name', initials='$initials', state=$state)"
-    }
+            var name: String = "", var initials: String = "", var state: CountryModel = CountryModel())
 
     @Entity(name = "country")
-    class CountryModel(
+    data class CountryModel(
             @Id
             @SequenceGenerator(name = "id", sequenceName = "country_id_seq",
                     allocationSize = 1)
             @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
             var id: Long = 0,
-            var name: String = "", var initials: String = "") {
-
-        override fun toString() = "CountryModel(id='$id', name='$name', initials='$initials')"
-    }
-
+            var name: String = "", var initials: String = "")
 }
 
