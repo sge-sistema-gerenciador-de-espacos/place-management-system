@@ -17,6 +17,6 @@ interface ApiController<T> {
     @PutMapping
     fun update(@RequestBody item: T): ResponseEntity<T>
 
-    @DeleteMapping
+    @RequestMapping(value = ["/{id}"], method = [RequestMethod.DELETE])
     fun delete(@PathVariable id: Long): ResponseEntity<Unit>
 }
