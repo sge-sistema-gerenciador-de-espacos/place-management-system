@@ -4,14 +4,14 @@ import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
 import org.springframework.data.annotation.Id
 import javax.persistence.*
 
-//@Entity(name = "space")
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(name = "SpaceModel_Type")
+@Entity(name = "space")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 open class SpaceModel(
 
-//        @Id
-//        @GeneratedValue(strategy = GenerationType.AUTO)
-//        @Column(name = "id", updatable = false, nullable = false)
+        @Id
+        @SequenceGenerator(name = "id", sequenceName = "space_id_seq",
+                allocationSize = 1)
+        @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
         open var id: Long = 0,
 
 //        @Column

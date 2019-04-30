@@ -2,7 +2,9 @@ package com.pms.placemanagementsystemserverside.apicontroller.space
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
 import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
+import com.pms.placemanagementsystemserverside.service.space.SpaceService
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestMapping
@@ -17,28 +19,30 @@ import java.net.URI
 )
 class ComputerLabController : ApiController<ComputerLabModel> {
 
-    private val LOGGER = LoggerFactory.getLogger(SpaceApiController::class.java)
+    private val logger = LoggerFactory.getLogger(SpaceApiController::class.java)
+
+    @Autowired
+    private lateinit var spaceService: SpaceService
 
     override fun createResource(item: ComputerLabModel): ResponseEntity<Unit> {
-        try {
-            LOGGER.info("createResource::item: $item")
-//            spaceModelList.add(item)
-            return ResponseEntity.created(URI.create("/spaces/${item.id}")).build()
+        return try {
+            logger.info("createResource::item: $item")
+            spaceService.saveSpace(item)
+            ResponseEntity.created(URI.create("/spaces/${item.id}")).build()
+
         } catch (e: Exception) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build()
+            ResponseEntity.status(HttpStatus.CONFLICT).build()
         }
     }
 
     override fun updateResource(item: ComputerLabModel): ResponseEntity<ComputerLabModel> {
-        try {
-            LOGGER.info("selectAllResources::updateResource: $item")
-//            spaceModelList.apply {
-//                removeIf { it.id == item.id }
-//                add(item)
-//            }
-            return ResponseEntity.noContent().build()
+        return try {
+            logger.info("selectAllResources::updateResource: $item")
+            spaceService.updateSpace(item)
+            ResponseEntity.noContent().build()
+
         } catch (e: Exception) {
-            return ResponseEntity.notFound().build()
+            ResponseEntity.notFound().build()
         }
     }
 
@@ -49,10 +53,16 @@ class ComputerLabController : ApiController<ComputerLabModel> {
         return ResponseEntity(mutableListOf(), HttpStatus.NOT_FOUND)
     }
 
+    /**
+     * Using from SpaceApiController
+     */
     override fun selectAllResources(): ResponseEntity<List<ComputerLabModel>> {
         return ResponseEntity(mutableListOf(), HttpStatus.NOT_FOUND)
     }
 
+    /**
+     * Using from SpaceApiController
+     */
     override fun deleteResource(id: Long): ResponseEntity<Unit> {
         return ResponseEntity.notFound().build()
     }
