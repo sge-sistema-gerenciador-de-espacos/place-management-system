@@ -27,7 +27,7 @@ class SpaceApiController : ApiController<SpaceModel> {
     override fun createResource(item: SpaceModel): ResponseEntity<Unit> {
         return try {
             logger.info("createResource::item: $item")
-            val itemUpdated = spaceService.saveSpace(item)
+            val itemUpdated = spaceService.create(item)
             ResponseEntity.created(URI.create("/spaces/${itemUpdated.id}")).build()
         } catch (e: Exception) {
             ResponseEntity.status(HttpStatus.CONFLICT).build()
@@ -39,7 +39,7 @@ class SpaceApiController : ApiController<SpaceModel> {
 
         return try {
             logger.info("selectResourcesByFilter::item: $item")
-            filteredSpaces = spaceService.listSpaces(item)
+            filteredSpaces = spaceService.read()
             logger.info("selectResourcesByFilter::filteredSpaces: $filteredSpaces")
             ResponseEntity.ok(filteredSpaces)
 
@@ -50,7 +50,7 @@ class SpaceApiController : ApiController<SpaceModel> {
     }
 
     override fun selectAllResources(): ResponseEntity<List<SpaceModel>> {
-        val spaceModelList = spaceService.listSpaces(null)
+        val spaceModelList = spaceService.read()
         logger.info("selectAllResources::spaceModelList: $spaceModelList")
         return ResponseEntity.ok(spaceModelList)
     }
@@ -58,7 +58,7 @@ class SpaceApiController : ApiController<SpaceModel> {
     override fun updateResource(item: SpaceModel): ResponseEntity<SpaceModel> {
         return try {
             logger.info("selectAllResources::updateResource: $item")
-            spaceService.updateSpace(item)
+            spaceService.update(item)
             ResponseEntity.noContent().build()
         } catch (e: Exception) {
             ResponseEntity.notFound().build()
@@ -67,7 +67,7 @@ class SpaceApiController : ApiController<SpaceModel> {
 
     override fun deleteResource(id: Long): ResponseEntity<Unit> {
         return try {
-            spaceService.deleteSpace(id)
+            spaceService.delete(id)
             ResponseEntity.noContent().build()
         } catch (e: Exception) {
             ResponseEntity.notFound().build()

@@ -3,8 +3,8 @@ package com.pms.placemanagementsystemserverside.service.space
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 
 interface SpaceService {
-    fun saveSpace(spaceModel: SpaceModel): SpaceModel
-    fun listSpaces(spaceModel: SpaceModel?): List<SpaceModel>
-    fun updateSpace(spaceModel: SpaceModel)
-    fun deleteSpace(id: Long)
+    fun create(spaceModel: SpaceModel): SpaceModel
+    fun read(): List<SpaceModel>
+    fun update(spaceModel: SpaceModel)
+    fun delete(id: Long)
 }
