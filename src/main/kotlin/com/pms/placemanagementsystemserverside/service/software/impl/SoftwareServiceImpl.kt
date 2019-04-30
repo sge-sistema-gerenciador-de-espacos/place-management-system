@@ -1,6 +1,7 @@
 package com.pms.placemanagementsystemserverside.service.software.impl
 
 import com.pms.placemanagementsystemserverside.models.software.SoftwareModel
+import com.pms.placemanagementsystemserverside.repository.software.SoftwareRepository
 import com.pms.placemanagementsystemserverside.service.software.SoftwareService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -9,26 +10,22 @@ import org.springframework.stereotype.Service
 class SoftwareServiceImpl : SoftwareService {
 
     @Autowired
-    private lateinit var softwareDao: SoftwareDao
+    private lateinit var softwareRepository: SoftwareRepository
 
-    override fun saveSoftware(softwareModel: SoftwareModel): SoftwareModel {
-        return softwareDao.saveSoftware(softwareModel)
+    override fun create(softwareModel: SoftwareModel): SoftwareModel {
+        return softwareRepository.create(softwareModel)
     }
 
-    override fun listSoftwares(softwareModel: SoftwareModel?): List<SoftwareModel> {
-        return softwareDao.listSoftwares(softwareModel)
+    override fun read(): List<SoftwareModel> {
+        return softwareRepository.read()
     }
 
-    override fun listSoftwaresByComputerLab(id: Long): List<SoftwareModel> {
-        return softwareDao.listSoftwaresByComputerLab(id)
+    override fun update(softwareModel: SoftwareModel) {
+        softwareRepository.update(softwareModel)
     }
 
-    override fun updateSoftware(softwareModel: SoftwareModel) {
-        softwareDao.updateSoftware(softwareModel)
-    }
-
-    override fun deleteSoftware(id: Long) {
-        softwareDao.deleteSoftware(id)
+    override fun delete(id: Long) {
+        softwareRepository.delete(id)
     }
 
 }
