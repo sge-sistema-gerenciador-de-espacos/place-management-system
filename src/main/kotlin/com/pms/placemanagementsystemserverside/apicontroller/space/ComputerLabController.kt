@@ -27,7 +27,7 @@ class ComputerLabController : ApiController<ComputerLabModel> {
     override fun createResource(item: ComputerLabModel): ResponseEntity<Unit> {
         return try {
             logger.info("createResource::item: $item")
-            spaceService.saveSpace(item)
+            spaceService.create(item)
             ResponseEntity.created(URI.create("/spaces/${item.id}")).build()
 
         } catch (e: Exception) {
@@ -38,7 +38,7 @@ class ComputerLabController : ApiController<ComputerLabModel> {
     override fun updateResource(item: ComputerLabModel): ResponseEntity<ComputerLabModel> {
         return try {
             logger.info("selectAllResources::updateResource: $item")
-            spaceService.updateSpace(item)
+            spaceService.update(item)
             ResponseEntity.noContent().build()
 
         } catch (e: Exception) {
