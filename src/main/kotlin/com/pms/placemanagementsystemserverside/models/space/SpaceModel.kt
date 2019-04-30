@@ -1,13 +1,16 @@
 package com.pms.placemanagementsystemserverside.models.space
 
 import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
+import org.springframework.data.annotation.Id
+import javax.persistence.*
 
-//@Entity
-//@Inheritance(strategy = InheritanceType.SINGLE)
+//@Entity(name = "space")
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "SpaceModel_Type")
 open class SpaceModel(
 
 //        @Id
-//        @Generatedvalue(strategy = GenerationType.AUTO)
+//        @GeneratedValue(strategy = GenerationType.AUTO)
 //        @Column(name = "id", updatable = false, nullable = false)
         open var id: Long = 0,
 
@@ -20,10 +23,10 @@ open class SpaceModel(
 //        @Column
         open var hasProjector: Boolean = false,
 
-        //        @Column
+//        @Column
         open var hasBoard: Boolean = false,
 
-        //        @Column
+//        @Column
         open var hasSmartBoard: Boolean = false,
 
 //        @Column

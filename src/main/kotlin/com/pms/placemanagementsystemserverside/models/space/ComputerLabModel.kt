@@ -1,15 +1,26 @@
 package com.pms.placemanagementsystemserverside.models.space
 
 import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
+import javax.persistence.Column
+import javax.persistence.DiscriminatorValue
+import javax.persistence.Entity
 
+//@Entity(name = "ComputerLabModel")
+//@DiscriminatorValue(value = "ComputerLabModel")
 data class ComputerLabModel(
+
+
         override var id: Long,
         override var name: String,
         override var numberOfChairs: Int,
         override var hasProjector: Boolean,
         override var hasBoard: Boolean,
         override var hasSmartBoard: Boolean,
+
+        @Column
         var numberOfPcs: Int = 0,
+
+        @Column
         var softwares: MutableList<SoftwareModel> = mutableListOf()
 )
 
