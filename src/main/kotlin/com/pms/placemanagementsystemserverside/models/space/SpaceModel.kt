@@ -13,22 +13,21 @@ open class SpaceModel(
         @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
         open var id: Long = 0,
 
-        @Column(name = "")
         open var name: String = "",
 
-        @Column(name = "")
+        @Column(name = "number_chair")
         open var numberOfChairs: Int = 0,
 
-        @Column(name = "")
+        @Column(name = "projector")
         open var hasProjector: Boolean = false,
 
-        @Column(name = "")
+        @Column(name = "board")
         open var hasBoard: Boolean = false,
 
-        @Column(name = "")
+        @Column(name = "smart_board")
         open var hasSmartBoard: Boolean = false,
 
-        @Column(name = "")
+        @Column(name = "type")
         val typeOfSpace: TypeOfSpaceEnum = TypeOfSpaceEnum.CLASSROOM
 ) {
 
