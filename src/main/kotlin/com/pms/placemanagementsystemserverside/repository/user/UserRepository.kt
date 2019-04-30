@@ -1,0 +1,10 @@
+package com.pms.placemanagementsystemserverside.repository.user
+
+import com.pms.placemanagementsystemserverside.models.user.UserModel
+
+interface UserRepository {
+    fun create(user: UserModel): UserModel
+    fun read(): List<UserModel>
+    fun update(user: UserModel): UserModel
+    fun delete(id: Long)
+}
