@@ -1,6 +1,6 @@
 package com.pms.placemanagementsystemserverside.repository.software.impl
 
-import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
+import com.pms.placemanagementsystemserverside.models.software.SoftwareModel
 import com.pms.placemanagementsystemserverside.repository.software.SoftwareJpaRepository
 import com.pms.placemanagementsystemserverside.repository.software.SoftwareRepository
 import org.springframework.beans.BeanUtils

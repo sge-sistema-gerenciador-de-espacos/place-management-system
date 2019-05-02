@@ -1,6 +1,6 @@
 package com.pms.placemanagementsystemserverside.service.software
 
-import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
+import com.pms.placemanagementsystemserverside.models.software.SoftwareModel
 
 interface SoftwareService {
     fun create(softwareModel: SoftwareModel): SoftwareModel
