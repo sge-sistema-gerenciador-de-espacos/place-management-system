@@ -1,6 +1,6 @@
 package com.pms.placemanagementsystemserverside.models.space
 
-import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
+import com.pms.placemanagementsystemserverside.models.enums.SpaceTypeEnum
 import com.pms.placemanagementsystemserverside.models.software.SoftwareModel
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -24,4 +24,4 @@ data class ComputerLabModel(
 )
 
     : SpaceModel(id = id, name = name, numberOfChairs = numberOfChairs, hasProjector = hasProjector,
-        hasBoard = hasBoard, hasSmartBoard = hasSmartBoard, typeOfSpace = TypeOfSpaceEnum.COMPUTER_LAB)
+        hasBoard = hasBoard, hasSmartBoard = hasSmartBoard, typeOfSpace = SpaceTypeEnum.COMPUTER_LAB)

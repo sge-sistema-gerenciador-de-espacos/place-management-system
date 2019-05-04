@@ -1,6 +1,6 @@
 package com.pms.placemanagementsystemserverside.models.space
 
-import com.pms.placemanagementsystemserverside.models.enums.TypeOfSpaceEnum
+import com.pms.placemanagementsystemserverside.models.enums.SpaceTypeEnum
 import javax.persistence.*
 
 @Entity(name = "space")
@@ -28,7 +28,7 @@ open class SpaceModel(
         open var hasSmartBoard: Boolean = false,
 
         @Column(name = "type")
-        val typeOfSpace: TypeOfSpaceEnum = TypeOfSpaceEnum.CLASSROOM
+        val typeOfSpace: SpaceTypeEnum = SpaceTypeEnum.CLASSROOM
 ) {
 
     override fun toString(): String {
