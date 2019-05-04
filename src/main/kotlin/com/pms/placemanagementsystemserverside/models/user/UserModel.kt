@@ -1,6 +1,6 @@
 package com.pms.placemanagementsystemserverside.models.user
 
-import com.pms.placemanagementsystemserverside.models.enums.TypeOfUserEnum
+import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.enums.UserStatusEnum
 import com.pms.placemanagementsystemserverside.models.user.address.AddressModel
 import com.pms.placemanagementsystemserverside.models.user.telephone.TelephoneModel
@@ -25,7 +25,7 @@ open class UserModel(
         open var status: UserStatusEnum = UserStatusEnum.UNKNOWN,
 
         @Column(name = "type")
-        open var typeOfUser: TypeOfUserEnum = TypeOfUserEnum.UNKNOWN,
+        open var typeOfUser: UserTypeEnum = UserTypeEnum.UNKNOWN,
 
         open var telephones: MutableList<TelephoneModel> = mutableListOf()
 

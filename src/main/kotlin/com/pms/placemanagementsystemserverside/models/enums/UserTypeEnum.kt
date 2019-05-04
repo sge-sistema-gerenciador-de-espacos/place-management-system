@@ -1,5 +1,5 @@
 package com.pms.placemanagementsystemserverside.models.enums
 
-enum class TypeOfUserEnum {
+enum class UserTypeEnum {
     UNKNOWN
 }
