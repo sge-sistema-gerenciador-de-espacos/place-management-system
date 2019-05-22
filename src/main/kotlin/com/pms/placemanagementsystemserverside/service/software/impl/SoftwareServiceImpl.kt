@@ -1,6 +1,6 @@
 package com.pms.placemanagementsystemserverside.service.software.impl
 
-import com.pms.placemanagementsystemserverside.models.software.SoftwareModel
+import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
 import com.pms.placemanagementsystemserverside.repository.software.SoftwareRepository
 import com.pms.placemanagementsystemserverside.service.software.SoftwareService
 import org.springframework.beans.factory.annotation.Autowired

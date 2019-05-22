@@ -3,6 +3,7 @@ package com.pms.placemanagementsystemserverside.models.scheduling
 import com.pms.placemanagementsystemserverside.models.clazz.ClazzModel
 import com.pms.placemanagementsystemserverside.models.enums.SchedulingStatusEnum
 import com.pms.placemanagementsystemserverside.models.scheduling.date.SchedulingDate
+import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import javax.persistence.*
 
@@ -19,7 +20,7 @@ data class SchedulingModel(
         var schedulerUser: UserModel = UserModel(),
 
         @Column(name = "start_date")
-        var schedulingDates: List<SchedulingDate> = mutableListOf(),
+        var schedulingDates: MutableList<SchedulingDate> = mutableListOf(),
 
 //        @Column(name = "start_date")
 //        var startDate: Date = Date(),
@@ -31,6 +32,9 @@ data class SchedulingModel(
         var itResponsibleUser: UserModel = UserModel(),
 
         @Column(name = "class_id")
-        var clazz: ClazzModel = ClazzModel()
+        var clazz: ClazzModel = ClazzModel(),
+
+        @Column(name = "class_id")
+        var space: SpaceModel = SpaceModel()
 
 )

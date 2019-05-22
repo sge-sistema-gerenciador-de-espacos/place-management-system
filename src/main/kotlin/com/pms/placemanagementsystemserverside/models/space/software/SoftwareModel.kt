@@ -1,4 +1,4 @@
-package com.pms.placemanagementsystemserverside.models.software
+package com.pms.placemanagementsystemserverside.models.space.software
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

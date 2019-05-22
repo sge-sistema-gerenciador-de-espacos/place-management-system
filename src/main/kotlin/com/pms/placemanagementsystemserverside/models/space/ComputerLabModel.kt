@@ -1,7 +1,7 @@
 package com.pms.placemanagementsystemserverside.models.space
 
 import com.pms.placemanagementsystemserverside.models.enums.SpaceTypeEnum
-import com.pms.placemanagementsystemserverside.models.software.SoftwareModel
+import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.ManyToMany

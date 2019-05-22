@@ -1,7 +1,7 @@
 package com.pms.placemanagementsystemserverside.apicontroller.software
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
-import com.pms.placemanagementsystemserverside.models.software.SoftwareModel
+import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
 import com.pms.placemanagementsystemserverside.service.software.SoftwareService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
