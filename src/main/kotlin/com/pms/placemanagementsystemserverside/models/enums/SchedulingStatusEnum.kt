@@ -1,5 +1,5 @@
 package com.pms.placemanagementsystemserverside.models.enums
 
 enum class SchedulingStatusEnum {
-    UNKNOWN
+    UNKNOWN, OPEN, PENDING, DENIED, APPROVED
 }

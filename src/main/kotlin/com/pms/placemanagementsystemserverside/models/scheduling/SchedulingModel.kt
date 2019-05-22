@@ -2,8 +2,8 @@ package com.pms.placemanagementsystemserverside.models.scheduling
 
 import com.pms.placemanagementsystemserverside.models.clazz.ClazzModel
 import com.pms.placemanagementsystemserverside.models.enums.SchedulingStatusEnum
+import com.pms.placemanagementsystemserverside.models.scheduling.date.SchedulingDate
 import com.pms.placemanagementsystemserverside.models.user.UserModel
-import java.util.*
 import javax.persistence.*
 
 @Entity(name = "scheduling")
@@ -19,10 +19,13 @@ data class SchedulingModel(
         var schedulerUser: UserModel = UserModel(),
 
         @Column(name = "start_date")
-        var startDate: Date = Date(),
+        var schedulingDates: List<SchedulingDate> = mutableListOf(),
 
-        @Column(name = "end_date")
-        var endDate: Date = Date(),
+//        @Column(name = "start_date")
+//        var startDate: Date = Date(),
+//
+//        @Column(name = "end_date")
+//        var endDate: Date = Date(),
 
         @Column(name = "IT_responsible")
         var itResponsibleUser: UserModel = UserModel(),
