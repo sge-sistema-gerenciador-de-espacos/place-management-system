@@ -4,7 +4,9 @@ import com.pms.placemanagementsystemserverside.models.course.CourseModel
 import com.pms.placemanagementsystemserverside.repository.course.CourseRepository
 import com.pms.placemanagementsystemserverside.service.course.CourseService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
+@Service
 class CourseServiceImpl : CourseService {
 
     @Autowired

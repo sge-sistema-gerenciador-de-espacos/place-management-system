@@ -56,7 +56,7 @@ class ProgramApiController : ApiController<ProgramModel> {
         return ResponseEntity.ok(programModelList)
     }
 
-    override fun update(item: ProgramModel): ResponseEntity<ProgramModel> {
+    override fun update(item: ProgramModel, id: Long): ResponseEntity<ProgramModel> {
         return try {
             logger.info("read::update: $item")
             programService.update(item)

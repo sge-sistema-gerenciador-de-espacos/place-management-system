@@ -4,7 +4,9 @@ import com.pms.placemanagementsystemserverside.models.clazz.ClazzModel
 import com.pms.placemanagementsystemserverside.repository.clazz.ClazzRepository
 import com.pms.placemanagementsystemserverside.service.clazz.ClazzService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
+@Service
 class ClazzServiceImpl : ClazzService {
 
     @Autowired

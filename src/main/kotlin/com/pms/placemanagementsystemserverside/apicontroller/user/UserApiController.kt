@@ -13,7 +13,7 @@ import java.net.URI
 
 @RestController
 @RequestMapping(
-        value = ["/pms-api/users"],
+        value = ["/pms-api/user"],
         consumes = ["application/json"],
         produces = ["application/json"]
 )
@@ -56,7 +56,7 @@ class UserApiController : ApiController<UserModel> {
         return ResponseEntity.ok(userModelList)
     }
 
-    override fun update(item: UserModel): ResponseEntity<UserModel> {
+    override fun update(item: UserModel, id: Long): ResponseEntity<UserModel> {
         return try {
             logger.info("read::update: $item")
             userService.update(item)

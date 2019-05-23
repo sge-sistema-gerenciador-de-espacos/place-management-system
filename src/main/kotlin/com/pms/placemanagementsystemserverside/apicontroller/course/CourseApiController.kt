@@ -56,7 +56,7 @@ class CourseApiController : ApiController<CourseModel> {
         return ResponseEntity.ok(courseModelList)
     }
 
-    override fun update(item: CourseModel): ResponseEntity<CourseModel> {
+    override fun update(item: CourseModel, id: Long): ResponseEntity<CourseModel> {
         return try {
             logger.info("read::update: $item")
             courseService.update(item)

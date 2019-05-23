@@ -55,7 +55,7 @@ class SchedulingApiController : ApiController<SchedulingModel> {
         return ResponseEntity.ok(schedulingModelList)
     }
 
-    override fun update(item: SchedulingModel): ResponseEntity<SchedulingModel> {
+    override fun update(item: SchedulingModel, id: Long): ResponseEntity<SchedulingModel> {
         return try {
             logger.info("read::update: $item")
             schedulingService.update(item)

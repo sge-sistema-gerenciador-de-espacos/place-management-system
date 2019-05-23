@@ -1,10 +1,7 @@
 package com.pms.placemanagementsystemserverside.models.clazz
 
 import com.pms.placemanagementsystemserverside.models.course.CourseModel
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity(name = "class")
 data class ClazzModel(
@@ -15,5 +12,6 @@ data class ClazzModel(
 
         var name: String = "",
 
+        @ManyToOne(targetEntity = CourseModel::class)
         var courseModel: CourseModel = CourseModel()
 )

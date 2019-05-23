@@ -55,7 +55,7 @@ class SoftwareApiController : ApiController<SoftwareModel> {
         return ResponseEntity.ok(softwareModelList)
     }
 
-    override fun update(item: SoftwareModel): ResponseEntity<SoftwareModel> {
+    override fun update(item: SoftwareModel, id: Long): ResponseEntity<SoftwareModel> {
         return try {
             logger.info("read::update: $item")
             softwareService.update(item)

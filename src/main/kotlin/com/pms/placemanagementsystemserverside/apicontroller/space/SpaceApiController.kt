@@ -56,7 +56,7 @@ class SpaceApiController : ApiController<SpaceModel> {
         return ResponseEntity.ok(spaceModelList)
     }
 
-    override fun update(item: SpaceModel): ResponseEntity<SpaceModel> {
+    override fun update(item: SpaceModel, id: Long): ResponseEntity<SpaceModel> {
         return try {
             logger.info("read::update: $item")
             spaceService.update(item)

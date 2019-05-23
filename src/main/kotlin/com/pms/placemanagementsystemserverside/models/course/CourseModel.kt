@@ -1,10 +1,8 @@
 package com.pms.placemanagementsystemserverside.models.course
 
 import com.pms.placemanagementsystemserverside.models.program.ProgramModel
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import com.pms.placemanagementsystemserverside.models.user.address.AddressModel
+import javax.persistence.*
 
 @Entity(name = "course")
 data class CourseModel(
@@ -19,5 +17,6 @@ data class CourseModel(
 
         var code: Int = 0,
 
+        @OneToMany(targetEntity = ProgramModel::class)
         var programs: List<ProgramModel> = mutableListOf()
 )

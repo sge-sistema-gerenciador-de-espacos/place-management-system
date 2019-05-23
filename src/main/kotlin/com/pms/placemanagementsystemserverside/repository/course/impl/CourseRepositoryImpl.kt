@@ -5,7 +5,9 @@ import com.pms.placemanagementsystemserverside.repository.course.CourseJpaReposi
 import com.pms.placemanagementsystemserverside.repository.course.CourseRepository
 import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Repository
 
+@Repository
 class CourseRepositoryImpl : CourseRepository {
 
     @Autowired

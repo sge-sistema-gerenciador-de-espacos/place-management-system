@@ -35,7 +35,7 @@ class ComputerLabApiController : ApiController<ComputerLabModel> {
         }
     }
 
-    override fun update(item: ComputerLabModel): ResponseEntity<ComputerLabModel> {
+    override fun update(item: ComputerLabModel, id: Long): ResponseEntity<ComputerLabModel> {
         return try {
             logger.info("read::update: $item")
             spaceService.update(item)

@@ -3,6 +3,7 @@ package com.pms.placemanagementsystemserverside.models.user
 import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.enums.UserStatusEnum
 import com.pms.placemanagementsystemserverside.models.user.address.AddressModel
+import com.pms.placemanagementsystemserverside.models.user.address.CountryModel
 import com.pms.placemanagementsystemserverside.models.user.telephone.TelephoneModel
 import javax.persistence.*
 
@@ -20,13 +21,15 @@ open class UserModel(
 
         open var email: String = "",
 
-        open var addresses: MutableList<AddressModel> = mutableListOf(),
+        @OneToOne(targetEntity = AddressModel::class)
+        open var addresses: AddressModel = AddressModel(),
 
         open var status: UserStatusEnum = UserStatusEnum.UNKNOWN,
 
         @Column(name = "type")
         open var typeOfUser: UserTypeEnum = UserTypeEnum.UNKNOWN,
 
+        @OneToMany(targetEntity = TelephoneModel::class)
         open var telephones: MutableList<TelephoneModel> = mutableListOf()
 
 ) {

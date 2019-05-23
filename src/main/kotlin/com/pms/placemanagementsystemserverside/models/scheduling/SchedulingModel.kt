@@ -16,10 +16,10 @@ data class SchedulingModel(
 
         var status: SchedulingStatusEnum = SchedulingStatusEnum.UNKNOWN,
 
-        @Column(name = "scheduler_user")
+        @ManyToOne(targetEntity = UserModel::class)
         var schedulerUser: UserModel = UserModel(),
 
-        @Column(name = "start_date")
+        @OneToMany(targetEntity = SchedulingDate::class)
         var schedulingDates: MutableList<SchedulingDate> = mutableListOf(),
 
 //        @Column(name = "start_date")
@@ -28,13 +28,13 @@ data class SchedulingModel(
 //        @Column(name = "end_date")
 //        var endDate: Date = Date(),
 
-        @Column(name = "IT_responsible")
+        @ManyToOne(targetEntity = UserModel::class)
         var itResponsibleUser: UserModel = UserModel(),
 
-        @Column(name = "class_id")
+        @ManyToOne(targetEntity = ClazzModel::class)
         var clazz: ClazzModel = ClazzModel(),
 
-        @Column(name = "class_id")
+        @ManyToOne(targetEntity = SpaceModel::class)
         var space: SpaceModel = SpaceModel()
 
 )

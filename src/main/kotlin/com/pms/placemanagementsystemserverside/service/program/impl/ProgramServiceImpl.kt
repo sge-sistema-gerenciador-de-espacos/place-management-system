@@ -4,7 +4,9 @@ import com.pms.placemanagementsystemserverside.models.program.ProgramModel
 import com.pms.placemanagementsystemserverside.repository.program.ProgramRepository
 import com.pms.placemanagementsystemserverside.service.program.ProgramService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
+@Service
 class ProgramServiceImpl : ProgramService {
 
     @Autowired

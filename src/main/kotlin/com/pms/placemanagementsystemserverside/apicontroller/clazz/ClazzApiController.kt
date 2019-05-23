@@ -56,7 +56,7 @@ class ClazzApiController : ApiController<ClazzModel> {
         return ResponseEntity.ok(clazzModelList)
     }
 
-    override fun update(item: ClazzModel): ResponseEntity<ClazzModel> {
+    override fun update(item: ClazzModel, id: Long): ResponseEntity<ClazzModel> {
         return try {
             logger.info("read::update: $item")
             clazzService.update(item)
