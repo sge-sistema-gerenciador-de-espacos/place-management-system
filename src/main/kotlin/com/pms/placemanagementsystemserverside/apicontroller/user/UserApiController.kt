@@ -1,12 +1,16 @@
 package com.pms.placemanagementsystemserverside.apicontroller.user
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
+import com.pms.placemanagementsystemserverside.models.authenticator.AuthenticatorRequestModel
+import com.pms.placemanagementsystemserverside.models.authenticator.AuthenticatorResponseModel
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.service.user.UserService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
@@ -23,6 +27,12 @@ class UserApiController : ApiController<UserModel> {
 
     @Autowired
     private lateinit var userService: UserService
+
+    @PostMapping(value = ["/login"])
+    fun login(@RequestBody authenticatorRequestModel: AuthenticatorRequestModel):
+            ResponseEntity<AuthenticatorResponseModel> {
+        return ResponseEntity.ok(AuthenticatorResponseModel())
+    }
 
     override fun create(item: UserModel): ResponseEntity<Unit> {
         return try {
