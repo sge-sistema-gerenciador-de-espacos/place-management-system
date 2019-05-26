@@ -1,6 +1,7 @@
 package com.pms.placemanagementsystemserverside.models.space
 
 import com.pms.placemanagementsystemserverside.models.enums.SpaceTypeEnum
+import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
 import javax.persistence.*
 
 @Entity(name = "space")
@@ -28,12 +29,17 @@ open class SpaceModel(
         open var hasSmartBoard: Boolean = false,
 
         @Column(name = "type")
-        val typeOfSpace: SpaceTypeEnum = SpaceTypeEnum.CLASSROOM
+        val typeOfSpace: SpaceTypeEnum = SpaceTypeEnum.CLASSROOM,
+
+        @OneToMany(targetEntity = SchedulingModel::class)
+        val schedulingModels: MutableList<SchedulingModel> = mutableListOf()
+
 ) {
 
     override fun toString(): String {
         return "SpaceModel(id=$id, name='$name', numberOfChairs=$numberOfChairs, hasProjector=$hasProjector, " +
-                "hasBoard=$hasBoard, hasSmartBoard=$hasSmartBoard, typeOfSpace=$typeOfSpace)"
+                "hasBoard=$hasBoard, hasSmartBoard=$hasSmartBoard, typeOfSpace=$typeOfSpace, " +
+                "schedulingModels=$schedulingModels)"
     }
 
 }
