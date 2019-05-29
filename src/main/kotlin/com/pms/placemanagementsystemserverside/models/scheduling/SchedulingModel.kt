@@ -2,7 +2,7 @@ package com.pms.placemanagementsystemserverside.models.scheduling
 
 import com.pms.placemanagementsystemserverside.models.clazz.ClazzModel
 import com.pms.placemanagementsystemserverside.models.enums.SchedulingStatusEnum
-import com.pms.placemanagementsystemserverside.models.scheduling.date.SchedulingDate
+import com.pms.placemanagementsystemserverside.models.scheduling.date.SchedulingDateModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import javax.persistence.*
@@ -19,8 +19,8 @@ data class SchedulingModel(
         @ManyToOne(targetEntity = UserModel::class)
         var schedulerUser: UserModel = UserModel(),
 
-        @OneToMany(targetEntity = SchedulingDate::class)
-        var schedulingDates: MutableList<SchedulingDate> = mutableListOf(),
+        @OneToMany(targetEntity = SchedulingDateModel::class)
+        var schedulingDateModels: MutableList<SchedulingDateModel> = mutableListOf(),
 
 //        @Column(name = "start_date")
 //        var startDate: Date = Date(),

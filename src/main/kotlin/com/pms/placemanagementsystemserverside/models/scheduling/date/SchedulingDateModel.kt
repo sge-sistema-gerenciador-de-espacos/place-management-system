@@ -4,7 +4,7 @@ import java.util.*
 import javax.persistence.*
 
 @Entity(name = "scheduling_date")
-data class SchedulingDate(
+data class SchedulingDateModel(
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

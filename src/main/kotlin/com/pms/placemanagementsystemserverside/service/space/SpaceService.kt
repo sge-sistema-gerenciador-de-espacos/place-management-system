@@ -7,4 +7,5 @@ interface SpaceService {
     fun read(): List<SpaceModel>
     fun update(spaceModel: SpaceModel)
     fun delete(id: Long)
+    fun filterSpaceBySpaceIntention(spaceModel: SpaceModel): List<SpaceModel>
 }

@@ -1,5 +1,6 @@
 package com.pms.placemanagementsystemserverside.service.space.impl
 
+import com.pms.placemanagementsystemserverside.domain.space.SpaceDomain
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.repository.space.SpaceRepository
 import com.pms.placemanagementsystemserverside.service.space.SpaceService
@@ -11,6 +12,9 @@ class SpaceServiceImpl : SpaceService {
 
     @Autowired
     private lateinit var spaceRepository: SpaceRepository
+
+    @Autowired
+    private lateinit var spaceDomain: SpaceDomain
 
     override fun create(spaceModel: SpaceModel): SpaceModel {
         return spaceRepository.create(spaceModel)
@@ -27,4 +31,9 @@ class SpaceServiceImpl : SpaceService {
     override fun delete(id: Long) {
         spaceRepository.delete(id)
     }
+
+    override fun filterSpaceBySpaceIntention(spaceModel: SpaceModel): List<SpaceModel> {
+        return spaceDomain.filterSpaceBySpaceIntention(spaceModel, read())
+    }
+
 }
