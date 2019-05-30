@@ -24,4 +24,4 @@ data class ComputerLabModel(
 )
 
     : SpaceModel(id = id, name = name, numberOfChairs = numberOfChairs, hasProjector = hasProjector,
-        hasBoard = hasBoard, hasSmartBoard = hasSmartBoard, typeOfSpace = SpaceTypeEnum.COMPUTER_LAB)
+        hasBoard = hasBoard, hasSmartBoard = hasSmartBoard, spaceType = SpaceTypeEnum.COMPUTER_LAB)

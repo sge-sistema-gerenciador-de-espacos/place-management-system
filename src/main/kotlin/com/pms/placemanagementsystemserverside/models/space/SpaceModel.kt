@@ -29,7 +29,7 @@ open class SpaceModel(
         open var hasSmartBoard: Boolean = false,
 
         @Column(name = "type")
-        val typeOfSpace: SpaceTypeEnum = SpaceTypeEnum.CLASSROOM,
+        val spaceType: SpaceTypeEnum = SpaceTypeEnum.CLASSROOM,
 
         @OneToMany(targetEntity = SchedulingModel::class)
         val schedulingModels: MutableList<SchedulingModel> = mutableListOf()
@@ -38,7 +38,7 @@ open class SpaceModel(
 
     override fun toString(): String {
         return "SpaceModel(id=$id, name='$name', numberOfChairs=$numberOfChairs, hasProjector=$hasProjector, " +
-                "hasBoard=$hasBoard, hasSmartBoard=$hasSmartBoard, typeOfSpace=$typeOfSpace, " +
+                "hasBoard=$hasBoard, hasSmartBoard=$hasSmartBoard, spaceType=$spaceType, " +
                 "schedulingModels=$schedulingModels)"
     }
 

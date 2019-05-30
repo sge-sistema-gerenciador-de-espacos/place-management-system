@@ -33,7 +33,7 @@ class SpaceServiceImpl : SpaceService {
     }
 
     override fun filterSpaceBySpaceIntention(spaceModel: SpaceModel): List<SpaceModel> {
-        return spaceDomain.filterSpaceBySpaceIntention(spaceModel, read())
+        return spaceDomain.filterSpaceListBySpaceIntention(read(), spaceModel)
     }
 
 }
