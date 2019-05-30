@@ -4,6 +4,7 @@ import com.pms.placemanagementsystemserverside.domain.scheduling.SchedulingDomai
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
 import com.pms.placemanagementsystemserverside.models.scheduling.date.SchedulingDateModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
+import org.springframework.stereotype.Component
 
 class SchedulingDomainImpl : SchedulingDomain {
 
