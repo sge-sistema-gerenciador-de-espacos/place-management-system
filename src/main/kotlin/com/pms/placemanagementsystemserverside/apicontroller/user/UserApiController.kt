@@ -1,8 +1,8 @@
 package com.pms.placemanagementsystemserverside.apicontroller.user
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
-import com.pms.placemanagementsystemserverside.models.authenticator.AuthenticatorRequestModel
-import com.pms.placemanagementsystemserverside.models.authenticator.AuthenticatorResponseModel
+import com.pms.placemanagementsystemserverside.models.api.authenticator.AuthenticatorRequestModel
+import com.pms.placemanagementsystemserverside.models.api.authenticator.AuthenticatorResponseModel
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.service.user.UserService
 import org.slf4j.LoggerFactory
