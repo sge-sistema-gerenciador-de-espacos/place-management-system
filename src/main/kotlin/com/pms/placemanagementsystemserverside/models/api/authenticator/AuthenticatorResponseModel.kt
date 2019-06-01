@@ -1,4 +1,4 @@
-package com.pms.placemanagementsystemserverside.models.authenticator
+package com.pms.placemanagementsystemserverside.models.api.authenticator
 
 //TODO adc anotacoes do jpa
 data class AuthenticatorResponseModel(

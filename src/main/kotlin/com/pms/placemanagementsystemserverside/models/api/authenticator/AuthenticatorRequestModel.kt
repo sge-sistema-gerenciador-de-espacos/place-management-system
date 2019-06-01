@@ -1,4 +1,4 @@
-package com.pms.placemanagementsystemserverside.models.authenticator
+package com.pms.placemanagementsystemserverside.models.api.authenticator
 
 data class AuthenticatorRequestModel(
         var user: String = "",
