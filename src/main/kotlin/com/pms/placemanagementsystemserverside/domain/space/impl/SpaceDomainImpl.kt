@@ -27,11 +27,11 @@ class SpaceDomainImpl : SpaceDomain {
             return filteredSpaceModels
         }
 
-        throw Exception("No one space to this intention!")
+        throw Exception("There is no space available for this intention!")
     }
 
     //TODO estou ignorando software no filtro
-    fun filterComputerLabByfilteredComputerLabList(
+    private fun filterComputerLabByfilteredComputerLabList(
             computerLab: ComputerLabModel, filteredComputerLabList: List<ComputerLabModel>): List<ComputerLabModel> {
 
         return filteredComputerLabList.filter {

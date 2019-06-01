@@ -4,7 +4,6 @@ import com.pms.placemanagementsystemserverside.domain.scheduling.SchedulingDomai
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
 import com.pms.placemanagementsystemserverside.models.scheduling.date.SchedulingDateModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
-import org.springframework.stereotype.Component
 
 class SchedulingDomainImpl : SchedulingDomain {
 
@@ -15,19 +14,32 @@ class SchedulingDomainImpl : SchedulingDomain {
         var spaceModel: SpaceModel? = null
 
         filteredSpaceModels.forEach {
-            if (checkSpaceAvailabilityByDateSchedulingIntention(schedulingModel.schedulingDateModels, it))
+            if (checkSpaceAvailabilityBySchedulingDateIntentionList(it, schedulingModel.schedulingDateModels))
                 spaceModel = it
         }
 
         return spaceModel ?: throw Exception("There is no space available for this scheduling")
     }
 
-    override fun checkSpaceAvailabilityByDateSchedulingIntention(
-            dateSchedulingModelModels: List<SchedulingDateModel>, spaceModel: SpaceModel
+    override fun checkSpaceAvailabilityBySchedulingDateIntentionList(
+            spaceFindedModel: SpaceModel, intentionSchedulingDateModels: List<SchedulingDateModel>
     ): Boolean {
 
-        //TODO fazer a logica de verificacao de espaco disponivel
+        val schedulingFindedModels = spaceFindedModel.schedulingModels
 
+        schedulingFindedModels.forEach { schedulingFindedModel ->
+            schedulingFindedModel.schedulingDateModels.forEach { schedulingDateFindedModels ->
+                intentionSchedulingDateModels.forEach { intentionSchedulingDateModel ->
+
+                    if (schedulingDateFindedModels.startDate == intentionSchedulingDateModel.startDate ||
+                            schedulingDateFindedModels.startDate == intentionSchedulingDateModel.startDate) {
+                        return false;
+                    }
+
+                }
+
+            }
+        }
         return true
     }
 
