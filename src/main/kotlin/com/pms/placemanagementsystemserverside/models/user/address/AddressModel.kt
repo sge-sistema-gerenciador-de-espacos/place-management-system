@@ -4,7 +4,6 @@ import javax.persistence.*
 
 @Entity(name = "addresses")
 data class AddressModel(
-
         @Id
         @SequenceGenerator(name = "id", sequenceName = "addresses_id_seq",
                 allocationSize = 1)
@@ -19,8 +18,9 @@ data class AddressModel(
 
         var street: String = "",
 
-        @OneToOne(targetEntity = CityModel::class)
-        var city: CityModel = CityModel()
+        var city: String = "",
 
+        @ManyToOne(targetEntity = StateModel::class)
+        var state: StateModel = StateModel()
 )
 

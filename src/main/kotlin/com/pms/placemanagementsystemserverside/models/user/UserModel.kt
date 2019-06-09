@@ -1,9 +1,8 @@
 package com.pms.placemanagementsystemserverside.models.user
 
-import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.enums.UserStatusEnum
+import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.user.address.AddressModel
-import com.pms.placemanagementsystemserverside.models.user.address.CountryModel
 import com.pms.placemanagementsystemserverside.models.user.telephone.TelephoneModel
 import javax.persistence.*
 
@@ -27,7 +26,7 @@ open class UserModel(
         open var status: UserStatusEnum = UserStatusEnum.UNKNOWN,
 
         @Column(name = "type")
-        open var typeOfUser: UserTypeEnum = UserTypeEnum.UNKNOWN,
+        open var type: UserTypeEnum = UserTypeEnum.UNKNOWN,
 
         @OneToMany(targetEntity = TelephoneModel::class)
         open var telephones: MutableList<TelephoneModel> = mutableListOf()
@@ -35,6 +34,6 @@ open class UserModel(
 ) {
     override fun toString(): String {
         return "UserModel(id=$id, name='$name', email='$email', addresses=$addresses, " +
-                "status=$status, typeOfUser=$typeOfUser, telephones=$telephones)"
+                "status=$status, type=$type, telephones=$telephones)"
     }
 }
