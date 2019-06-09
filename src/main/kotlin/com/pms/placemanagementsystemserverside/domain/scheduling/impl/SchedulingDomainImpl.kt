@@ -25,15 +25,15 @@ class SchedulingDomainImpl : SchedulingDomain {
             spaceFindedModel: SpaceModel, intentionSchedulingDateModels: List<SchedulingDateModel>
     ): Boolean {
 
-        val schedulingFindedModels = spaceFindedModel.schedulingModels
+        val schedulingFoundModels = spaceFindedModel.schedulingModels
 
-        schedulingFindedModels.forEach { schedulingFindedModel ->
+        schedulingFoundModels.forEach { schedulingFindedModel ->
             schedulingFindedModel.schedulingDateModels.forEach { schedulingDateFindedModels ->
                 intentionSchedulingDateModels.forEach { intentionSchedulingDateModel ->
 
                     if (schedulingDateFindedModels.startDate == intentionSchedulingDateModel.startDate ||
                             schedulingDateFindedModels.startDate == intentionSchedulingDateModel.startDate) {
-                        return false;
+                        return false
                     }
 
                 }
