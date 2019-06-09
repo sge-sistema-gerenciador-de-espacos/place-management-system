@@ -31,6 +31,10 @@ class UserApiController : ApiController<UserModel> {
     @PostMapping(value = ["/login"])
     fun login(@RequestBody authenticatorRequestModel: AuthenticatorRequestModel):
             ResponseEntity<AuthenticatorResponseModel> {
+        print("AQUI!")
+        logger.error("AQUI!")
+        logger.debug("AQUI!")
+        logger.info("AQUI!")
         return ResponseEntity.ok(AuthenticatorResponseModel())
     }
 
@@ -61,7 +65,8 @@ class UserApiController : ApiController<UserModel> {
     }
 
     override fun read(): ResponseEntity<List<UserModel>> {
-        val userModelList = userService.read()
+//        val userModelList = userService.read()
+        val userModelList = getUsers()
         logger.info("read::userModelList: $userModelList")
         return ResponseEntity.ok(userModelList)
     }
@@ -84,5 +89,9 @@ class UserApiController : ApiController<UserModel> {
             ResponseEntity.notFound().build()
         }
 
+    }
+
+    private fun getUsers(): List<UserModel> {
+        return mutableListOf(UserModel(), UserModel(), UserModel())
     }
 }
