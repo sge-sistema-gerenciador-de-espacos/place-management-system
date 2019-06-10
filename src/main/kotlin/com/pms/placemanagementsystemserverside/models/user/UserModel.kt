@@ -28,6 +28,7 @@ open class UserModel(
         @Column(name = "type")
         open var type: UserTypeEnum = UserTypeEnum.UNKNOWN,
 
+        //TODO acordado que vai ser uma lista
         @OneToMany(targetEntity = TelephoneModel::class)
         open var telephones: MutableList<TelephoneModel> = mutableListOf()
 

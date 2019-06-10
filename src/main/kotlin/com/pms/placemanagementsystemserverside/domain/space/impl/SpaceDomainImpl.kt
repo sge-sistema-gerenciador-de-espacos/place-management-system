@@ -19,7 +19,7 @@ class SpaceDomainImpl : SpaceDomain {
         }
 
         if (spaceIntentionModel.spaceType == SpaceTypeEnum.COMPUTER_LAB) {
-            filterComputerLabByfilteredComputerLabList(
+            filterComputerLabByFilteredSpaceModelList(
                     (spaceIntentionModel as ComputerLabModel),
                     (filteredSpaceModels as List<ComputerLabModel>))
 
@@ -31,7 +31,7 @@ class SpaceDomainImpl : SpaceDomain {
     }
 
     //TODO estou ignorando software no filtro
-    private fun filterComputerLabByfilteredComputerLabList(
+    private fun filterComputerLabByFilteredSpaceModelList(
             computerLab: ComputerLabModel, filteredComputerLabList: List<ComputerLabModel>): List<ComputerLabModel> {
 
         return filteredComputerLabList.filter {
