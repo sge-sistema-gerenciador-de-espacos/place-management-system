@@ -19,9 +19,19 @@ class SpaceDomainImpl : SpaceDomain {
         }
 
         if (spaceIntentionModel.spaceType == SpaceTypeEnum.COMPUTER_LAB) {
+
+            val filterComputerLabModels = mutableListOf<ComputerLabModel>()
+
+            filteredSpaceModels.forEach {
+                if (it.spaceType == SpaceTypeEnum.COMPUTER_LAB) {
+                    filterComputerLabModels.add(it as ComputerLabModel)
+                }
+            }
+
             filterComputerLabByFilteredSpaceModelList(
                     (spaceIntentionModel as ComputerLabModel),
-                    (filteredSpaceModels as List<ComputerLabModel>))
+                    filterComputerLabModels
+            )
 
         } else {
             return filteredSpaceModels
