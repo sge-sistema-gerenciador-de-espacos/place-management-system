@@ -9,10 +9,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.net.URI
 
 @RestController
@@ -28,15 +25,6 @@ class UserApiController : ApiController<UserModel> {
     @Autowired
     private lateinit var userService: UserService
 
-    @PostMapping(value = ["/login"])
-    fun login(@RequestBody authenticatorRequestModel: AuthenticatorRequestModel):
-            ResponseEntity<AuthenticatorResponseModel> {
-        print("AQUI!")
-        logger.error("AQUI!")
-        logger.debug("AQUI!")
-        logger.info("AQUI!")
-        return ResponseEntity.ok(AuthenticatorResponseModel())
-    }
 
     override fun create(item: UserModel): ResponseEntity<Unit> {
         return try {
@@ -89,6 +77,26 @@ class UserApiController : ApiController<UserModel> {
             ResponseEntity.notFound().build()
         }
 
+    }
+
+    @PostMapping(value = ["/login"])
+    fun login(@RequestBody authenticatorRequestModel: AuthenticatorRequestModel):
+            ResponseEntity<AuthenticatorResponseModel> {
+        logger.info("login")
+        return ResponseEntity.ok(AuthenticatorResponseModel())
+    }
+
+    @PostMapping(value = ["/logout"])
+    fun logout(@RequestBody authenticatorRequestModel: AuthenticatorRequestModel):
+            ResponseEntity<AuthenticatorResponseModel> {
+        logger.info("logout")
+        return ResponseEntity.ok(AuthenticatorResponseModel())
+    }
+
+    @GetMapping(value = ["/info"])
+    fun getInfo(): ResponseEntity<UserModel> {
+        logger.info("info")
+        return ResponseEntity.ok(UserModel())
     }
 
     private fun getUsers(): List<UserModel> {
