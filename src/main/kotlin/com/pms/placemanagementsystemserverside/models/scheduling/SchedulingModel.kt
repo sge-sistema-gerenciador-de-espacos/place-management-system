@@ -19,7 +19,7 @@ data class SchedulingModel(
         @ManyToOne(targetEntity = UserModel::class)
         var schedulerUser: UserModel = UserModel(),
 
-        @OneToMany(targetEntity = SchedulingDateModel::class, mappedBy = "scheduling_id")
+        @OneToMany(targetEntity = SchedulingDateModel::class)
         var schedulingDateModels: MutableList<SchedulingDateModel> = mutableListOf(),
 
 //        @Column(name = "start_date")
