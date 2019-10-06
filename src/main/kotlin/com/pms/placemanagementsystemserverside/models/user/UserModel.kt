@@ -1,13 +1,19 @@
 package com.pms.placemanagementsystemserverside.models.user
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.pms.placemanagementsystemserverside.models.enums.UserStatusEnum
 import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.user.address.AddressModel
 import com.pms.placemanagementsystemserverside.models.user.telephone.TelephoneModel
+import com.pms.placemanagementsystemserverside.util.json.parse.user.UserDeserializer
+import com.pms.placemanagementsystemserverside.util.json.parse.user.UserSerializer
 import javax.persistence.*
 
 @Entity(name = "user")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@JsonSerialize(using = UserSerializer::class)
+//@JsonDeserialize(using = UserDeserializer::class)
 open class UserModel(
 
         @Id

@@ -8,12 +8,11 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class SpringApplicationConfiguration {
+class DependencyInjection {
 
     @Bean
     fun schedulingDomain(): SchedulingDomain = SchedulingDomainImpl()
 
     @Bean
     fun spaceDomain(): SpaceDomain = SpaceDomainImpl()
-
 }
