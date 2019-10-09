@@ -13,18 +13,13 @@ import org.springframework.web.bind.annotation.*
 import java.net.URI
 
 @RestController
-@RequestMapping(
-        value = ["/pms-api/user"],
-        consumes = ["application/json"],
-        produces = ["application/json"]
-)
+@RequestMapping(value = ["/pms-api/user"])
 class UserApiController : ApiController<UserModel> {
 
     private val logger = LoggerFactory.getLogger(UserApiController::class.java)
 
     @Autowired
     private lateinit var userService: UserService
-
 
     override fun create(item: UserModel): ResponseEntity<Unit> {
         return try {
@@ -53,15 +48,15 @@ class UserApiController : ApiController<UserModel> {
     }
 
     override fun read(): ResponseEntity<List<UserModel>> {
-//        val userModelList = userService.read()
-        val userModelList = getUsers()
+        val userModelList = userService.read()
+//        val userModelList = getUsers()
         logger.info("read::userModelList: $userModelList")
         return ResponseEntity.ok(userModelList)
     }
 
     override fun update(item: UserModel, id: Long): ResponseEntity<UserModel> {
         return try {
-            logger.info("read::update: $item")
+            logger.info("update::item: $item")
             userService.update(item)
             ResponseEntity.noContent().build()
         } catch (e: Exception) {
@@ -71,25 +66,25 @@ class UserApiController : ApiController<UserModel> {
 
     override fun delete(id: Long): ResponseEntity<Unit> {
         return try {
+            logger.info("delete::id: $id")
             userService.delete(id)
             ResponseEntity.noContent().build()
         } catch (e: Exception) {
             ResponseEntity.notFound().build()
         }
-
     }
 
     @PostMapping(value = ["/login"])
     fun login(@RequestBody authenticatorRequestModel: AuthenticatorRequestModel):
             ResponseEntity<AuthenticatorResponseModel> {
-        logger.info("login")
+        logger.info("login::authenticatorRequestModel: $authenticatorRequestModel")
         return ResponseEntity.ok(AuthenticatorResponseModel())
     }
 
     @PostMapping(value = ["/logout"])
     fun logout(@RequestBody authenticatorRequestModel: AuthenticatorRequestModel):
             ResponseEntity<AuthenticatorResponseModel> {
-        logger.info("logout")
+        logger.info("logout::authenticatorRequestModel: $authenticatorRequestModel")
         return ResponseEntity.ok(AuthenticatorResponseModel())
     }
 
