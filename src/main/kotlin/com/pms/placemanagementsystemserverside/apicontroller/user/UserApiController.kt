@@ -75,6 +75,7 @@ class UserApiController : ApiController<UserModel> {
         }
     }
 
+    //TODO rever
     @PostMapping(value = ["/login"])
     fun login(@RequestBody authenticatorRequestModel: AuthenticatorRequestModel):
             ResponseEntity<ApiResponseModel> {
@@ -94,10 +95,13 @@ class UserApiController : ApiController<UserModel> {
         return ResponseEntity.ok(AuthenticatorResponseModel())
     }
 
+    //TODO rever
     @GetMapping(value = ["/info"])
-    fun getInfo(): ResponseEntity<UserModel> {
+    fun getInfo(@RequestParam token: String): ResponseEntity<String> {
         logger.info("info")
-        return ResponseEntity.ok(UserModel())
+        return ResponseEntity.ok(
+                "{\"code\":20000,\"data\":{\"roles\":[\"admin\"],\"introduction\":\"I am a super administrator\",\"avatar\":\"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif\",\"name\":\"Super Admin\"}}"
+        )
     }
 
     private fun getUsers(): List<UserModel> {
