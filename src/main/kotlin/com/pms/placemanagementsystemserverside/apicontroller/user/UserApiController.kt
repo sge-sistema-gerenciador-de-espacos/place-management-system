@@ -3,6 +3,7 @@ package com.pms.placemanagementsystemserverside.apicontroller.user
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
 import com.pms.placemanagementsystemserverside.models.api.authenticator.AuthenticatorRequestModel
 import com.pms.placemanagementsystemserverside.models.api.authenticator.AuthenticatorResponseModel
+import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.service.user.UserService
 import org.slf4j.LoggerFactory
@@ -76,9 +77,14 @@ class UserApiController : ApiController<UserModel> {
 
     @PostMapping(value = ["/login"])
     fun login(@RequestBody authenticatorRequestModel: AuthenticatorRequestModel):
-            ResponseEntity<AuthenticatorResponseModel> {
+            ResponseEntity<ApiResponseModel> {
         logger.info("login::authenticatorRequestModel: $authenticatorRequestModel")
-        return ResponseEntity.ok(AuthenticatorResponseModel())
+        return ResponseEntity.ok(
+                ApiResponseModel(
+                        20000,
+                        AuthenticatorResponseModel()
+                )
+        )
     }
 
     @PostMapping(value = ["/logout"])
