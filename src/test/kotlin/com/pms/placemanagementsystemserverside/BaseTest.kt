@@ -3,13 +3,8 @@ package com.pms.placemanagementsystemserverside
 import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.MockitoAnnotations
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
+//@RunWith(MockitoJUnitRunner::class)
 open class BaseTest {
 
     protected val userModelList = InstanceMocks.getUserModelList()
@@ -43,12 +38,12 @@ open class BaseTest {
             hasProjector = true
     )
 
-    @Before
+//    @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+//        MockitoAnnotations.initMocks(this)
     }
 
-    @Test
+//    @Test
     fun print_instanceMocks() {
         print("\n\n User = $userModelList \n\n Space1 = $space1 \n\n Space2 = $space2 \n\n CompLab = $computerLab \n\n")
     }

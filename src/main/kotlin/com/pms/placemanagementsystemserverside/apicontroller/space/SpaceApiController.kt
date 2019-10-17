@@ -1,15 +1,13 @@
 package com.pms.placemanagementsystemserverside.apicontroller.space
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
+import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.service.space.SpaceService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.net.URI
 
 @RestController
 @RequestMapping(
@@ -24,54 +22,54 @@ class SpaceApiController : ApiController<SpaceModel> {
     @Autowired
     private lateinit var spaceService: SpaceService
 
-    override fun create(item: SpaceModel): ResponseEntity<Unit> {
+    override fun create(item: SpaceModel): ApiResponseModel {
         return try {
             logger.info("create::item: $item")
             val itemUpdated = spaceService.create(item)
-            ResponseEntity.created(URI.create("/spaces/${itemUpdated.id}")).build()
+            ApiResponseModel()
         } catch (e: Exception) {
             logger.info("create::catch: ${e.message}")
-            ResponseEntity.status(HttpStatus.CONFLICT).build()
+            ApiResponseModel()
         }
     }
 
-    override fun readByFilter(item: SpaceModel): ResponseEntity<List<SpaceModel>> {
+    override fun readByFilter(item: SpaceModel): ApiResponseModel {
         var filteredSpaces: List<SpaceModel>? = null
 
         return try {
             logger.info("readByFilter::item: $item")
             filteredSpaces = spaceService.read()
             logger.info("readByFilter::filteredSpaces: $filteredSpaces")
-            ResponseEntity.ok(filteredSpaces)
+            ApiResponseModel()
 
         } catch (e: Exception) {
-            ResponseEntity(filteredSpaces, HttpStatus.NOT_FOUND)
+            ApiResponseModel()
         }
 
     }
 
-    override fun read(): ResponseEntity<List<SpaceModel>> {
+    override fun read(): ApiResponseModel {
         val spaceModelList = spaceService.read()
         logger.info("read::spaceModelList: $spaceModelList")
-        return ResponseEntity.ok(spaceModelList)
+        return ApiResponseModel()
     }
 
-    override fun update(item: SpaceModel, id: Long): ResponseEntity<SpaceModel> {
+    override fun update(item: SpaceModel, id: Long): ApiResponseModel {
         return try {
             logger.info("read::update: $item")
             spaceService.update(item)
-            ResponseEntity.noContent().build()
+            ApiResponseModel()
         } catch (e: Exception) {
-            ResponseEntity.notFound().build()
+            ApiResponseModel()
         }
     }
 
-    override fun delete(id: Long): ResponseEntity<Unit> {
+    override fun delete(id: Long): ApiResponseModel {
         return try {
             spaceService.delete(id)
-            ResponseEntity.noContent().build()
+            ApiResponseModel()
         } catch (e: Exception) {
-            ResponseEntity.notFound().build()
+            ApiResponseModel()
         }
 
     }

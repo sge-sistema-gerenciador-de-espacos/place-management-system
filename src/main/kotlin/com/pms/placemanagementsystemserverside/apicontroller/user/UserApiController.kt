@@ -27,7 +27,7 @@ class UserApiController : ApiController<UserModel> {
         return try {
             logger.info("create::item: $item")
             val itemUpdated = userService.create(item)
-//            ResponseEntity.created(URI.create("/users/${itemUpdated.id}")).build()
+//            ApiResponseModel.created(URI.create("/users/${itemUpdated.id}")).build()
 //            ApiResponseModel(HttpStatus.CREATED.value(), PostResponseModel(itemUpdated.id))
             ApiResponseModel(20000, PostResponseModel(itemUpdated.id))
         } catch (e: Exception) {

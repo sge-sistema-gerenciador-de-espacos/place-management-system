@@ -1,15 +1,13 @@
 package com.pms.placemanagementsystemserverside.apicontroller.software
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
+import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
 import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
 import com.pms.placemanagementsystemserverside.service.software.SoftwareService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.net.URI
 
 @RestController
 @RequestMapping(
@@ -24,53 +22,53 @@ class SoftwareApiController : ApiController<SoftwareModel> {
     @Autowired
     private lateinit var softwareService: SoftwareService
 
-    override fun create(item: SoftwareModel): ResponseEntity<Unit> {
+    override fun create(item: SoftwareModel): ApiResponseModel {
         return try {
             logger.info("create::item: $item")
             val itemUpdated = softwareService.create(item)
-            ResponseEntity.created(URI.create("/softwares/${itemUpdated.id}")).build()
+            ApiResponseModel()
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.CONFLICT).build()
+            ApiResponseModel()
         }
     }
 
-    override fun readByFilter(item: SoftwareModel): ResponseEntity<List<SoftwareModel>> {
+    override fun readByFilter(item: SoftwareModel): ApiResponseModel {
         var filteredSoftwares: List<SoftwareModel>? = null
 
         return try {
             logger.info("readByFilter::item: $item")
             filteredSoftwares = softwareService.read()
             logger.info("readByFilter::filteredSoftwares: $filteredSoftwares")
-            ResponseEntity.ok(filteredSoftwares)
+            ApiResponseModel()
 
         } catch (e: Exception) {
-            ResponseEntity(filteredSoftwares, HttpStatus.NOT_FOUND)
+            ApiResponseModel()
         }
 
     }
 
-    override fun read(): ResponseEntity<List<SoftwareModel>> {
+    override fun read(): ApiResponseModel {
         val softwareModelList = softwareService.read()
         logger.info("read::softwareModelList: $softwareModelList")
-        return ResponseEntity.ok(softwareModelList)
+        return ApiResponseModel()
     }
 
-    override fun update(item: SoftwareModel, id: Long): ResponseEntity<SoftwareModel> {
+    override fun update(item: SoftwareModel, id: Long): ApiResponseModel {
         return try {
             logger.info("read::update: $item")
             softwareService.update(item)
-            ResponseEntity.noContent().build()
+            ApiResponseModel()
         } catch (e: Exception) {
-            ResponseEntity.notFound().build()
+            ApiResponseModel()
         }
     }
 
-    override fun delete(id: Long): ResponseEntity<Unit> {
+    override fun delete(id: Long): ApiResponseModel {
         return try {
             softwareService.delete(id)
-            ResponseEntity.noContent().build()
+            ApiResponseModel()
         } catch (e: Exception) {
-            ResponseEntity.notFound().build()
+            ApiResponseModel()
         }
 
     }

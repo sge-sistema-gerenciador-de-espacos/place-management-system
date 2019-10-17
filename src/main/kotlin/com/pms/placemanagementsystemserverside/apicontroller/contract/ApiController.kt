@@ -1,7 +1,6 @@
 package com.pms.placemanagementsystemserverside.apicontroller.contract
 
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 interface ApiController<T> {
