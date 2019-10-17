@@ -1,13 +1,10 @@
 package com.pms.placemanagementsystemserverside.models.user
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.pms.placemanagementsystemserverside.models.enums.UserStatusEnum
 import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.user.address.AddressModel
 import com.pms.placemanagementsystemserverside.models.user.telephone.TelephoneModel
-import com.pms.placemanagementsystemserverside.util.json.parse.user.UserDeserializer
-import com.pms.placemanagementsystemserverside.util.json.parse.user.UserSerializer
 import javax.persistence.*
 
 @Entity(name = "user")
@@ -20,6 +17,7 @@ open class UserModel(
         @SequenceGenerator(name = "id", sequenceName = "user_id_seq",
                 allocationSize = 1)
         @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
+        @JsonIgnoreProperties(allowGetters = true)
         open var id: Long = 0,
 
         open var name: String = "",
@@ -27,20 +25,18 @@ open class UserModel(
         open var email: String = "",
 
         @OneToOne(targetEntity = AddressModel::class)
-        open var addresses: AddressModel = AddressModel(),
+        open var address: AddressModel = AddressModel(),
 
         open var status: UserStatusEnum = UserStatusEnum.UNKNOWN,
 
-        @Column(name = "type")
         open var type: UserTypeEnum = UserTypeEnum.UNKNOWN,
 
-        //TODO acordado que vai ser uma lista
         @OneToMany(targetEntity = TelephoneModel::class)
         open var telephones: MutableList<TelephoneModel> = mutableListOf()
 
 ) {
     override fun toString(): String {
-        return "UserModel(id=$id, name='$name', email='$email', addresses=$addresses, " +
+        return "UserModel(id=$id, name='$name', email='$email', addresses=$address, " +
                 "status=$status, type=$type, telephones=$telephones)"
     }
 }

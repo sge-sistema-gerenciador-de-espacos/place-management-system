@@ -1,22 +1,23 @@
 package com.pms.placemanagementsystemserverside.apicontroller.contract
 
+import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 interface ApiController<T> {
 
     @PostMapping
-    fun create(@RequestBody item: T): ResponseEntity<Unit>
+    fun create(@RequestBody item: T): ApiResponseModel
 
     @PostMapping(value = ["/filter"])
-    fun readByFilter(@RequestBody item: T): ResponseEntity<List<T>>
+    fun readByFilter(@RequestBody item: T): ApiResponseModel
 
     @GetMapping
-    fun read(): ResponseEntity<List<T>>
+    fun read(): ApiResponseModel
 
     @PutMapping
-    fun update(@RequestBody item: T, @PathVariable id: Long): ResponseEntity<T>
+    fun update(@RequestBody item: T, @PathVariable id: Long): ApiResponseModel
 
     @DeleteMapping(value = ["/{id}"])
-    fun delete(@PathVariable id: Long): ResponseEntity<Unit>
+    fun delete(@PathVariable id: Long): ApiResponseModel
 }

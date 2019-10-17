@@ -1,5 +1,6 @@
 package com.pms.placemanagementsystemserverside.models.user.address
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
 
@@ -10,9 +11,14 @@ data class StateModel(
                 allocationSize = 1)
         @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
         var id: Long = 0,
+
+        @JsonIgnoreProperties
         var name: String = "",
+
+        @JsonIgnoreProperties
         var initials: String = "",
 
         @OneToOne(targetEntity = CountryModel::class)
+        @JsonIgnoreProperties
         var countryModel: CountryModel = CountryModel()
 )
