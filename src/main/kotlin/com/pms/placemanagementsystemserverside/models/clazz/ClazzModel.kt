@@ -1,6 +1,7 @@
 package com.pms.placemanagementsystemserverside.models.clazz
 
 import com.pms.placemanagementsystemserverside.models.course.CourseModel
+import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import javax.persistence.*
 
 @Entity(name = "class")
@@ -13,5 +14,7 @@ data class ClazzModel(
         var name: String = "",
 
         @ManyToOne(targetEntity = CourseModel::class)
-        var courseModel: CourseModel = CourseModel()
+        var course: CourseModel = CourseModel(),
+
+        var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN
 )
