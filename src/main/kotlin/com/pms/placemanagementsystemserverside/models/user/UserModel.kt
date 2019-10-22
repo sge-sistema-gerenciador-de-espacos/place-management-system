@@ -1,7 +1,7 @@
 package com.pms.placemanagementsystemserverside.models.user
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.pms.placemanagementsystemserverside.models.enums.UserStatusEnum
+import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.user.address.AddressModel
 import com.pms.placemanagementsystemserverside.models.user.telephone.TelephoneModel
@@ -27,7 +27,7 @@ open class UserModel(
         @OneToOne(targetEntity = AddressModel::class)
         open var address: AddressModel? = null,
 
-        open var status: UserStatusEnum? = null,
+        open var statusActivation: ActivationModelStatusEnum? = null,
 
         open var type: UserTypeEnum? = null,
 
@@ -37,6 +37,6 @@ open class UserModel(
 ) {
     override fun toString(): String {
         return "UserModel(id=$id, name='$name', email='$email', addresses=$address, " +
-                "status=$status, type=$type, telephones=$telephones)"
+                "status=$statusActivation, type=$type, telephones=$telephones)"
     }
 }
