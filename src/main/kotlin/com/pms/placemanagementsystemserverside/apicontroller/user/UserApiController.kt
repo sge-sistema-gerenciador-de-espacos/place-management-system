@@ -8,6 +8,7 @@ import com.pms.placemanagementsystemserverside.models.api.response.PostResponseM
 import com.pms.placemanagementsystemserverside.models.api.response.PutResponseModel
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.service.user.UserService
+import com.pms.placemanagementsystemserverside.service.user.impl.UserServiceImpl
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -29,7 +30,7 @@ class UserApiController : ApiController<UserModel> {
             val itemUpdated = userService.create(item)
 //            ApiResponseModel.created(URI.create("/users/${itemUpdated.id}")).build()
 //            ApiResponseModel(HttpStatus.CREATED.value(), PostResponseModel(itemUpdated.id))
-            ApiResponseModel(20000, PostResponseModel(itemUpdated.id))
+            ApiResponseModel(20000, itemUpdated.id?.let { PostResponseModel(it) })
         } catch (e: Exception) {
             logger.info("create::catch: ${e.message}")
             ApiResponseModel(HttpStatus.CONFLICT.value(), null)
@@ -45,14 +46,20 @@ class UserApiController : ApiController<UserModel> {
             logger.info("readByFilter::filteredUsers: $filteredUsers")
 //            ApiResponseModel(HttpStatus.OK.value(), filteredUsers)
             ApiResponseModel(20000, filteredUsers)
-
         } catch (e: Exception) {
             ApiResponseModel(HttpStatus.NOT_FOUND.value(), filteredUsers)
         }
-
     }
 
     override fun read(): ApiResponseModel {
+        val userModelList = (userService as UserServiceImpl).readByUserType()
+        logger.info("read::userModelList: $userModelList")
+//        return ApiResponseModel(HttpStatus.OK.value(), userModelList)
+        return ApiResponseModel(20000, userModelList)
+    }
+
+    @GetMapping(value = ["/master"])
+    fun readMaster(): ApiResponseModel {
         val userModelList = userService.read()
 //        val userModelList = getUsers()
         logger.info("read::userModelList: $userModelList")
@@ -130,7 +137,4 @@ class UserApiController : ApiController<UserModel> {
         return "{\"code\":20000,\"data\":{\"roles\":[\"admin\"],\"introduction\":\"I am a super administrator\",\"avatar\":\"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif\",\"name\":\"Super Admin\"}}"
     }
 
-    private fun getUsers(): List<UserModel> {
-        return mutableListOf(UserModel(), UserModel(), UserModel())
-    }
 }

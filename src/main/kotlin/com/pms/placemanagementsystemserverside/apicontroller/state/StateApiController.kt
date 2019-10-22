@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController
         produces = ["application/json"]
 )
 class StateApiController {
+    //TODO acertar
     fun read(): String {
         return "[\n" +
                 "    {\n" +

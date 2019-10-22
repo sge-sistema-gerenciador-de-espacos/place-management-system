@@ -18,21 +18,21 @@ open class UserModel(
                 allocationSize = 1)
         @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
         @JsonIgnoreProperties(allowGetters = true)
-        open var id: Long = 0,
+        open var id: Long? = null,
 
-        open var name: String = "",
+        open var name: String? = null,
 
-        open var email: String = "",
+        open var email: String? = null,
 
         @OneToOne(targetEntity = AddressModel::class)
-        open var address: AddressModel = AddressModel(),
+        open var address: AddressModel? = null,
 
-        open var status: UserStatusEnum = UserStatusEnum.UNKNOWN,
+        open var status: UserStatusEnum? = null,
 
-        open var type: UserTypeEnum = UserTypeEnum.UNKNOWN,
+        open var type: UserTypeEnum? = null,
 
         @OneToMany(targetEntity = TelephoneModel::class)
-        open var telephones: MutableList<TelephoneModel> = mutableListOf()
+        open var telephones: MutableList<TelephoneModel>? = null
 
 ) {
     override fun toString(): String {

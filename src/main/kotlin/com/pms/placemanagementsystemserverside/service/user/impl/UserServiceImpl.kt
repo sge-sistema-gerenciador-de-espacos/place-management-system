@@ -2,6 +2,7 @@ package com.pms.placemanagementsystemserverside.service.user.impl
 
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.repository.user.UserRepository
+import com.pms.placemanagementsystemserverside.repository.user.impl.UserRepositoryImpl
 import com.pms.placemanagementsystemserverside.service.user.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -18,6 +19,10 @@ class UserServiceImpl : UserService {
 
     override fun read(): List<UserModel> {
         return userRepository.read()
+    }
+
+    fun readByUserType(): List<UserModel> {
+        return (userRepository as UserRepositoryImpl).readByUserType()
     }
 
     override fun update(userModel: UserModel) {
