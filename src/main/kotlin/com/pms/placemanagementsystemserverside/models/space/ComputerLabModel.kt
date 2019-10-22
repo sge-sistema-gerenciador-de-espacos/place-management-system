@@ -1,14 +1,17 @@
 package com.pms.placemanagementsystemserverside.models.space
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.pms.placemanagementsystemserverside.models.enums.SpaceTypeEnum
 import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.ManyToMany
 
+//TODO aplicar a anotacao correta do mapeamento de JPA, esse cara precisa ser relacionado com space no banco
 @Entity
 data class ComputerLabModel(
 
+        @JsonProperty(value = "labId")
         override var id: Long,
         override var name: String,
         override var numberOfChairs: Int,
@@ -17,6 +20,7 @@ data class ComputerLabModel(
         override var hasSmartBoard: Boolean,
 
         @Column(name = "number_pc")
+        @JsonProperty(value = "numberPc")
         var numberOfPcs: Int = 0,
 
         @ManyToMany
@@ -24,4 +28,4 @@ data class ComputerLabModel(
 )
 
     : SpaceModel(id = id, name = name, numberOfChairs = numberOfChairs, hasProjector = hasProjector,
-        hasBoard = hasBoard, hasSmartBoard = hasSmartBoard, spaceType = SpaceTypeEnum.COMPUTER_LAB)
+        hasBoard = hasBoard, hasSmartBoard = hasSmartBoard, type = SpaceTypeEnum.COMPUTER_LAB)

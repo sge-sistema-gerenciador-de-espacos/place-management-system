@@ -4,8 +4,8 @@ import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiControl
 import com.pms.placemanagementsystemserverside.models.api.authenticator.AuthenticatorRequestModel
 import com.pms.placemanagementsystemserverside.models.api.authenticator.AuthenticatorResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
-import com.pms.placemanagementsystemserverside.models.api.response.PostResponseModel
-import com.pms.placemanagementsystemserverside.models.api.response.PutResponseModel
+import com.pms.placemanagementsystemserverside.models.api.response.KeyResponseModel
+import com.pms.placemanagementsystemserverside.models.api.response.StatusResponseModel
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.service.user.UserService
 import com.pms.placemanagementsystemserverside.service.user.impl.UserServiceImpl
@@ -30,7 +30,7 @@ class UserApiController : ApiController<UserModel> {
             val itemUpdated = userService.create(item)
 //            ApiResponseModel.created(URI.create("/users/${itemUpdated.id}")).build()
 //            ApiResponseModel(HttpStatus.CREATED.value(), PostResponseModel(itemUpdated.id))
-            ApiResponseModel(20000, itemUpdated.id?.let { PostResponseModel(it) })
+            ApiResponseModel(20000, itemUpdated.id?.let { KeyResponseModel(it) })
         } catch (e: Exception) {
             logger.info("create::catch: ${e.message}")
             ApiResponseModel(HttpStatus.CONFLICT.value(), null)
@@ -79,13 +79,13 @@ class UserApiController : ApiController<UserModel> {
 
             ApiResponseModel(
                     20000,
-                    PutResponseModel(PutResponseModel.PutResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
             )
 
         } catch (e: Exception) {
             ApiResponseModel(
                     HttpStatus.NO_CONTENT.value(),
-                    PutResponseModel(PutResponseModel.PutResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
             )
         }
     }
@@ -101,13 +101,13 @@ class UserApiController : ApiController<UserModel> {
 
             ApiResponseModel(
                     20000,
-                    PutResponseModel(PutResponseModel.PutResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
             )
 
         } catch (e: Exception) {
             ApiResponseModel(
                     HttpStatus.NO_CONTENT.value(),
-                    PutResponseModel(PutResponseModel.PutResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.ERROR)
             )
         }
     }

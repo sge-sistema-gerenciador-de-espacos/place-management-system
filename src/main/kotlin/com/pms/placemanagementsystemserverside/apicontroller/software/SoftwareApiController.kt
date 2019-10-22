@@ -2,6 +2,8 @@ package com.pms.placemanagementsystemserverside.apicontroller.software
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
+import com.pms.placemanagementsystemserverside.models.api.response.KeyResponseModel
+import com.pms.placemanagementsystemserverside.models.api.response.StatusResponseModel
 import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
 import com.pms.placemanagementsystemserverside.service.software.SoftwareService
 import org.slf4j.LoggerFactory
@@ -26,7 +28,7 @@ class SoftwareApiController : ApiController<SoftwareModel> {
         return try {
             logger.info("create::item: $item")
             val itemUpdated = softwareService.create(item)
-            ApiResponseModel()
+            ApiResponseModel(20000, KeyResponseModel(itemUpdated.id))
         } catch (e: Exception) {
             ApiResponseModel()
         }
@@ -50,14 +52,17 @@ class SoftwareApiController : ApiController<SoftwareModel> {
     override fun read(): ApiResponseModel {
         val softwareModelList = softwareService.read()
         logger.info("read::softwareModelList: $softwareModelList")
-        return ApiResponseModel()
+        return ApiResponseModel(20000, softwareModelList)
     }
 
     override fun update(item: SoftwareModel, id: Long): ApiResponseModel {
         return try {
             logger.info("read::update: $item")
             softwareService.update(item)
-            ApiResponseModel()
+            ApiResponseModel(
+                    20000,
+                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+            )
         } catch (e: Exception) {
             ApiResponseModel()
         }
@@ -66,7 +71,10 @@ class SoftwareApiController : ApiController<SoftwareModel> {
     override fun delete(id: Long): ApiResponseModel {
         return try {
             softwareService.delete(id)
-            ApiResponseModel()
+            ApiResponseModel(
+                    20000,
+                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+            )
         } catch (e: Exception) {
             ApiResponseModel()
         }

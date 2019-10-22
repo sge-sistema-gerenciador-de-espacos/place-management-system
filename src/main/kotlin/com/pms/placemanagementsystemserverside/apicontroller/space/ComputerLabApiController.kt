@@ -2,6 +2,8 @@ package com.pms.placemanagementsystemserverside.apicontroller.space
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
+import com.pms.placemanagementsystemserverside.models.api.response.KeyResponseModel
+import com.pms.placemanagementsystemserverside.models.api.response.StatusResponseModel
 import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
 import com.pms.placemanagementsystemserverside.service.space.SpaceService
 import org.slf4j.LoggerFactory
@@ -25,9 +27,11 @@ class ComputerLabApiController : ApiController<ComputerLabModel> {
     override fun create(item: ComputerLabModel): ApiResponseModel {
         return try {
             logger.info("create::item: $item")
-            spaceService.create(item)
-            ApiResponseModel()
-
+            val itemUpdated = spaceService.create(item)
+            ApiResponseModel(
+                    20000,
+                    KeyResponseModel(itemUpdated.id)
+            )
         } catch (e: Exception) {
             ApiResponseModel()
         }
@@ -37,8 +41,10 @@ class ComputerLabApiController : ApiController<ComputerLabModel> {
         return try {
             logger.info("read::update: $item")
             spaceService.update(item)
-            ApiResponseModel()
-
+            ApiResponseModel(
+                    20000,
+                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+            )
         } catch (e: Exception) {
             ApiResponseModel()
         }
@@ -62,7 +68,10 @@ class ComputerLabApiController : ApiController<ComputerLabModel> {
      * Using from SpaceApiController
      */
     override fun delete(id: Long): ApiResponseModel {
-        return ApiResponseModel()
+        return ApiResponseModel(
+                20000,
+                StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+        )
     }
 
 }

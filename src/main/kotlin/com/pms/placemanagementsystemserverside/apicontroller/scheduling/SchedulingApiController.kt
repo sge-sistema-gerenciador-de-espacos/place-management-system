@@ -2,6 +2,8 @@ package com.pms.placemanagementsystemserverside.apicontroller.scheduling
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
+import com.pms.placemanagementsystemserverside.models.api.response.KeyResponseModel
+import com.pms.placemanagementsystemserverside.models.api.response.StatusResponseModel
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
 import com.pms.placemanagementsystemserverside.service.scheduling.SchedulingService
 import org.slf4j.LoggerFactory
@@ -26,7 +28,7 @@ class SchedulingApiController : ApiController<SchedulingModel> {
         return try {
             logger.info("create::item: $item")
             val itemUpdated = schedulingService.create(item)
-            ApiResponseModel()
+            ApiResponseModel(20000, KeyResponseModel(itemUpdated.id))
         } catch (e: Exception) {
             ApiResponseModel()
         }
@@ -50,14 +52,17 @@ class SchedulingApiController : ApiController<SchedulingModel> {
     override fun read(): ApiResponseModel {
         val schedulingModelList = schedulingService.read()
         logger.info("read::schedulingModelList: $schedulingModelList")
-        return ApiResponseModel()
+        return ApiResponseModel(20000, schedulingModelList)
     }
 
     override fun update(item: SchedulingModel, id: Long): ApiResponseModel {
         return try {
             logger.info("read::update: $item")
             schedulingService.update(item)
-            ApiResponseModel()
+            ApiResponseModel(
+                    20000,
+                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+            )
         } catch (e: Exception) {
             ApiResponseModel()
         }
@@ -66,7 +71,10 @@ class SchedulingApiController : ApiController<SchedulingModel> {
     override fun delete(id: Long): ApiResponseModel {
         return try {
             schedulingService.delete(id)
-            ApiResponseModel()
+            ApiResponseModel(
+                    20000,
+                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+            )
         } catch (e: Exception) {
             ApiResponseModel()
         }

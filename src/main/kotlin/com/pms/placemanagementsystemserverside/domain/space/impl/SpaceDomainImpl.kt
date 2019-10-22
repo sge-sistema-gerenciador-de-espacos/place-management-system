@@ -18,12 +18,12 @@ class SpaceDomainImpl : SpaceDomain {
                     it.numberOfChairs == spaceIntentionModel.numberOfChairs
         }
 
-        if (spaceIntentionModel.spaceType == SpaceTypeEnum.COMPUTER_LAB) {
+        if (spaceIntentionModel.type == SpaceTypeEnum.COMPUTER_LAB) {
 
             val filterComputerLabModels = mutableListOf<ComputerLabModel>()
 
             filteredSpaceModels.forEach {
-                if (it.spaceType == SpaceTypeEnum.COMPUTER_LAB) {
+                if (it.type == SpaceTypeEnum.COMPUTER_LAB) {
                     filterComputerLabModels.add(it as ComputerLabModel)
                 }
             }
