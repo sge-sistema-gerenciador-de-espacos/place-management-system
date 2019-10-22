@@ -1,5 +1,6 @@
 package com.pms.placemanagementsystemserverside.models.program
 
+import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -14,5 +15,7 @@ data class ProgramModel(
 
         var name: String = "",
 
-        var code: Int = 0
+        var code: String = "",
+
+        var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN
 )
