@@ -1,5 +1,6 @@
 package com.pms.placemanagementsystemserverside.models.course
 
+import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.models.program.ProgramModel
 import com.pms.placemanagementsystemserverside.models.user.address.AddressModel
 import javax.persistence.*
@@ -18,5 +19,7 @@ data class CourseModel(
         var code: Int = 0,
 
         @OneToMany(targetEntity = ProgramModel::class)
-        var programs: List<ProgramModel> = mutableListOf()
+        var programs: List<ProgramModel> = mutableListOf(),
+
+        var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN
 )
