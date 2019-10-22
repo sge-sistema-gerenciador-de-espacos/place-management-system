@@ -2,6 +2,7 @@ package com.pms.placemanagementsystemserverside.models.space
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.models.enums.SpaceTypeEnum
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
 import javax.persistence.*
@@ -39,8 +40,9 @@ open class SpaceModel(
 
         @OneToMany(targetEntity = SchedulingModel::class)
         @JsonIgnoreProperties
-        val schedulingModels: MutableList<SchedulingModel> = mutableListOf()
+        val schedulingModels: MutableList<SchedulingModel> = mutableListOf(),
 
+        var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN
 ) {
 
     override fun toString(): String {
