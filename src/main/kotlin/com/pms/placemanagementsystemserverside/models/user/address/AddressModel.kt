@@ -25,6 +25,7 @@ data class AddressModel(
         var city: String = "",
 
         @ManyToOne(targetEntity = StateModel::class)
-        var state: StateModel = StateModel()
+//        var state: StateModel = StateModel()
+        var state: Int
 )
 

@@ -1,158 +1,17 @@
 package com.pms.placemanagementsystemserverside.apicontroller.state
 
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping(
-        value = ["/pms-api/state"],
-        consumes = ["application/json"],
-        produces = ["application/json"]
+        value = ["/pms-api/states"]
 )
 class StateApiController {
     //TODO acertar
+    @GetMapping
     fun read(): String {
-        return "[\n" +
-                "    {\n" +
-                "    code: 20000,\n" +
-                "    data: [\n" +
-                "    {\n" +
-                "        ID: 1,\n" +
-                "        Initials: 'AC',\n" +
-                "        Name: 'Acre'\n" +
-                "    },\n" +
-                "      {\n" +
-                "        ID: 2,\n" +
-                "        Initials: 'AL',\n" +
-                "        Name: 'Alagoas'\n" +
-                "      },\n" +
-                "  {\n" +
-                "    ID: 3,\n" +
-                "    Initials: 'AM',\n" +
-                "    Name: 'Amazonas'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 4,\n" +
-                "    Initials: 'AP',\n" +
-                "    Name: 'Amapá'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 5,\n" +
-                "    Initials: 'BA',\n" +
-                "    Name: 'Bahia'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 6,\n" +
-                "    Initials: 'CE',\n" +
-                "    Name: 'Ceará'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 7,\n" +
-                "    Initials: 'DF',\n" +
-                "    Name: 'Distrito Federal'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 8,\n" +
-                "    Initials: 'ES',\n" +
-                "    Name: 'Espírito Santo'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 9,\n" +
-                "    Initials: 'GO',\n" +
-                "    Name: 'Goiás'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 10,\n" +
-                "    Initials: 'MA',\n" +
-                "    Name: 'Maranhão'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 11,\n" +
-                "    Initials: 'MG',\n" +
-                "    Name: 'Minas Gerais'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 12,\n" +
-                "    Initials: 'MS',\n" +
-                "    Name: 'Mato Grosso do Sul'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 13,\n" +
-                "    Initials: 'MT',\n" +
-                "    Name: 'Mato Grosso'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 14,\n" +
-                "    Initials: 'PA',\n" +
-                "    Name: 'Pará'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 15,\n" +
-                "    Initials: 'PB',\n" +
-                "    Name: 'Paraíba'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 16,\n" +
-                "    Initials: 'PE',\n" +
-                "    Name: 'Pernambuco'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 17,\n" +
-                "    Initials: 'PI',\n" +
-                "    Name: 'Piauí'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 18,\n" +
-                "    Initials: 'PR',\n" +
-                "    Name: 'Paraná'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 19,\n" +
-                "    Initials: 'RJ',\n" +
-                "    Name: 'Rio de Janeiro'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 20,\n" +
-                "    Initials: 'RN',\n" +
-                "    Name: 'Rio Grande do Norte'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 21,\n" +
-                "    Initials: 'RO',\n" +
-                "    Name: 'Rondônia'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 22,\n" +
-                "    Initials: 'RR',\n" +
-                "    Name: 'Roraima'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 23,\n" +
-                "    Initials: 'RS',\n" +
-                "    Name: 'Rio Grande do Sul'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 24,\n" +
-                "    Initials: 'SC',\n" +
-                "    Name: 'Santa Catarina'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 25,\n" +
-                "    Initials: 'SE',\n" +
-                "    Name: 'Sergipe'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 26,\n" +
-                "    Initials: 'SP',\n" +
-                "    Name: 'São Paulo'\n" +
-                "  },\n" +
-                "  {\n" +
-                "    ID: 27,\n" +
-                "    Initials: 'TO',\n" +
-                "    Name: 'Tocantins'\n" +
-                "  }\n" +
-                "    ]\n" +
-                "    }\n" +
-                "]"
+        return """{"code":20000,"data":[{"ID":1,"Initials":"AC","Name":"Acre"},{"ID":2,"Initials":"AL","Name":"Alagoas"},{"ID":3,"Initials":"AM","Name":"Amazonas"},{"ID":4,"Initials":"AP","Name":"Amapá"},{"ID":5,"Initials":"BA","Name":"Bahia"},{"ID":6,"Initials":"CE","Name":"Ceará"},{"ID":7,"Initials":"DF","Name":"Distrito Federal"},{"ID":8,"Initials":"ES","Name":"Espírito Santo"},{"ID":9,"Initials":"GO","Name":"Goiás"},{"ID":10,"Initials":"MA","Name":"Maranhão"},{"ID":11,"Initials":"MG","Name":"Minas Gerais"},{"ID":12,"Initials":"MS","Name":"Mato Grosso do Sul"},{"ID":13,"Initials":"MT","Name":"Mato Grosso"},{"ID":14,"Initials":"PA","Name":"Pará"},{"ID":15,"Initials":"PB","Name":"Paraíba"},{"ID":16,"Initials":"PE","Name":"Pernambuco"},{"ID":17,"Initials":"PI","Name":"Piauí"},{"ID":18,"Initials":"PR","Name":"Paraná"},{"ID":19,"Initials":"RJ","Name":"Rio de Janeiro"},{"ID":20,"Initials":"RN","Name":"Rio Grande do Norte"},{"ID":21,"Initials":"RO","Name":"Rondônia"},{"ID":22,"Initials":"RR","Name":"Roraima"},{"ID":23,"Initials":"RS","Name":"Rio Grande do Sul"},{"ID":24,"Initials":"SC","Name":"Santa Catarina"},{"ID":25,"Initials":"SE","Name":"Sergipe"},{"ID":26,"Initials":"SP","Name":"São Paulo"},{"ID":27,"Initials":"TO","Name":"Tocantins"}]}"""
     }
 }
