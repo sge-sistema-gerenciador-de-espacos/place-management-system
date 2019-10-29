@@ -8,7 +8,7 @@ plugins {
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.pms'
-version = '22-10-2019_RELEASE'
+version = 'user-tel-adrss-as-string'
 sourceCompatibility = '1.8'
 
 repositories {

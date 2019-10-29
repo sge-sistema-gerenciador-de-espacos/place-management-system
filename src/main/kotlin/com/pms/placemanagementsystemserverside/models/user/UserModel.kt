@@ -3,14 +3,10 @@ package com.pms.placemanagementsystemserverside.models.user
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
-import com.pms.placemanagementsystemserverside.models.user.address.AddressModel
-import com.pms.placemanagementsystemserverside.models.user.telephone.TelephoneModel
 import javax.persistence.*
 
 @Entity(name = "user")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@JsonSerialize(using = UserSerializer::class)
-//@JsonDeserialize(using = UserDeserializer::class)
 open class UserModel(
 
         @Id
@@ -24,15 +20,13 @@ open class UserModel(
 
         open var email: String? = null,
 
-        @OneToOne(targetEntity = AddressModel::class)
-        open var address: AddressModel? = null,
+        open var address: String? = null,
 
         open var statusActivation: ActivationModelStatusEnum? = null,
 
         open var type: UserTypeEnum? = null,
 
-        @OneToMany(targetEntity = TelephoneModel::class)
-        open var telephones: MutableList<TelephoneModel>? = null
+        open var telephones: String? = null
 
 ) {
     override fun toString(): String {
