@@ -20,7 +20,13 @@ open class UserModel(
 
         open var email: String? = null,
 
-        open var address: String? = null,
+        open var number: Int? = null,
+
+        open var street: String? = null,
+
+        open var city: String? = null,
+
+        open var state: Int? = null,
 
         open var statusActivation: ActivationModelStatusEnum? = null,
 
@@ -30,7 +36,9 @@ open class UserModel(
 
 ) {
     override fun toString(): String {
-        return "UserModel(id=$id, name='$name', email='$email', addresses=$address, " +
-                "status=$statusActivation, type=$type, telephones=$telephones)"
+        return "UserModel(" +
+                "id=$id, name=$name, email=$email, number=$number, street='$street', city='$city', state=$state, " +
+                "statusActivation=$statusActivation, type=$type, telephones=$telephones" +
+                ")"
     }
 }
