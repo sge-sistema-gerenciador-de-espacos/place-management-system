@@ -2,7 +2,6 @@ package com.pms.placemanagementsystemserverside.models.course
 
 import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.models.program.ProgramModel
-import com.pms.placemanagementsystemserverside.models.user.address.AddressModel
 import javax.persistence.*
 
 @Entity(name = "course")
