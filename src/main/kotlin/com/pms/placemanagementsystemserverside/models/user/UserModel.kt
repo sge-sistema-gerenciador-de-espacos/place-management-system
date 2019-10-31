@@ -10,8 +10,7 @@ import javax.persistence.*
 open class UserModel(
 
         @Id
-        @SequenceGenerator(name = "id", sequenceName = "user_id_seq",
-                allocationSize = 1)
+        @SequenceGenerator(name = "id", sequenceName = "user_id_seq", allocationSize = 1)
         @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
         @JsonIgnoreProperties(allowGetters = true)
         open var id: Long? = null,
