@@ -52,18 +52,15 @@ class UserApiController : ApiController<UserModel> {
     }
 
     override fun read(): ApiResponseModel {
-        val userModelList = (userService as UserServiceImpl).readByUserType()
+        val userModelList = userService.read()
         logger.info("read::userModelList: $userModelList")
-//        return ApiResponseModel(HttpStatus.OK.value(), userModelList)
         return ApiResponseModel(20000, userModelList)
     }
 
     @GetMapping(value = ["/master"])
     fun readMaster(): ApiResponseModel {
-        val userModelList = userService.read()
-//        val userModelList = getUsers()
+        val userModelList = (userService as UserServiceImpl).readByUserType()
         logger.info("read::userModelList: $userModelList")
-//        return ApiResponseModel(HttpStatus.OK.value(), userModelList)
         return ApiResponseModel(20000, userModelList)
     }
 
@@ -94,11 +91,6 @@ class UserApiController : ApiController<UserModel> {
         return try {
             logger.info("delete::id: $id")
             userService.delete(id)
-//            ApiResponseModel(
-//                    HttpStatus.NO_CONTENT.value(),
-//                    PutResponseModel(PutResponseModel.PutResponseTypeEnum.SUCCESS)
-//            )
-
             ApiResponseModel(
                     20000,
                     StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
