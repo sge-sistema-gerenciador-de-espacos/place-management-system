@@ -1,8 +1,5 @@
 package com.pms.placemanagementsystemserverside.models.user.address
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import javax.persistence.*
-
 //@Entity(name = "addresses")
 data class AddressModel(
 //        @Id
