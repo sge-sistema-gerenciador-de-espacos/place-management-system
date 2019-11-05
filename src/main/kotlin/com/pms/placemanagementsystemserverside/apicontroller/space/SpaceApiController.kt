@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping(
-        value = ["/pms-api/spaces"],
-        consumes = ["application/json"],
-        produces = ["application/json"]
-)
+        value = ["/pms-api/space"])
 class SpaceApiController : ApiController<SpaceModel> {
 
     private val logger = LoggerFactory.getLogger(SpaceApiController::class.java)

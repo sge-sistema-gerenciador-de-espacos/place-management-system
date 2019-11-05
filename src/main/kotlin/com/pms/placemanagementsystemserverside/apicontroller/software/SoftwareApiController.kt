@@ -12,11 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(
-        value = ["/pms-api/softwares"],
-        consumes = ["application/json"],
-        produces = ["application/json"]
-)
+@RequestMapping(value = ["/pms-api/software"])
 class SoftwareApiController : ApiController<SoftwareModel> {
 
     private val logger = LoggerFactory.getLogger(SoftwareApiController::class.java)
@@ -58,6 +54,7 @@ class SoftwareApiController : ApiController<SoftwareModel> {
     override fun update(item: SoftwareModel, id: Long): ApiResponseModel {
         return try {
             logger.info("read::update: $item")
+            item.id = id
             softwareService.update(item)
             ApiResponseModel(
                     20000,

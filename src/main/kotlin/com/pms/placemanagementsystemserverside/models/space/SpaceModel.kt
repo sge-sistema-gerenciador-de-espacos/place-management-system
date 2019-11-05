@@ -12,8 +12,7 @@ import javax.persistence.*
 open class SpaceModel(
 
         @Id
-        @SequenceGenerator(name = "id", sequenceName = "space_id_seq",
-                allocationSize = 1)
+        @SequenceGenerator(name = "id", sequenceName = "space_id_seq", allocationSize = 1)
         @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
         @JsonIgnoreProperties(allowGetters = true)
         open var id: Long = 0,
