@@ -12,11 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(
-        value = ["/pms-api/schedulings"],
-        consumes = ["application/json"],
-        produces = ["application/json"]
-)
+@RequestMapping(value = ["/pms-api/scheduling"])
 class SchedulingApiController : ApiController<SchedulingModel> {
 
     private val logger = LoggerFactory.getLogger(SchedulingApiController::class.java)

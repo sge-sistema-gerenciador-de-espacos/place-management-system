@@ -12,11 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(
-        value = ["/pms-api/clazzs"],
-        consumes = ["application/json"],
-        produces = ["application/json"]
-)
+@RequestMapping(value = ["/pms-api/clazz"])
 class ClazzApiController : ApiController<ClazzModel> {
 
     private val logger = LoggerFactory.getLogger(ClazzApiController::class.java)
