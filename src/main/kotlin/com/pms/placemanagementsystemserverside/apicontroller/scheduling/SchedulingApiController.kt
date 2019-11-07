@@ -35,7 +35,7 @@ class SchedulingApiController : ApiController<SchedulingModel> {
     }
 
     override fun readByFilter(item: SchedulingModel): ApiResponseModel {
-        var filteredSchedulings: List<SchedulingModel>? = null
+        var filteredSchedulings: List<SchedulingModel>?
 
         return try {
             logger.info("readByFilter::item: $item")

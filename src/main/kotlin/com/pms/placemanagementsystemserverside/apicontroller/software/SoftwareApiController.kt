@@ -31,7 +31,7 @@ class SoftwareApiController : ApiController<SoftwareModel> {
     }
 
     override fun readByFilter(item: SoftwareModel): ApiResponseModel {
-        var filteredSoftwares: List<SoftwareModel>? = null
+        var filteredSoftwares: List<SoftwareModel>?
 
         return try {
             logger.info("readByFilter::item: $item")

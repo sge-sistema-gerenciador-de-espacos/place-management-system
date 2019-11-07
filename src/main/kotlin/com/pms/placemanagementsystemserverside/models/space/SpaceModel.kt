@@ -8,6 +8,7 @@ import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
 import javax.persistence.*
 
 @Entity(name = "space")
+//TODO acertar essa annotation
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 open class SpaceModel(
 
@@ -35,19 +36,16 @@ open class SpaceModel(
         @JsonProperty(value = "smartBoard")
         open var hasSmartBoard: Boolean = false,
 
-        val type: SpaceTypeEnum = SpaceTypeEnum.CLASSROOM,
+        open var type: SpaceTypeEnum = SpaceTypeEnum.UNKNOWN,
+
+        open var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN,
 
         @OneToMany(targetEntity = SchedulingModel::class)
         @JsonIgnoreProperties
-        val schedulingModels: MutableList<SchedulingModel> = mutableListOf(),
-
-        var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN
+        val schedulingModels: MutableList<SchedulingModel> = mutableListOf()
 ) {
 
-    override fun toString(): String {
-        return "SpaceModel(id=$id, name='$name', numberOfChairs=$numberOfChairs, hasProjector=$hasProjector, " +
-                "hasBoard=$hasBoard, hasSmartBoard=$hasSmartBoard, spaceType=$type, " +
-                "schedulingModels=$schedulingModels)"
-    }
-
+    override fun toString(): String = "SpaceModel(id=$id, name='$name', numberOfChairs=$numberOfChairs, " +
+            "hasProjector=$hasProjector, " + "hasBoard=$hasBoard, hasSmartBoard=$hasSmartBoard, " +
+            "type=$type, status=$status, " + "schedulingModels=$schedulingModels)"
 }

@@ -5,53 +5,33 @@ import com.fasterxml.jackson.core.TreeNode
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.fasterxml.jackson.databind.node.IntNode
+import com.pms.placemanagementsystemserverside.extensions.deserializeToActivationModelStatusEnum
+import com.pms.placemanagementsystemserverside.extensions.deserializeToSpaceEnumType
+import com.pms.placemanagementsystemserverside.extensions.isComputerLab
 import com.pms.placemanagementsystemserverside.extensions.trueOrFalse
-import com.pms.placemanagementsystemserverside.models.enums.SpaceTypeEnum
+import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 
 class SpaceDeserializer(spaceModel: Class<SpaceModel>) : StdDeserializer<SpaceModel>(spaceModel) {
     override fun deserialize(jsonParser: JsonParser, ctxt: DeserializationContext): SpaceModel {
         val treeNode = jsonParser.readValueAsTree<TreeNode>()
-        val id = (treeNode.get("id") as IntNode).numberValue() as Int
+        val id = (treeNode.get("id") as IntNode).numberValue().toLong()
         val name = treeNode.get("name").toString()
-        val numberOfChairs = (treeNode.get("numberChair") as IntNode).numberValue()
+        val numberOfChairs = (treeNode.get("numberChair") as IntNode).numberValue().toInt()
         val hasProjector = (treeNode.get("project") as IntNode).numberValue().toInt().trueOrFalse()
         val hasBoard = (treeNode.get("board") as IntNode).numberValue().toInt().trueOrFalse()
         val hasSmartBoard = (treeNode.get("smartBoard") as IntNode).numberValue().toInt().trueOrFalse()
-        val status = treeNode.get("status")
+        val type = (treeNode.get("type") as IntNode).numberValue().toInt().deserializeToSpaceEnumType()
+        val status = (treeNode.get("status") as IntNode).numberValue().toInt().deserializeToActivationModelStatusEnum()
 
-        val type = treeNode.get("type").let {
-            if (it.toString() == "sala") SpaceTypeEnum.CLASSROOM
-            else SpaceTypeEnum.COMPUTER_LAB
+        if (type.isComputerLab()) {
+            val numberOfPcs = (treeNode.get("numberPc") as IntNode).numberValue().toInt()
+            //TODO softwares ?
+            return ComputerLabModel(
+                    id, name, numberOfChairs, hasProjector, hasBoard, hasSmartBoard, type, status, numberOfPcs
+            )
+        } else {
+            return SpaceModel(id, name, numberOfChairs, hasProjector, hasBoard, hasSmartBoard, type, status)
         }
-
-
-
-//                @Column(name = "number_chair")
-//                @JsonProperty(value = "numberChair")
-//                open var numberOfChairs: Int = 0,
-//
-//        @Column(name = "projector")
-//        @JsonProperty(value = "project")
-//        open var hasProjector: Boolean = false,
-//
-//        @Column(name = "board")
-//        @JsonProperty(value = "board")
-//        open var hasBoard: Boolean = false,
-//
-//        @Column(name = "smart_board")
-//        @JsonProperty(value = "smartBoard")
-//        open var hasSmartBoard: Boolean = false,
-//
-//        val type: SpaceTypeEnum = SpaceTypeEnum.CLASSROOM,
-//
-//        @OneToMany(targetEntity = SchedulingModel::class)
-//        @JsonIgnoreProperties
-//        val schedulingModels: MutableList<SchedulingModel> = mutableListOf(),
-//
-//        var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN
-
-
-        return SpaceModel()
     }
 }

@@ -36,7 +36,7 @@ class ClazzApiController : ApiController<ClazzModel> {
     }
 
     override fun readByFilter(item: ClazzModel): ApiResponseModel {
-        var filteredClazzs: List<ClazzModel>? = null
+        var filteredClazzs: List<ClazzModel>?
 
         return try {
             logger.info("readByFilter::item: $item")

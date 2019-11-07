@@ -36,7 +36,7 @@ class CourseApiController : ApiController<CourseModel> {
     }
 
     override fun readByFilter(item: CourseModel): ApiResponseModel {
-        var filteredCourses: List<CourseModel>? = null
+        var filteredCourses: List<CourseModel>?
 
         return try {
             logger.info("readByFilter::item: $item")

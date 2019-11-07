@@ -1,14 +1,17 @@
 package com.pms.placemanagementsystemserverside.util.json.parse.space
 
 import com.fasterxml.jackson.core.JsonGenerator
+import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.fasterxml.jackson.databind.ser.std.StdSerializer
+import com.pms.placemanagementsystemserverside.extensions.isComputerLab
 import com.pms.placemanagementsystemserverside.extensions.oneOrZero
-import com.pms.placemanagementsystemserverside.extensions.serializeToInt
+import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
+import java.io.IOException
 
 open class SpaceSerializer(spaceModel: Class<SpaceModel>) : StdSerializer<SpaceModel>(spaceModel) {
-    //    @Throws(IOException::class, JsonProcessingException::class)
+    @Throws(IOException::class, JsonProcessingException::class)
     override fun serialize(value: SpaceModel, gen: JsonGenerator, provider: SerializerProvider) {
         gen.writeStartObject()
         gen.writeNumber(value.id)
@@ -17,7 +20,15 @@ open class SpaceSerializer(spaceModel: Class<SpaceModel>) : StdSerializer<SpaceM
         gen.writeNumber(value.hasProjector.oneOrZero())
         gen.writeNumber(value.hasBoard.oneOrZero())
         gen.writeNumber(value.hasSmartBoard.oneOrZero())
-        gen.writeNumber(value.type.serializeToInt())
+        gen.writeNumber(value.type.value)
+        gen.writeNumber(value.status.value)
+
+        if (value.type.isComputerLab()) {
+            val computerLab = value as ComputerLabModel
+            gen.writeNumber(computerLab.id)
+            //TODO softwares?
+        }
+
         gen.writeEndObject()
     }
 }

@@ -1,6 +1,7 @@
 package com.pms.placemanagementsystemserverside.models.space
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.models.enums.SpaceTypeEnum
 import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
 import javax.persistence.Column
@@ -18,6 +19,8 @@ data class ComputerLabModel(
         override var hasProjector: Boolean,
         override var hasBoard: Boolean,
         override var hasSmartBoard: Boolean,
+        override var type: SpaceTypeEnum = SpaceTypeEnum.UNKNOWN,
+        override var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN,
 
         @Column(name = "number_pc")
         @JsonProperty(value = "numberPc")
@@ -25,7 +28,6 @@ data class ComputerLabModel(
 
         @ManyToMany
         var softwares: MutableList<SoftwareModel> = mutableListOf()
-)
 
-    : SpaceModel(id = id, name = name, numberOfChairs = numberOfChairs, hasProjector = hasProjector,
+) : SpaceModel(id = id, name = name, numberOfChairs = numberOfChairs, hasProjector = hasProjector,
         hasBoard = hasBoard, hasSmartBoard = hasSmartBoard, type = SpaceTypeEnum.COMPUTER_LAB)

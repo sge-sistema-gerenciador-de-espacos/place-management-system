@@ -36,7 +36,7 @@ class ProgramApiController : ApiController<ProgramModel> {
     }
 
     override fun readByFilter(item: ProgramModel): ApiResponseModel {
-        var filteredPrograms: List<ProgramModel>? = null
+        var filteredPrograms: List<ProgramModel>?
 
         return try {
             logger.info("readByFilter::item: $item")
