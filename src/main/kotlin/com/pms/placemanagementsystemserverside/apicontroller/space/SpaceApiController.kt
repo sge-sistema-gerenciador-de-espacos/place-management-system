@@ -4,6 +4,7 @@ import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiControl
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.KeyResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.StatusResponseModel
+import com.pms.placemanagementsystemserverside.models.enums.StatusResponseTypeEnum
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.service.space.SpaceService
 import org.slf4j.LoggerFactory
@@ -12,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(
-        value = ["/pms-api/space"])
+@RequestMapping(value = ["/pms-api/space"])
 class SpaceApiController : ApiController<SpaceModel> {
 
     private val logger = LoggerFactory.getLogger(SpaceApiController::class.java)
@@ -62,7 +62,7 @@ class SpaceApiController : ApiController<SpaceModel> {
             spaceService.update(item)
             ApiResponseModel(
                     20000,
-                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
             )
         } catch (e: Exception) {
             ApiResponseModel()
@@ -74,7 +74,7 @@ class SpaceApiController : ApiController<SpaceModel> {
             spaceService.delete(id)
             ApiResponseModel(
                     20000,
-                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
             )
         } catch (e: Exception) {
             ApiResponseModel()

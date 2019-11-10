@@ -5,6 +5,7 @@ import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseMo
 import com.pms.placemanagementsystemserverside.models.api.response.KeyResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.StatusResponseModel
 import com.pms.placemanagementsystemserverside.models.course.CourseModel
+import com.pms.placemanagementsystemserverside.models.enums.StatusResponseTypeEnum
 import com.pms.placemanagementsystemserverside.service.course.CourseService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -58,7 +59,7 @@ class CourseApiController : ApiController<CourseModel> {
             courseService.update(item)
             ApiResponseModel(
                     20000,
-                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
             )
         } catch (e: Exception) {
             ApiResponseModel()
@@ -70,7 +71,7 @@ class CourseApiController : ApiController<CourseModel> {
             courseService.delete(id)
             ApiResponseModel(
                     20000,
-                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
             )
         } catch (e: Exception) {
             ApiResponseModel()

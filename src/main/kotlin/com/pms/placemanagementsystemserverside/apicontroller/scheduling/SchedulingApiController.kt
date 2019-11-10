@@ -4,6 +4,7 @@ import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiControl
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.KeyResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.StatusResponseModel
+import com.pms.placemanagementsystemserverside.models.enums.StatusResponseTypeEnum
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
 import com.pms.placemanagementsystemserverside.service.scheduling.SchedulingService
 import org.slf4j.LoggerFactory
@@ -57,7 +58,7 @@ class SchedulingApiController : ApiController<SchedulingModel> {
             schedulingService.update(item)
             ApiResponseModel(
                     20000,
-                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
             )
         } catch (e: Exception) {
             ApiResponseModel()
@@ -69,7 +70,7 @@ class SchedulingApiController : ApiController<SchedulingModel> {
             schedulingService.delete(id)
             ApiResponseModel(
                     20000,
-                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
             )
         } catch (e: Exception) {
             ApiResponseModel()

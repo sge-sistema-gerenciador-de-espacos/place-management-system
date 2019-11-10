@@ -6,6 +6,7 @@ import com.pms.placemanagementsystemserverside.models.api.authenticator.Authenti
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.KeyResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.StatusResponseModel
+import com.pms.placemanagementsystemserverside.models.enums.StatusResponseTypeEnum
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.service.user.UserService
 import com.pms.placemanagementsystemserverside.service.user.impl.UserServiceImpl
@@ -70,20 +71,16 @@ class UserApiController : ApiController<UserModel> {
             item.id = id
             //TODO acertar update para procurar pelo id
             userService.update(item)
-//            ApiResponseModel(
-//                    HttpStatus.NO_CONTENT.value(),
-//                    PutResponseModel(PutResponseModel.PutResponseTypeEnum.SUCCESS)
-//            )
 
             ApiResponseModel(
                     20000,
-                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
             )
 
         } catch (e: Exception) {
             ApiResponseModel(
                     HttpStatus.NO_CONTENT.value(),
-                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
             )
         }
     }
@@ -94,13 +91,13 @@ class UserApiController : ApiController<UserModel> {
             userService.delete(id)
             ApiResponseModel(
                     20000,
-                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
             )
 
         } catch (e: Exception) {
             ApiResponseModel(
                     HttpStatus.NO_CONTENT.value(),
-                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.ERROR)
+                    StatusResponseModel(StatusResponseTypeEnum.ERROR.status)
             )
         }
     }

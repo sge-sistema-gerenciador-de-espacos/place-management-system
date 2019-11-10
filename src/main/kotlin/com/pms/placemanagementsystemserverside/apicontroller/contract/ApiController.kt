@@ -14,7 +14,7 @@ interface ApiController<T> {
     @GetMapping
     fun read(): ApiResponseModel
 
-    @PutMapping
+    @PutMapping(value = ["/{id}"])
     fun update(@RequestBody item: T, @PathVariable id: Long): ApiResponseModel
 
     @DeleteMapping(value = ["/{id}"])

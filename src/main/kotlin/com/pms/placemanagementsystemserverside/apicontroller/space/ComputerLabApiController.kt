@@ -4,6 +4,7 @@ import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiControl
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.KeyResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.StatusResponseModel
+import com.pms.placemanagementsystemserverside.models.enums.StatusResponseTypeEnum
 import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
 import com.pms.placemanagementsystemserverside.service.space.SpaceService
 import org.slf4j.LoggerFactory
@@ -43,7 +44,7 @@ class ComputerLabApiController : ApiController<ComputerLabModel> {
             spaceService.update(item)
             ApiResponseModel(
                     20000,
-                    StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+                    StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
             )
         } catch (e: Exception) {
             ApiResponseModel()
@@ -70,7 +71,7 @@ class ComputerLabApiController : ApiController<ComputerLabModel> {
     override fun delete(id: Long): ApiResponseModel {
         return ApiResponseModel(
                 20000,
-                StatusResponseModel(StatusResponseModel.StatusResponseTypeEnum.SUCCESS)
+                StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
         )
     }
 
