@@ -10,7 +10,11 @@ import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import java.io.IOException
 
-open class SpaceSerializer(spaceModel: Class<SpaceModel>) : StdSerializer<SpaceModel>(spaceModel) {
+class SpaceSerializer : StdSerializer<SpaceModel> {
+
+    constructor(spaceModel: Class<SpaceModel>?) : super(spaceModel)
+    constructor() : this(null)
+
     @Throws(IOException::class, JsonProcessingException::class)
     override fun serialize(value: SpaceModel, gen: JsonGenerator, provider: SerializerProvider) {
         gen.writeStartObject()

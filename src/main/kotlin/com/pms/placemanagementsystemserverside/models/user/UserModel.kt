@@ -27,8 +27,11 @@ open class UserModel(
 
         open var state: Int? = null,
 
-        open var statusActivation: ActivationModelStatusEnum? = null,
+        open var status: ActivationModelStatusEnum? = null, //TODO criar get set para parsear o valor
 
+        //ADMINISTRATOR: "Admin", PROFESSOR: "Professor", TI_SUPPORT: "TI",
+        // ASSISTANT: "Auxiliar", STUDENT: "Aluno", MANAGER: "Gerenciador"
+        // TODO acertar enum e criar get set pro parser posso tb criar um serializer para esses campos separados
         open var type: UserTypeEnum? = null,
 
         open var telephones: String? = null
@@ -37,7 +40,7 @@ open class UserModel(
     override fun toString(): String {
         return "UserModel(" +
                 "id=$id, name=$name, email=$email, number=$number, street='$street', city='$city', state=$state, " +
-                "statusActivation=$statusActivation, type=$type, telephones=$telephones" +
+                "statusActivation=$status, type=$type, telephones=$telephones" +
                 ")"
     }
 }

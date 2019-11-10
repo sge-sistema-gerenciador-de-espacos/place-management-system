@@ -36,7 +36,7 @@ class SpaceApiController : ApiController<SpaceModel> {
     }
 
     override fun readByFilter(item: SpaceModel): ApiResponseModel {
-        var filteredSpaces: List<SpaceModel>?
+        val filteredSpaces: List<SpaceModel>?
 
         return try {
             logger.info("readByFilter::item: $item")
