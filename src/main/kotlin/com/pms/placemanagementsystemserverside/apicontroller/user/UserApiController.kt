@@ -24,7 +24,6 @@ class UserApiController : ApiController<UserModel> {
     @Autowired
     private lateinit var userService: UserService
 
-    @ResponseBody
     override fun create(item: UserModel): ApiResponseModel {
         return try {
             logger.info("create::item: $item")

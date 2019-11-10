@@ -25,8 +25,7 @@ open class SpaceSerializer(spaceModel: Class<SpaceModel>) : StdSerializer<SpaceM
 
         if (value.type.isComputerLab()) {
             val computerLab = value as ComputerLabModel
-            gen.writeNumber(computerLab.id)
-            //TODO softwares?
+            gen.writeNumber(computerLab.numberOfPcs)
         }
 
         gen.writeEndObject()

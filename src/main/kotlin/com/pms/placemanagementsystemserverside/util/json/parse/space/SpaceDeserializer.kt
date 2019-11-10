@@ -24,14 +24,13 @@ class SpaceDeserializer(spaceModel: Class<SpaceModel>) : StdDeserializer<SpaceMo
         val type = (treeNode.get("type") as IntNode).numberValue().toInt().deserializeToSpaceEnumType()
         val status = (treeNode.get("status") as IntNode).numberValue().toInt().deserializeToActivationModelStatusEnum()
 
-        if (type.isComputerLab()) {
+        return if (type.isComputerLab()) {
             val numberOfPcs = (treeNode.get("numberPc") as IntNode).numberValue().toInt()
-            //TODO softwares ?
-            return ComputerLabModel(
+            ComputerLabModel(
                     id, name, numberOfChairs, hasProjector, hasBoard, hasSmartBoard, type, status, numberOfPcs
             )
         } else {
-            return SpaceModel(id, name, numberOfChairs, hasProjector, hasBoard, hasSmartBoard, type, status)
+            SpaceModel(id, name, numberOfChairs, hasProjector, hasBoard, hasSmartBoard, type, status)
         }
     }
 }

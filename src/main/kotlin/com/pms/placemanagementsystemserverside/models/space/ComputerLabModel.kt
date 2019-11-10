@@ -12,7 +12,6 @@ import javax.persistence.ManyToMany
 @Entity
 data class ComputerLabModel(
 
-        @JsonProperty(value = "labId")
         override var id: Long,
         override var name: String,
         override var numberOfChairs: Int,

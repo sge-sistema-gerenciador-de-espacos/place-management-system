@@ -2,14 +2,20 @@ package com.pms.placemanagementsystemserverside.models.space
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.models.enums.SpaceTypeEnum
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
+import com.pms.placemanagementsystemserverside.util.json.parse.space.SpaceDeserializer
+import com.pms.placemanagementsystemserverside.util.json.parse.space.SpaceSerializer
 import javax.persistence.*
 
 @Entity(name = "space")
 //TODO acertar essa annotation
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@JsonSerialize(using = SpaceSerializer::class)
+@JsonDeserialize(using = SpaceDeserializer::class)
 open class SpaceModel(
 
         @Id
