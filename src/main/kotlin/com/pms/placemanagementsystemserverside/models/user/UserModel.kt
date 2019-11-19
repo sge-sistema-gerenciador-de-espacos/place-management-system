@@ -1,12 +1,18 @@
 package com.pms.placemanagementsystemserverside.models.user
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
+import com.pms.placemanagementsystemserverside.util.json.parse.user.UserDeserializer
+import com.pms.placemanagementsystemserverside.util.json.parse.user.UserSerializer
 import javax.persistence.*
 
 @Entity(name = "user")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@JsonSerialize(using = UserSerializer::class)
+@JsonDeserialize(using = UserDeserializer::class)
 open class UserModel(
 
         @Id
@@ -27,11 +33,8 @@ open class UserModel(
 
         open var state: Int? = null,
 
-        open var status: ActivationModelStatusEnum? = null, //TODO criar get set para parsear o valor
+        open var status: ActivationModelStatusEnum? = null,
 
-        //ADMINISTRATOR: "Admin", PROFESSOR: "Professor", TI_SUPPORT: "TI",
-        // ASSISTANT: "Auxiliar", STUDENT: "Aluno", MANAGER: "Gerenciador"
-        // TODO acertar enum e criar get set pro parser posso tb criar um serializer para esses campos separados
         open var type: UserTypeEnum? = null,
 
         open var telephones: String? = null
