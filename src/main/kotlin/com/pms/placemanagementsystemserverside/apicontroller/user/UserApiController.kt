@@ -7,6 +7,7 @@ import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseMo
 import com.pms.placemanagementsystemserverside.models.api.response.KeyResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.StatusResponseModel
 import com.pms.placemanagementsystemserverside.models.enums.StatusResponseTypeEnum
+import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.service.user.UserService
 import com.pms.placemanagementsystemserverside.service.user.impl.UserServiceImpl
@@ -62,6 +63,25 @@ class UserApiController : ApiController<UserModel> {
         val userModelList = (userService as UserServiceImpl).readByUserType()
         logger.info("read::userModelList: $userModelList")
         return ApiResponseModel(20000, userModelList)
+    }
+
+    @GetMapping(value = ["/professor"])
+    fun readActivatedProfessor(): ApiResponseModel {
+        val userModelList = readActivatedUserByType(UserTypeEnum.PROFESSOR)
+        logger.info("readActivatedProfessor::userModelList: $userModelList")
+        return ApiResponseModel(20000, userModelList)
+    }
+
+    @GetMapping(value = ["/scheduler"])
+    fun readActivatedScheduler(): ApiResponseModel {
+        val userModelList = readActivatedUserByType(UserTypeEnum.MANAGER)//TODO mudar
+        logger.info("read::userModelList: $userModelList")
+        return ApiResponseModel(20000, userModelList)
+    }
+
+    private fun readActivatedUserByType(userTypeEnum: UserTypeEnum): List<UserModel> {
+        //TODO fazer um arg de usuario agendadorF
+        return (userService as UserServiceImpl).readActivatedUserByType(userTypeEnum)
     }
 
     override fun update(item: UserModel, id: Long): ApiResponseModel {

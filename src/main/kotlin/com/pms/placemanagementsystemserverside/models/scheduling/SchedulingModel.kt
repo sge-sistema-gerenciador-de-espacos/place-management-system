@@ -17,7 +17,7 @@ data class SchedulingModel(
         var status: SchedulingStatusEnum = SchedulingStatusEnum.UNKNOWN,
 
         @ManyToOne(targetEntity = UserModel::class)
-        var schedulerUser: UserModel = UserModel(),
+        var schedulerUser: UserModel = UserModel(), //TODO criar o tipo agendador
 
         @OneToMany(targetEntity = SchedulingDateModel::class)
         var schedulingDateModels: MutableList<SchedulingDateModel> = mutableListOf(),

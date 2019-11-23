@@ -1,5 +1,6 @@
 package com.pms.placemanagementsystemserverside.service.user.impl
 
+import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.repository.user.UserRepository
 import com.pms.placemanagementsystemserverside.repository.user.impl.UserRepositoryImpl
@@ -23,6 +24,10 @@ class UserServiceImpl : UserService {
 
     fun readByUserType(): List<UserModel> {
         return (userRepository as UserRepositoryImpl).readByUserType()
+    }
+
+    fun readActivatedUserByType(userTypeEnum: UserTypeEnum): List<UserModel> {
+        return (userRepository as UserRepositoryImpl).readActivatedUserByType(userTypeEnum)
     }
 
     override fun update(userModel: UserModel) {

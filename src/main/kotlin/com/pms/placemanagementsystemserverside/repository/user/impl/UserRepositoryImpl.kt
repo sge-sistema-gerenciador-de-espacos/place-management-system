@@ -1,5 +1,6 @@
 package com.pms.placemanagementsystemserverside.repository.user.impl
 
+import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.repository.user.UserJpaRepository
@@ -31,6 +32,12 @@ class UserRepositoryImpl : UserRepository {
                 addAll(userJpaRepository.findAll(Example.of(UserModel(type = UserTypeEnum.MANAGER))))
             }
         }
+    }
+
+    fun readActivatedUserByType(userTypeEnum: UserTypeEnum): List<UserModel> {
+        return userJpaRepository.findAll(
+                Example.of(UserModel(type = userTypeEnum, status = ActivationModelStatusEnum.ACTIVE))
+        )
     }
 
     override fun update(user: UserModel): UserModel {
