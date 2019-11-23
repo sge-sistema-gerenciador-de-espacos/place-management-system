@@ -9,7 +9,11 @@ import com.pms.placemanagementsystemserverside.extensions.deserializeToUserTypeE
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 
 
-class UserDeserializer(userModel: Class<UserModel>) : StdDeserializer<UserModel>(userModel) {
+class UserDeserializer : StdDeserializer<UserModel> {
+
+    constructor(userModel: Class<UserModel>?) : super(userModel)
+    constructor() : this(null)
+
     override fun deserialize(jsonParser: JsonParser, context: DeserializationContext): UserModel {
         val jsonNode = jsonParser.codec.readTree<JsonNode>(jsonParser)
         val id = jsonNode.get("id").asLong()

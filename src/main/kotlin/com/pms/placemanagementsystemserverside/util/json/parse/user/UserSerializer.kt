@@ -7,7 +7,11 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import java.io.IOException
 
-class UserSerializer(userModel: Class<UserModel>) : StdSerializer<UserModel>(userModel) {
+class UserSerializer : StdSerializer<UserModel> {
+
+    constructor(userModel: Class<UserModel>?) : super(userModel)
+    constructor() : this(null)
+
     @Throws(IOException::class, JsonProcessingException::class)
     override fun serialize(value: UserModel, jgen: JsonGenerator, provider: SerializerProvider) {
         jgen.writeStartObject()
