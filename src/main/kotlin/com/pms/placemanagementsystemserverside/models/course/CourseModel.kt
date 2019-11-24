@@ -15,7 +15,7 @@ data class CourseModel(
 
         var credit: Int = 0,
 
-        var code: Int = 0,
+        var code: String = "",
 
         @OneToMany(targetEntity = ProgramModel::class)
         var programs: List<ProgramModel> = mutableListOf(),
