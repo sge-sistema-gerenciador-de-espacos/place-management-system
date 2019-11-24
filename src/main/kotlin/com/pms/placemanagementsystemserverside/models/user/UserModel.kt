@@ -37,13 +37,15 @@ open class UserModel(
 
         open var type: UserTypeEnum? = null,
 
-        open var telephones: String? = null
+        open var telephone: String? = null,
+
+        open var password: String? = null
 
 ) {
     override fun toString(): String {
         return "UserModel(" +
                 "id=$id, name=$name, email=$email, number=$number, street='$street', city='$city', state=$state, " +
-                "statusActivation=$status, type=$type, telephones=$telephones" +
+                "statusActivation=$status, type=$type, telephone=$telephone, password=$password" +
                 ")"
     }
 }

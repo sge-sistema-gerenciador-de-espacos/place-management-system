@@ -26,6 +26,7 @@ class UserDeserializer : StdDeserializer<UserModel> {
         val number = jsonNode.get("number").asInt()
         val state = jsonNode.get("state").asInt()
         val telephone = jsonNode.get("telephone").asText()
-        return UserModel(id, name, email, number, street, city, state, status, type, telephone)
+        val password = jsonNode.get("password").asText()
+        return UserModel(id, name, email, number, street, city, state, status, type, telephone, password)
     }
 }
