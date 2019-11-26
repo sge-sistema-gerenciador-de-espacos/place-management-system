@@ -18,18 +18,19 @@ class SpaceSerializer : StdSerializer<SpaceModel> {
     @Throws(IOException::class, JsonProcessingException::class)
     override fun serialize(value: SpaceModel, gen: JsonGenerator, provider: SerializerProvider) {
         gen.writeStartObject()
-        gen.writeNumber(value.id)
-        gen.writeString(value.name)
-        gen.writeNumber(value.numberOfChairs)
-        gen.writeNumber(value.hasProjector.oneOrZero())
-        gen.writeNumber(value.hasBoard.oneOrZero())
-        gen.writeNumber(value.hasSmartBoard.oneOrZero())
-        gen.writeNumber(value.type.value)
-        gen.writeNumber(value.status.value)
+
+        gen.writeNumberField("id", value.id)
+        gen.writeStringField("name", value.name)
+        gen.writeNumberField("numberChair", value.numberOfChairs)
+        gen.writeNumberField("project", value.hasProjector.oneOrZero())
+        gen.writeNumberField("board", value.hasBoard.oneOrZero())
+        gen.writeNumberField("smartBoard", value.hasSmartBoard.oneOrZero())
+        gen.writeStringField("type", value.type.value)
+        gen.writeNumberField("status", value.status.value)
 
         if (value.type.isComputerLab()) {
             val computerLab = value as ComputerLabModel
-            gen.writeNumber(computerLab.numberOfPcs)
+            gen.writeNumberField("numberPc", computerLab.numberOfPcs)
         }
 
         gen.writeEndObject()

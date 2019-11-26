@@ -59,6 +59,7 @@ class SpaceApiController : ApiController<SpaceModel> {
     override fun update(item: SpaceModel, id: Long): ApiResponseModel {
         return try {
             logger.info("read::update: $item")
+            item.id = id
             spaceService.update(item)
             ApiResponseModel(
                     20000,

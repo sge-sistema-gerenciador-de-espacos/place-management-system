@@ -21,25 +21,20 @@ open class SpaceModel(
         @Id
         @SequenceGenerator(name = "id", sequenceName = "space_id_seq", allocationSize = 1)
         @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
-        @JsonIgnoreProperties(allowGetters = true)
         open var id: Long = 0,
 
         open var name: String = "",
 
         @Column(name = "number_chair")
-        @JsonProperty(value = "numberChair")
         open var numberOfChairs: Int = 0,
 
         @Column(name = "projector")
-        @JsonProperty(value = "project")
         open var hasProjector: Boolean = false,
 
         @Column(name = "board")
-        @JsonProperty(value = "board")
         open var hasBoard: Boolean = false,
 
         @Column(name = "smart_board")
-        @JsonProperty(value = "smartBoard")
         open var hasSmartBoard: Boolean = false,
 
         open var type: SpaceTypeEnum = SpaceTypeEnum.UNKNOWN,

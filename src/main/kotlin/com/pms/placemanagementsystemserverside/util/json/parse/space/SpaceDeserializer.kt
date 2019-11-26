@@ -25,7 +25,7 @@ class SpaceDeserializer : StdDeserializer<SpaceModel> {
         val hasProjector = jsonNode.get("project").asInt().trueOrFalse()
         val hasBoard = jsonNode.get("board").asInt().trueOrFalse()
         val hasSmartBoard = jsonNode.get("smartBoard").asInt().trueOrFalse()
-        val type = jsonNode.get("type").asInt().deserializeToSpaceEnumType()
+        val type = jsonNode.get("type").asText().deserializeToSpaceEnumType()
         val status = jsonNode.get("status").asInt().deserializeToActivationModelStatusEnum()
 
         return if (type.isComputerLab()) {
