@@ -17,8 +17,8 @@ data class CourseModel(
 
         var code: String = "",
 
-        @OneToMany(targetEntity = ProgramModel::class)
-        var programs: List<ProgramModel> = mutableListOf(),
+        @OneToOne(targetEntity = ProgramModel::class)
+        var program: ProgramModel = ProgramModel(),
 
         var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN
 )
