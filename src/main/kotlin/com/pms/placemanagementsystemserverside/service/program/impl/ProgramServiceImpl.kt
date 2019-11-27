@@ -20,6 +20,10 @@ class ProgramServiceImpl : ProgramService {
         return programRepository.read()
     }
 
+    override fun readActive(): List<ProgramModel> {
+        return programRepository.readActive()
+    }
+
     override fun update(programModel: ProgramModel) {
         programRepository.update(programModel)
     }

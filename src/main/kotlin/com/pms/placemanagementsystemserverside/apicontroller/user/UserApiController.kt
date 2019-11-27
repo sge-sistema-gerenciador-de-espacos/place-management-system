@@ -10,7 +10,6 @@ import com.pms.placemanagementsystemserverside.models.enums.StatusResponseTypeEn
 import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.service.user.UserService
-import com.pms.placemanagementsystemserverside.service.user.impl.UserServiceImpl
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -45,7 +44,6 @@ class UserApiController : ApiController<UserModel> {
             logger.info("readByFilter::item: $item")
             filteredUsers = userService.read()
             logger.info("readByFilter::filteredUsers: $filteredUsers")
-//            ApiResponseModel(HttpStatus.OK.value(), filteredUsers)
             ApiResponseModel(20000, filteredUsers)
         } catch (e: Exception) {
             ApiResponseModel(HttpStatus.NOT_FOUND.value(), filteredUsers)
@@ -60,28 +58,29 @@ class UserApiController : ApiController<UserModel> {
 
     @GetMapping(value = ["/master"])
     fun readMaster(): ApiResponseModel {
-        val userModelList = (userService as UserServiceImpl).readByUserType()
+        val userModelList = readActiveByType(UserTypeEnum.MANAGER)//TODO adc ADMINISTRATOR TB
         logger.info("read::userModelList: $userModelList")
         return ApiResponseModel(20000, userModelList)
     }
 
     @GetMapping(value = ["/professor"])
-    fun readActivatedProfessor(): ApiResponseModel {
-        val userModelList = readActivatedUserByType(UserTypeEnum.PROFESSOR)
+    fun readActiveProfessor(): ApiResponseModel {
+        val userModelList = readActiveByType(UserTypeEnum.PROFESSOR)
         logger.info("readActivatedProfessor::userModelList: $userModelList")
         return ApiResponseModel(20000, userModelList)
     }
 
     @GetMapping(value = ["/scheduler"])
-    fun readActivatedScheduler(): ApiResponseModel {
-        val userModelList = readActivatedUserByType(UserTypeEnum.MANAGER)//TODO mudar
+    fun readActiveScheduler(): ApiResponseModel {
+        val userModelList = readActiveByType(UserTypeEnum.MANAGER)//TODO mudar
         logger.info("read::userModelList: $userModelList")
         return ApiResponseModel(20000, userModelList)
     }
 
-    private fun readActivatedUserByType(userTypeEnum: UserTypeEnum): List<UserModel> {
+    private fun readActiveByType(userTypeEnum: UserTypeEnum): List<UserModel> {
         //TODO fazer um arg de usuario agendadorF
-        return (userService as UserServiceImpl).readActivatedUserByType(userTypeEnum)
+        return userService.readActiveByType(userTypeEnum)
+        //TODO fazer um overload no service para ter 2 metodos, um aceita array, outro aceita um enum
     }
 
     override fun update(item: UserModel, id: Long): ApiResponseModel {

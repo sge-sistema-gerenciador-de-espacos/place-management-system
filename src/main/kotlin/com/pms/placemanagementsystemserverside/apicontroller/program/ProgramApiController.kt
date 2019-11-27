@@ -9,6 +9,7 @@ import com.pms.placemanagementsystemserverside.models.program.ProgramModel
 import com.pms.placemanagementsystemserverside.service.program.ProgramService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -25,7 +26,7 @@ class ProgramApiController : ApiController<ProgramModel> {
         return try {
             logger.info("create::item: $item")
             val itemUpdated = programService.create(item)
-            ApiResponseModel(20000, KeyResponseModel(itemUpdated.id))
+            ApiResponseModel(20000, KeyResponseModel(itemUpdated.id ?: 0))
         } catch (e: Exception) {
             logger.info("create::catch: ${e.message}")
             ApiResponseModel()
@@ -49,6 +50,13 @@ class ProgramApiController : ApiController<ProgramModel> {
 
     override fun read(): ApiResponseModel {
         val programModelList = programService.read()
+        logger.info("read::programModelList: $programModelList")
+        return ApiResponseModel(20000, programModelList)
+    }
+
+    @GetMapping(value = ["enable"])
+    fun readActive(): ApiResponseModel {
+        val programModelList = programService.readActive()
         logger.info("read::programModelList: $programModelList")
         return ApiResponseModel(20000, programModelList)
     }

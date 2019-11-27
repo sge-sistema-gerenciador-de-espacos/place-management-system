@@ -22,12 +22,8 @@ class UserServiceImpl : UserService {
         return userRepository.read()
     }
 
-    fun readByUserType(): List<UserModel> {
-        return (userRepository as UserRepositoryImpl).readByUserType()
-    }
-
-    fun readActivatedUserByType(userTypeEnum: UserTypeEnum): List<UserModel> {
-        return (userRepository as UserRepositoryImpl).readActivatedUserByType(userTypeEnum)
+    override fun readActiveByType(userTypeEnum: UserTypeEnum): List<UserModel> {
+        return userRepository.readActivatedUserByType(userTypeEnum)
     }
 
     override fun update(userModel: UserModel) {

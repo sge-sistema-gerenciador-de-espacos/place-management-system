@@ -24,16 +24,7 @@ class UserRepositoryImpl : UserRepository {
         return userJpaRepository.findAll()
     }
 
-    fun readByUserType(): List<UserModel> {
-        return let {
-            mutableListOf<UserModel>().apply {
-                addAll(userJpaRepository.findAll(Example.of(UserModel(type = UserTypeEnum.ADMINISTRATOR))))
-                addAll(userJpaRepository.findAll(Example.of(UserModel(type = UserTypeEnum.MANAGER))))
-            }
-        }
-    }
-
-    fun readActivatedUserByType(userTypeEnum: UserTypeEnum): List<UserModel> {
+    override fun readActivatedUserByType(userTypeEnum: UserTypeEnum): List<UserModel> {
         return userJpaRepository.findAll(
                 Example.of(UserModel(type = userTypeEnum, status = ActivationModelStatusEnum.ACTIVE))
         )
