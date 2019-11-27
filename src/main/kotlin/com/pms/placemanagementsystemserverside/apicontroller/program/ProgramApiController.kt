@@ -55,6 +55,7 @@ class ProgramApiController : ApiController<ProgramModel> {
 
     override fun update(item: ProgramModel, id: Long): ApiResponseModel {
         return try {
+            item.id = id
             logger.info("read::update: $item")
             programService.update(item)
             ApiResponseModel(

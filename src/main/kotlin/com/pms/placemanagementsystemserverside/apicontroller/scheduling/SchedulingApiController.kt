@@ -54,6 +54,7 @@ class SchedulingApiController : ApiController<SchedulingModel> {
 
     override fun update(item: SchedulingModel, id: Long): ApiResponseModel {
         return try {
+            item.id = id
             logger.info("read::update: $item")
             schedulingService.update(item)
             ApiResponseModel(

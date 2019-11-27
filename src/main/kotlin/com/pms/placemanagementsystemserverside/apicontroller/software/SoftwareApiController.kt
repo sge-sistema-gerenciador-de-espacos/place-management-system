@@ -54,8 +54,8 @@ class SoftwareApiController : ApiController<SoftwareModel> {
 
     override fun update(item: SoftwareModel, id: Long): ApiResponseModel {
         return try {
-            logger.info("read::update: $item")
             item.id = id
+            logger.info("read::update: $item")
             softwareService.update(item)
             ApiResponseModel(
                     20000,

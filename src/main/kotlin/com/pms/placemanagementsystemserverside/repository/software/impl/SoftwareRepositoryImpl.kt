@@ -3,7 +3,6 @@ package com.pms.placemanagementsystemserverside.repository.software.impl
 import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
 import com.pms.placemanagementsystemserverside.repository.software.SoftwareJpaRepository
 import com.pms.placemanagementsystemserverside.repository.software.SoftwareRepository
-import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
@@ -23,9 +22,11 @@ class SoftwareRepositoryImpl : SoftwareRepository {
     }
 
     override fun update(software: SoftwareModel): SoftwareModel {
-        val existingSoftware = softwareJpaRepository.findById(software.id)
-        BeanUtils.copyProperties(software, existingSoftware)
-        return softwareJpaRepository.saveAndFlush(existingSoftware.get())
+        return if (softwareJpaRepository.findById(software.id).isPresent) {
+            softwareJpaRepository.saveAndFlush(software)
+        } else {
+            SoftwareModel()
+        }
     }
 
     override fun delete(id: Long) {

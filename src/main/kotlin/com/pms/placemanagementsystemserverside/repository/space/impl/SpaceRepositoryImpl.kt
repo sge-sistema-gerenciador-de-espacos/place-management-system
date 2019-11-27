@@ -3,7 +3,6 @@ package com.pms.placemanagementsystemserverside.repository.space.impl
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.repository.space.SpaceJpaRepository
 import com.pms.placemanagementsystemserverside.repository.space.SpaceRepository
-import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
@@ -23,9 +22,10 @@ class SpaceRepositoryImpl : SpaceRepository {
     }
 
     override fun update(space: SpaceModel): SpaceModel {
-        val existingSpace = spaceJpaRepository.findById(space.id)
-        BeanUtils.copyProperties(space, existingSpace)
-        return spaceJpaRepository.saveAndFlush(existingSpace.get())
+        if (spaceJpaRepository.findById(space.id).isPresent) {
+            return spaceJpaRepository.saveAndFlush(space)
+        }
+        return SpaceModel()
     }
 
     override fun delete(id: Long) {

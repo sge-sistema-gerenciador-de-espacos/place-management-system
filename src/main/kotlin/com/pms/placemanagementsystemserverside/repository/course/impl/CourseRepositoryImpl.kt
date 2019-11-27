@@ -3,7 +3,6 @@ package com.pms.placemanagementsystemserverside.repository.course.impl
 import com.pms.placemanagementsystemserverside.models.course.CourseModel
 import com.pms.placemanagementsystemserverside.repository.course.CourseJpaRepository
 import com.pms.placemanagementsystemserverside.repository.course.CourseRepository
-import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
@@ -22,9 +21,10 @@ class CourseRepositoryImpl : CourseRepository {
     }
 
     override fun update(course: CourseModel): CourseModel {
-        val existingCourse = courseJpaRepository.findById(course.id)
-        BeanUtils.copyProperties(course, existingCourse)
-        return courseJpaRepository.saveAndFlush(existingCourse.get())
+        if (courseJpaRepository.findById(course.id).isPresent) {
+            return courseJpaRepository.saveAndFlush(course)
+        }
+        return CourseModel()
     }
 
     override fun delete(id: Long) {

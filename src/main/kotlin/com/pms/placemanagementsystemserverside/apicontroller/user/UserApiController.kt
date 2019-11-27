@@ -86,9 +86,8 @@ class UserApiController : ApiController<UserModel> {
 
     override fun update(item: UserModel, id: Long): ApiResponseModel {
         return try {
-            logger.info("update::item: $item")
             item.id = id
-            //TODO acertar update para procurar pelo id
+            logger.info("update::item: $item")
             userService.update(item)
 
             ApiResponseModel(

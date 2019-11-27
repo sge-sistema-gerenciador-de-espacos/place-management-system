@@ -55,6 +55,7 @@ class ClazzApiController : ApiController<ClazzModel> {
 
     override fun update(item: ClazzModel, id: Long): ApiResponseModel {
         return try {
+            item.id = id
             logger.info("read::update: $item")
             clazzService.update(item)
             ApiResponseModel(

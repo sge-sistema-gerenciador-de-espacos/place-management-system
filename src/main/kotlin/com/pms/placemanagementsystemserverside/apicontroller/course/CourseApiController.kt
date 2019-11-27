@@ -55,6 +55,7 @@ class CourseApiController : ApiController<CourseModel> {
 
     override fun update(item: CourseModel, id: Long): ApiResponseModel {
         return try {
+            item.id = id
             logger.info("read::update: $item")
             courseService.update(item)
             ApiResponseModel(

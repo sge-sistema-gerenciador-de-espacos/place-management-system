@@ -3,7 +3,6 @@ package com.pms.placemanagementsystemserverside.repository.scheduling.impl
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
 import com.pms.placemanagementsystemserverside.repository.scheduling.SchedulingJpaRepository
 import com.pms.placemanagementsystemserverside.repository.scheduling.SchedulingRepository
-import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
@@ -22,9 +21,10 @@ class SchedulingRepositoryImpl : SchedulingRepository {
     }
 
     override fun update(scheduling: SchedulingModel): SchedulingModel {
-        val existingScheduling = schedulingJpaRepository.findById(scheduling.id)
-        BeanUtils.copyProperties(scheduling, existingScheduling)
-        return schedulingJpaRepository.saveAndFlush(existingScheduling.get())
+        if (schedulingJpaRepository.findById(scheduling.id).isPresent) {
+            return schedulingJpaRepository.saveAndFlush(scheduling)
+        }
+        return SchedulingModel()
     }
 
     override fun delete(id: Long) {

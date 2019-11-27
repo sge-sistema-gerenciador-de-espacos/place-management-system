@@ -3,7 +3,6 @@ package com.pms.placemanagementsystemserverside.repository.clazz.impl
 import com.pms.placemanagementsystemserverside.models.clazz.ClazzModel
 import com.pms.placemanagementsystemserverside.repository.clazz.ClazzJpaRepository
 import com.pms.placemanagementsystemserverside.repository.clazz.ClazzRepository
-import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
@@ -23,9 +22,10 @@ class ClazzRepositoryImpl : ClazzRepository {
     }
 
     override fun update(clazz: ClazzModel): ClazzModel {
-        val existingClazz = clazzJpaRepository.findById(clazz.id)
-        BeanUtils.copyProperties(clazz, existingClazz)
-        return clazzJpaRepository.saveAndFlush(existingClazz.get())
+        if (clazzJpaRepository.findById(clazz.id).isPresent) {
+            return clazzJpaRepository.saveAndFlush(clazz)
+        }
+        return ClazzModel()
     }
 
     override fun delete(id: Long) {

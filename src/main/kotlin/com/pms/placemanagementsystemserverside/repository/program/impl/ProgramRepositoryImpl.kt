@@ -3,7 +3,6 @@ package com.pms.placemanagementsystemserverside.repository.program.impl
 import com.pms.placemanagementsystemserverside.models.program.ProgramModel
 import com.pms.placemanagementsystemserverside.repository.program.ProgramJpaRepository
 import com.pms.placemanagementsystemserverside.repository.program.ProgramRepository
-import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
@@ -23,9 +22,11 @@ class ProgramRepositoryImpl : ProgramRepository {
     }
 
     override fun update(program: ProgramModel): ProgramModel {
-        val existingProgram = programJpaRepository.findById(program.id)
-        BeanUtils.copyProperties(program, existingProgram)
-        return programJpaRepository.saveAndFlush(existingProgram.get())
+        return if (programJpaRepository.findById(program.id).isPresent) {
+            programJpaRepository.saveAndFlush(program)
+        } else {
+            ProgramModel()
+        }
     }
 
     override fun delete(id: Long) {
