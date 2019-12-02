@@ -27,12 +27,12 @@ class SchedulingDomainImpl : SchedulingDomain {
 
         val schedulingFoundModels = spaceFindedModel.schedulingModels
 
-        schedulingFoundModels.forEach { schedulingFindedModel ->
-            schedulingFindedModel.schedulingDateModels.forEach { schedulingDateFindedModels ->
+        schedulingFoundModels.forEach { schedulingFoundModel ->
+            schedulingFoundModel.schedulingDateModels.forEach { schedulingDateFoundModels ->
                 intentionSchedulingDateModels.forEach { intentionSchedulingDateModel ->
 
-                    if (schedulingDateFindedModels.startDate == intentionSchedulingDateModel.startDate ||
-                            schedulingDateFindedModels.startDate == intentionSchedulingDateModel.startDate) {
+                    if (schedulingDateFoundModels.startDate == intentionSchedulingDateModel.startDate ||
+                            schedulingDateFoundModels.startDate == intentionSchedulingDateModel.startDate) {
                         return false
                     }
 

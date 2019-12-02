@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping(value = ["/pms-api/state"])
 class StateApiController {
 
+    //TODO criar tabela de state e country
     @GetMapping
     fun read(): String {
         return """{"code":20000,"data":[
