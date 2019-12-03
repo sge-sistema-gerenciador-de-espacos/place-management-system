@@ -21,7 +21,5 @@ data class ProgramModel(
 
         var name: String = "",
 
-        var code: String = "",
-
         var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN
 )
