@@ -26,7 +26,7 @@ class ProgramApiController : ApiController<ProgramModel> {
         return try {
             logger.info("create::item: $item")
             val itemUpdated = programService.create(item)
-            ApiResponseModel(20000, KeyResponseModel(itemUpdated.id ?: 0))
+            ApiResponseModel(20000, KeyResponseModel(itemUpdated.id))
         } catch (e: Exception) {
             logger.info("create::catch: ${e.message}")
             ApiResponseModel()
@@ -34,7 +34,7 @@ class ProgramApiController : ApiController<ProgramModel> {
     }
 
     override fun readByFilter(item: ProgramModel): ApiResponseModel {
-        var filteredPrograms: List<ProgramModel>?
+        val filteredPrograms: List<ProgramModel>?
 
         return try {
             logger.info("readByFilter::item: $item")

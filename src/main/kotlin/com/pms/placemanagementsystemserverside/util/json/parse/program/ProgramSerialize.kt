@@ -14,10 +14,10 @@ class ProgramSerialize : StdSerializer<ProgramModel> {
     override fun serialize(value: ProgramModel, gen: JsonGenerator, provider: SerializerProvider) {
         gen.writeStartObject()
 
-        gen.writeNumberField("id", value.id ?: 0)
+        gen.writeNumberField("id", value.id)
         gen.writeStringField("name", value.name)
         gen.writeStringField("code", value.code)
-        gen.writeNumberField("status", value.status?.value ?: ActivationModelStatusEnum.UNKNOWN.value)
+        gen.writeNumberField("status", value.status.value)
 
         gen.writeEndObject()
     }

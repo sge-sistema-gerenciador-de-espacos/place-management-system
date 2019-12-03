@@ -22,7 +22,7 @@ class ProgramRepositoryImpl : ProgramRepository {
     }
 
     override fun update(program: ProgramModel): ProgramModel {
-        return if (programJpaRepository.findById(program.id ?: 0).isPresent) {
+        return if (programJpaRepository.findById(program.id).isPresent) {
             programJpaRepository.saveAndFlush(program)
         } else {
             ProgramModel()

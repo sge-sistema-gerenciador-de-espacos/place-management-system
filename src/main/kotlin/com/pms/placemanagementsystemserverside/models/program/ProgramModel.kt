@@ -17,11 +17,11 @@ data class ProgramModel(
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long? = null,
+        var id: Long = 0,
 
-        var name: String? = null,
+        var name: String = "",
 
-        var code: String? = null,
+        var code: String = "",
 
-        var status: ActivationModelStatusEnum? = null
+        var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN
 )
