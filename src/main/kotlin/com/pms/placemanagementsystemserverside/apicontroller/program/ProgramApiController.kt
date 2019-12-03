@@ -54,7 +54,7 @@ class ProgramApiController : ApiController<ProgramModel> {
         return ApiResponseModel(20000, programModelList)
     }
 
-    @GetMapping(value = ["enable"])
+    @GetMapping(value = ["/enable"])
     fun readActive(): ApiResponseModel {
         val programModelList = programService.readActive()
         logger.info("read::programModelList: $programModelList")
