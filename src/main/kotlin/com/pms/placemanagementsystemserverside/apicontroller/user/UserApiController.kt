@@ -28,7 +28,7 @@ class UserApiController : ApiController<UserModel> {
         return try {
             logger.info("create::item: $item")
             val itemUpdated = userService.create(item)
-            val apiResponseModel = ApiResponseModel(20000, KeyResponseModel(itemUpdated.id ?: 0))
+            val apiResponseModel = ApiResponseModel(20000, KeyResponseModel(itemUpdated.id))
             logger.info("create::response::success: $apiResponseModel")
             apiResponseModel
         } catch (e: Exception) {

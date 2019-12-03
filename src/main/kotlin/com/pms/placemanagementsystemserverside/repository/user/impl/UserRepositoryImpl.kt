@@ -25,7 +25,7 @@ class UserRepositoryImpl : UserRepository {
     }
 
     override fun update(user: UserModel): UserModel {
-        return if (userJpaRepository.findById(user.id ?: 0).isPresent) {
+        return if (userJpaRepository.findById(user.id).isPresent) {
             userJpaRepository.saveAndFlush(user)
         } else {
             UserModel()

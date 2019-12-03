@@ -19,33 +19,32 @@ open class UserModel(
         @SequenceGenerator(name = "id", sequenceName = "user_id_seq", allocationSize = 1)
         @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
         @JsonIgnoreProperties(allowGetters = true)
-        open var id: Long? = null,
+        open var id: Long = 0,
 
-        open var name: String? = null,
+        open var name: String = "",
 
-        open var email: String? = null,
+        open var email: String = "",
 
-        open var number: Int? = null,
+        open var number: Int = 0,
 
-        open var street: String? = null,
+        open var street: String = "",
 
-        open var city: String? = null,
+        open var neighborhood: String = "",
 
-        open var state: Int? = null,
+        open var city: String = "",
 
-        open var status: ActivationModelStatusEnum? = null,
+        open var state: Int = 0,
 
-        open var type: UserTypeEnum? = null,
+        open var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN,
 
-        open var telephone: String? = null,
+        open var type: UserTypeEnum = UserTypeEnum.UNKNOWN,
 
-        open var password: String? = null
+        open var telephone: String = "",
+
+        open var password: String = ""
 
 ) {
-    override fun toString(): String {
-        return "UserModel(" +
-                "id=$id, name=$name, email=$email, number=$number, street='$street', city='$city', state=$state, " +
-                "statusActivation=$status, type=$type, telephone=$telephone, password=$password" +
-                ")"
-    }
+    override fun toString(): String =
+            "UserModel(id=$id, name=$name, email=$email, number=$number, street=$street, neighborhood=$neighborhood, " +
+                    "city=$city, state=$state, status=$status, type=$type, telephone=$telephone, password=$password)"
 }

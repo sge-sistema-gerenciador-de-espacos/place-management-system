@@ -22,11 +22,15 @@ class UserDeserializer : StdDeserializer<UserModel> {
         val status = jsonNode.get("status").asInt().deserializeToActivationModelStatusEnum()
         val name = jsonNode.get("name").asText()
         val street = jsonNode.get("street").asText()
+        val neighborhood = jsonNode.get("neighborhood").asText()
         val city = jsonNode.get("city").asText()
         val number = jsonNode.get("number").asInt()
         val state = jsonNode.get("state").asInt()
         val telephone = jsonNode.get("telephone").asText()
         val password = jsonNode.get("password").asText()
-        return UserModel(id, name, email, number, street, city, state, status, type, telephone, password)
+        return UserModel(
+                id = id, name = name, email = email, number = number, street = street, neighborhood = neighborhood,
+                city = city, state = state, status = status, type = type, telephone = telephone, password = password
+        )
     }
 }
