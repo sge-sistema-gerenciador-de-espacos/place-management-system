@@ -16,6 +16,7 @@ class CourseSerialize : StdSerializer<CourseModel> {
         gen.writeNumberField("id", value.id)
         gen.writeStringField("name", value.name)
         gen.writeNumberField("credit", value.credit)
+        gen.writeNumberField("period", value.period)
         gen.writeStringField("code", value.code)
         gen.writeObjectField("program", value.program)
         gen.writeNumberField("status", value.status.value)

@@ -9,6 +9,7 @@ import com.pms.placemanagementsystemserverside.models.enums.StatusResponseTypeEn
 import com.pms.placemanagementsystemserverside.service.course.CourseService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -51,6 +52,13 @@ class CourseApiController : ApiController<CourseModel> {
         val courseModelList = courseService.read()
         logger.info("read::courseModelList: $courseModelList")
         return ApiResponseModel(20000, courseModelList)
+    }
+
+    @GetMapping(value = ["/enable"])
+    fun readActive(): ApiResponseModel {
+        val courseModelActiveList = courseService.readActive()
+        logger.info("readActive::courseModelActiveList: $courseModelActiveList")
+        return ApiResponseModel(20000, courseModelActiveList)
     }
 
     override fun update(item: CourseModel, id: Long): ApiResponseModel {

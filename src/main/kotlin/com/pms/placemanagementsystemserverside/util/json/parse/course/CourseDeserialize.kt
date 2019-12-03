@@ -23,11 +23,14 @@ class CourseDeserialize : StdDeserializer<CourseModel> {
         val id = jsonNode.get("id").asLong(0)
         val name = jsonNode.get("name").asText()
         val credit = jsonNode.get("credit").asInt()
+        val period = jsonNode.get("period").asInt()
         val code = jsonNode.get("code").asText()
         val programId = jsonNode.get("program").get("id").asLong(0)
-        val program = programService.read().filter { it.id == programId }[0]
+        val program = programService.read().find { it.id == programId }!!
         val status = jsonNode.get("status").asInt().deserializeToActivationModelStatusEnum()
 
-        return CourseModel(id, name, credit, code, program, status)
+        return CourseModel(
+                id = id, name = name, credit = credit, period = period, code = code, program = program, status = status
+        )
     }
 }
