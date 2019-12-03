@@ -1,9 +1,9 @@
 package com.pms.placemanagementsystemserverside.service.user.impl
 
+import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.repository.user.UserRepository
-import com.pms.placemanagementsystemserverside.repository.user.impl.UserRepositoryImpl
 import com.pms.placemanagementsystemserverside.service.user.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -23,7 +23,9 @@ class UserServiceImpl : UserService {
     }
 
     override fun readActiveByType(userTypeEnum: UserTypeEnum): List<UserModel> {
-        return userRepository.readActivatedUserByType(userTypeEnum)
+        return userRepository.read().filter {
+            it.type == userTypeEnum && it.status == ActivationModelStatusEnum.ACTIVE
+        }
     }
 
     override fun update(userModel: UserModel) {

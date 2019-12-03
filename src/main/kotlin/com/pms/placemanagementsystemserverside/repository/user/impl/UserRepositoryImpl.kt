@@ -24,12 +24,6 @@ class UserRepositoryImpl : UserRepository {
         return userJpaRepository.findAll()
     }
 
-    override fun readActivatedUserByType(userTypeEnum: UserTypeEnum): List<UserModel> {
-        return userJpaRepository.findAll(
-                Example.of(UserModel(type = userTypeEnum, status = ActivationModelStatusEnum.ACTIVE))
-        )
-    }
-
     override fun update(user: UserModel): UserModel {
         return if (userJpaRepository.findById(user.id ?: 0).isPresent) {
             userJpaRepository.saveAndFlush(user)

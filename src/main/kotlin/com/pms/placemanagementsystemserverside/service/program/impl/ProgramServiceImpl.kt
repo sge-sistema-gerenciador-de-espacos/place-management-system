@@ -1,5 +1,6 @@
 package com.pms.placemanagementsystemserverside.service.program.impl
 
+import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.models.program.ProgramModel
 import com.pms.placemanagementsystemserverside.repository.program.ProgramRepository
 import com.pms.placemanagementsystemserverside.service.program.ProgramService
@@ -21,7 +22,7 @@ class ProgramServiceImpl : ProgramService {
     }
 
     override fun readActive(): List<ProgramModel> {
-        return programRepository.readActive()
+        return programRepository.read().filter { it.status == ActivationModelStatusEnum.ACTIVE }
     }
 
     override fun update(programModel: ProgramModel) {
