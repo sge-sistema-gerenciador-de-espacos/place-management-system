@@ -9,6 +9,7 @@ import com.pms.placemanagementsystemserverside.models.space.software.SoftwareMod
 import com.pms.placemanagementsystemserverside.service.software.SoftwareService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -52,6 +53,7 @@ class SoftwareApiController : ApiController<SoftwareModel> {
         return ApiResponseModel(20000, softwareModelList)
     }
 
+    @GetMapping(value = ["/enable"])
     fun readActive(): ApiResponseModel {
         val softwareModelActiveList = softwareService.readActive()
         logger.info("readActive::softwareModelActiveList: $softwareModelActiveList")
