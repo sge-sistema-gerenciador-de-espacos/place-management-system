@@ -23,7 +23,7 @@ class UserServiceImpl : UserService {
     }
 
     override fun readActiveByType(userTypeEnum: UserTypeEnum): List<UserModel> {
-        return userRepository.read().filter {
+        return read().filter {
             it.type == userTypeEnum && it.status == ActivationModelStatusEnum.ACTIVE
         }
     }

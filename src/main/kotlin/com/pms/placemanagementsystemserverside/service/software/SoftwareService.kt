@@ -5,6 +5,7 @@ import com.pms.placemanagementsystemserverside.models.space.software.SoftwareMod
 interface SoftwareService {
     fun create(softwareModel: SoftwareModel): SoftwareModel
     fun read(): List<SoftwareModel>
+    fun readActive(): List<SoftwareModel>
     fun update(softwareModel: SoftwareModel)
     fun delete(id: Long)
 }

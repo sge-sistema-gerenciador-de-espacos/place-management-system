@@ -22,7 +22,7 @@ class ProgramServiceImpl : ProgramService {
     }
 
     override fun readActive(): List<ProgramModel> {
-        return programRepository.read().filter { it.status == ActivationModelStatusEnum.ACTIVE }
+        return read().filter { it.status == ActivationModelStatusEnum.ACTIVE }
     }
 
     override fun update(programModel: ProgramModel) {

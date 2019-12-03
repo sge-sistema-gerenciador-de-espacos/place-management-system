@@ -52,6 +52,12 @@ class SoftwareApiController : ApiController<SoftwareModel> {
         return ApiResponseModel(20000, softwareModelList)
     }
 
+    fun readActive(): ApiResponseModel {
+        val softwareModelActiveList = softwareService.readActive()
+        logger.info("readActive::softwareModelActiveList: $softwareModelActiveList")
+        return ApiResponseModel(20000, softwareModelActiveList)
+    }
+
     override fun update(item: SoftwareModel, id: Long): ApiResponseModel {
         return try {
             item.id = id
