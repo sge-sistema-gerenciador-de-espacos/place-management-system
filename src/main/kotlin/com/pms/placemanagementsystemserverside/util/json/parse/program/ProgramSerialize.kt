@@ -16,7 +16,6 @@ class ProgramSerialize : StdSerializer<ProgramModel> {
 
         gen.writeNumberField("id", value.id)
         gen.writeStringField("name", value.name)
-        gen.writeStringField("code", value.code)
         gen.writeNumberField("status", value.status.value)
 
         gen.writeEndObject()

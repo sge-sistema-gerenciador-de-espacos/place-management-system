@@ -17,9 +17,8 @@ class ProgramDeserialize : StdDeserializer<ProgramModel> {
 
         val id = jsonNode.get("id").asLong(0)
         val name = jsonNode.get("name").asText()
-        val code = jsonNode.get("code").asText()
         val status = jsonNode.get("status").asInt().deserializeToActivationModelStatusEnum()
 
-        return ProgramModel(id, name, code, status)
+        return ProgramModel(id, name, status)
     }
 }
