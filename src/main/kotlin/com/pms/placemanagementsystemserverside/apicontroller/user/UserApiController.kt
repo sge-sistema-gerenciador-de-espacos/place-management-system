@@ -83,6 +83,7 @@ class UserApiController : ApiController<UserModel> {
         //TODO fazer um overload no service para ter 2 metodos, um aceita array, outro aceita um enum
     }
 
+    //TODO quando mudar pra inativo, registrar evasao bo campo
     override fun update(item: UserModel, id: Long): ApiResponseModel {
         return try {
             item.id = id
