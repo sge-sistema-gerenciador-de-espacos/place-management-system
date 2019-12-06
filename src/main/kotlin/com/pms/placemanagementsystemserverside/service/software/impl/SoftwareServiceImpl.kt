@@ -25,6 +25,10 @@ class SoftwareServiceImpl : SoftwareService {
         return read().filter { it.status == ActivationModelStatusEnum.ACTIVE }
     }
 
+    override fun readBySpace(labId: Long): List<SoftwareModel> {
+        return read().filter { it.computerLabModel.id == labId }
+    }
+
     override fun update(softwareModel: SoftwareModel) {
         softwareRepository.update(softwareModel)
     }

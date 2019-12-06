@@ -12,12 +12,12 @@ import javax.persistence.ManyToMany
 @Entity
 data class ComputerLabModel(
 
-        override var id: Long,
-        override var name: String,
-        override var numberOfChairs: Int,
-        override var hasProjector: Boolean,
-        override var hasBoard: Boolean,
-        override var hasSmartBoard: Boolean,
+        override var id: Long = 0,
+        override var name: String = "",
+        override var numberOfChairs: Int = 0,
+        override var hasProjector: Boolean = false,
+        override var hasBoard: Boolean = false,
+        override var hasSmartBoard: Boolean = false,
         override var type: SpaceTypeEnum = SpaceTypeEnum.UNKNOWN,
         override var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN,
 

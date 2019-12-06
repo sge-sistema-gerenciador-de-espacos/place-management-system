@@ -10,6 +10,7 @@ import com.pms.placemanagementsystemserverside.service.software.SoftwareService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -58,6 +59,13 @@ class SoftwareApiController : ApiController<SoftwareModel> {
         val softwareModelActiveList = softwareService.readActive()
         logger.info("readActive::softwareModelActiveList: $softwareModelActiveList")
         return ApiResponseModel(20000, softwareModelActiveList)
+    }
+
+    @GetMapping(value = ["/software/space/{id}"])
+    fun readBySpace(@PathVariable labId: Long): ApiResponseModel {
+        val softwareModelFilteredBySpaceList = softwareService.readBySpace(labId)
+        logger.info("readActive::softwareModelFilteredBySpaceList: $softwareModelFilteredBySpaceList")
+        return ApiResponseModel(20000, softwareModelFilteredBySpaceList)
     }
 
     override fun update(item: SoftwareModel, id: Long): ApiResponseModel {
