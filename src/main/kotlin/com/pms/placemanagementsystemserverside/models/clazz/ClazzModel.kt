@@ -25,5 +25,6 @@ data class ClazzModel(
 
         var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN,
 
+        @ManyToOne
         var professor: UserModel = UserModel() //TODO rever anotacao do jpa, tabela no modelo, criar classe professor
 )
