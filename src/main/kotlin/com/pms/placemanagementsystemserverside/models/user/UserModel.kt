@@ -13,38 +13,35 @@ import javax.persistence.*
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @JsonSerialize(using = UserSerializer::class)
 @JsonDeserialize(using = UserDeserializer::class)
-open class UserModel(
+data class UserModel(
 
         @Id
         @SequenceGenerator(name = "id", sequenceName = "user_id_seq", allocationSize = 1)
         @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
         @JsonIgnoreProperties(allowGetters = true)
-        open var id: Long = 0,
+        var id: Long = 0,
 
-        open var name: String = "",
+        var name: String = "",
 
-        open var email: String = "",
+        var email: String = "",
 
-        open var number: Int = 0,
+        var number: Int = 0,
 
-        open var street: String = "",
+        var street: String = "",
 
-        open var neighborhood: String = "",
+        var neighborhood: String = "",
 
-        open var city: String = "",
+        var city: String = "",
 
-        open var state: Int = 0,
+        var state: Int = 0,
 
-        open var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN,
+        var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN,
 
-        open var type: UserTypeEnum = UserTypeEnum.UNKNOWN,
+        var type: UserTypeEnum = UserTypeEnum.UNKNOWN,
 
-        open var telephone: String = "",
+        var telephone: String = "",
 
-        open var password: String = ""
+        var password: String = "",
 
-) {
-    override fun toString(): String =
-            "UserModel(id=$id, name=$name, email=$email, number=$number, street=$street, neighborhood=$neighborhood, " +
-                    "city=$city, state=$state, status=$status, type=$type, telephone=$telephone, password=$password)"
-}
+        var application: String = ""
+)

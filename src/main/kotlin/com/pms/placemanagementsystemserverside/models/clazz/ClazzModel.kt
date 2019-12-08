@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.pms.placemanagementsystemserverside.models.course.CourseModel
 import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
-import com.pms.placemanagementsystemserverside.models.user.StudentModel
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.util.json.parse.clazz.ClazzDeserialize
 import com.pms.placemanagementsystemserverside.util.json.parse.clazz.ClazzSerialize
@@ -27,7 +26,7 @@ data class ClazzModel(
         var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN,
 
         @ManyToOne
-        var professor: UserModel = UserModel(), //TODO rever anotacao do jpa, tabela no modelo, criar classe professor
+        var professor: UserModel = UserModel(),
 
         @ManyToMany
         @JoinTable(
@@ -35,5 +34,5 @@ data class ClazzModel(
                 joinColumns = [JoinColumn(name = "class_id")],
                 inverseJoinColumns = [JoinColumn(name = "student_id")]
         )
-        var studentModel: StudentModel = StudentModel()
+        var student: UserModel = UserModel()
 )
