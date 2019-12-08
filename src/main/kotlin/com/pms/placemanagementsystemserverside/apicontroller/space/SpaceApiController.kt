@@ -116,7 +116,7 @@ class SpaceApiController : ApiController<SpaceModel> {
         } catch (e: Exception) {
             ApiResponseModel(
                     0,
-                    StatusResponseModel(StatusResponseTypeEnum.ERROR.status)
+                    StatusResponseModel("${StatusResponseTypeEnum.ERROR.status}: ${e.message}")
             )
         }
     }
