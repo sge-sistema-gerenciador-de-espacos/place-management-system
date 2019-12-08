@@ -106,7 +106,7 @@ class SpaceApiController : ApiController<SpaceModel> {
     }
 
     @PostMapping(value = ["/space/software"])
-    fun deleteSoftwareOfSpace(@RequestBody spaceSoftwareDto: SpaceSoftwareDto): ApiResponseModel {
+    fun addSoftwareOfSpace(@RequestBody spaceSoftwareDto: SpaceSoftwareDto): ApiResponseModel {
         return try {
             spaceService.addSoftwareOfSpace(spaceSoftwareDto)
             ApiResponseModel(
