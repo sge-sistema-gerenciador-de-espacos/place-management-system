@@ -16,6 +16,7 @@ class UserDeserializer : StdDeserializer<UserModel> {
 
     override fun deserialize(jsonParser: JsonParser, context: DeserializationContext): UserModel {
         val jsonNode = jsonParser.codec.readTree<JsonNode>(jsonParser)
+
         val id = jsonNode.get("id").asLong()
         val type = jsonNode.get("type").asText().deserializeToUserTypeEnum()
         val email = jsonNode.get("email").asText()
@@ -28,9 +29,12 @@ class UserDeserializer : StdDeserializer<UserModel> {
         val state = jsonNode.get("state").asInt()
         val telephone = jsonNode.get("telephone").asText()
         val password = jsonNode.get("password").asText()
+        val application = jsonNode.get("application").asText()
+
         return UserModel(
-                id = id, name = name, email = email, number = number, street = street, neighborhood = neighborhood,
-                city = city, state = state, status = status, type = type, telephone = telephone, password = password
+                id = id, name = name, email = email, number = number, street = street,
+                neighborhood = neighborhood, city = city, state = state, status = status,
+                type = type, telephone = telephone, password = password, application = application
         )
     }
 }

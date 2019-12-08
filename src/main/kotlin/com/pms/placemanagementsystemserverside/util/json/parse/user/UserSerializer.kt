@@ -27,6 +27,7 @@ class UserSerializer : StdSerializer<UserModel> {
         jgen.writeNumberField("state", value.state)
         jgen.writeStringField("telephone", value.telephone)
         jgen.writeStringField("password", value.password)
+        jgen.writeStringField("application", value.application)
         jgen.writeEndObject()
     }
 }
