@@ -14,8 +14,7 @@ class SchedulingServiceImpl : SchedulingService {
     @Autowired
     private lateinit var schedulingRepository: SchedulingRepository
 
-    @Autowired
-    private lateinit var schedulingDomain: SchedulingDomain
+    private val schedulingDomain: SchedulingDomain by lazy { SchedulingDomain() }
 
     @Autowired
     private lateinit var spaceService: SpaceService

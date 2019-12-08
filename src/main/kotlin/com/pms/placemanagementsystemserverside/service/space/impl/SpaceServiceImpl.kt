@@ -19,8 +19,7 @@ class SpaceServiceImpl : SpaceService {
     @Autowired
     private lateinit var softwareService: SoftwareService
 
-    @Autowired
-    private lateinit var spaceDomain: SpaceDomain
+    private val spaceDomain: SpaceDomain by lazy { SpaceDomain() }
 
     override fun create(spaceModel: SpaceModel): SpaceModel {
         return spaceRepository.create(spaceModel)

@@ -56,7 +56,7 @@ class SpaceApiController : ApiController<SpaceModel> {
         return ApiResponseModel(20000, spaceModelList)
     }
 
-    @GetMapping(value = ["/{id}/software"])
+    @GetMapping(value = ["/{spaceId}/software"])
     fun readSoftwareBySpaceId(@PathVariable spaceId: Long): ApiResponseModel {
         val softwareModelFilteredBySpaceList = spaceService.readSoftwareBySpaceId(spaceId)
         logger.info("readActive::softwareModelFilteredBySpaceList: $softwareModelFilteredBySpaceList")
@@ -89,7 +89,7 @@ class SpaceApiController : ApiController<SpaceModel> {
         }
     }
 
-    @DeleteMapping(value = ["/{id}/software/{id}"])
+    @DeleteMapping(value = ["/{spaceId}/software/{softwareId}"])
     fun deleteSoftwareOfSpace(@PathVariable spaceId: Long, @PathVariable softwareId: Long): ApiResponseModel {
         return try {
             spaceService.deleteSoftwareOfSpace(SpaceSoftwareDto(spaceId = spaceId, softwareId = softwareId))
@@ -105,7 +105,7 @@ class SpaceApiController : ApiController<SpaceModel> {
         }
     }
 
-    @PostMapping(value = ["/software"])
+    @PostMapping(value = ["/space/software"])
     fun deleteSoftwareOfSpace(@RequestBody spaceSoftwareDto: SpaceSoftwareDto): ApiResponseModel {
         return try {
             spaceService.addSoftwareOfSpace(spaceSoftwareDto)
