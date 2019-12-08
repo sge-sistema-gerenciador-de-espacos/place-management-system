@@ -34,5 +34,5 @@ data class ClazzModel(
                 joinColumns = [JoinColumn(name = "class_id")],
                 inverseJoinColumns = [JoinColumn(name = "student_id")]
         )
-        var student: UserModel = UserModel()
+        var student: List<UserModel> = mutableListOf()
 )
