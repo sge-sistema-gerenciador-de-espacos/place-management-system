@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.fasterxml.jackson.databind.ser.std.StdSerializer
-import com.pms.placemanagementsystemserverside.extensions.isComputerLab
 import com.pms.placemanagementsystemserverside.extensions.oneOrZero
-import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import java.io.IOException
 
@@ -27,11 +25,7 @@ class SpaceSerializer : StdSerializer<SpaceModel> {
         gen.writeNumberField("smartBoard", value.hasSmartBoard.oneOrZero())
         gen.writeStringField("type", value.type.value)
         gen.writeNumberField("status", value.status.value)
-
-        if (value.type.isComputerLab()) {
-            val computerLab = value as ComputerLabModel
-            gen.writeNumberField("numberPc", computerLab.numberOfPcs)
-        }
+        gen.writeNumberField("numberPc", value.numberOfPcs)
 
         gen.writeEndObject()
     }

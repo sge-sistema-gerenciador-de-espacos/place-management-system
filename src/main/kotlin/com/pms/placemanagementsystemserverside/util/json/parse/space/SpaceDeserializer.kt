@@ -6,9 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.pms.placemanagementsystemserverside.extensions.deserializeToActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.extensions.deserializeToSpaceEnumType
-import com.pms.placemanagementsystemserverside.extensions.isComputerLab
 import com.pms.placemanagementsystemserverside.extensions.trueOrFalse
-import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 
 class SpaceDeserializer : StdDeserializer<SpaceModel> {
@@ -27,14 +25,12 @@ class SpaceDeserializer : StdDeserializer<SpaceModel> {
         val hasSmartBoard = jsonNode.get("smartBoard").asInt().trueOrFalse()
         val type = jsonNode.get("type").asText().deserializeToSpaceEnumType()
         val status = jsonNode.get("status").asInt().deserializeToActivationModelStatusEnum()
+        val numberOfPcs = jsonNode.get("numberPc").asInt()
 
-        return if (type.isComputerLab()) {
-            val numberOfPcs = jsonNode.get("numberPc").asInt()
-            ComputerLabModel(
-                    id, name, numberOfChairs, hasProjector, hasBoard, hasSmartBoard, type, status, numberOfPcs
-            )
-        } else {
-            SpaceModel(id, name, numberOfChairs, hasProjector, hasBoard, hasSmartBoard, type, status)
-        }
+        return SpaceModel(
+                id = id, name = name, numberOfChairs = numberOfChairs, hasProjector = hasProjector,
+                hasBoard = hasBoard, hasSmartBoard = hasSmartBoard,
+                type = type, status = status, numberOfPcs = numberOfPcs
+        )
     }
 }

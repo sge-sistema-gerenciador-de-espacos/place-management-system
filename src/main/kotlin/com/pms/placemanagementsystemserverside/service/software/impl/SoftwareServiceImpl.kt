@@ -1,7 +1,6 @@
 package com.pms.placemanagementsystemserverside.service.software.impl
 
 import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
-import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
 import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
 import com.pms.placemanagementsystemserverside.repository.software.SoftwareRepository
 import com.pms.placemanagementsystemserverside.repository.space.SpaceRepository
@@ -31,8 +30,8 @@ class SoftwareServiceImpl : SoftwareService {
     }
 
     override fun readBySpace(labId: Long): List<SoftwareModel> {
-        val computerLabModel = spaceRepository.read().find { it.id == labId } as ComputerLabModel
-        return computerLabModel.softwares
+        val computerLabModel = spaceRepository.read().find { it.id == labId }
+        return computerLabModel?.softwares ?: mutableListOf()
     }
 
     override fun update(softwareModel: SoftwareModel) {

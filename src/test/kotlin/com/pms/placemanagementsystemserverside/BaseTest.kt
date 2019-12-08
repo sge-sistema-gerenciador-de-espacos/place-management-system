@@ -1,6 +1,5 @@
 package com.pms.placemanagementsystemserverside
 
-import com.pms.placemanagementsystemserverside.models.space.ComputerLabModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.models.space.software.SoftwareModel
 
@@ -26,26 +25,14 @@ open class BaseTest {
             SoftwareModel(id = 2, name = "go")
     )
 
-    protected val computerLab = ComputerLabModel(
-            id = 3,
-            hasBoard =
-            false,
-            numberOfChairs = 30,
-            name = "labA",
-            softwares = softwares,
-            numberOfPcs = 15,
-            hasSmartBoard = false,
-            hasProjector = true
-    )
-
-//    @Before
+    //    @Before
     fun setUp() {
 //        MockitoAnnotations.initMocks(this)
     }
 
-//    @Test
+    //    @Test
     fun print_instanceMocks() {
-        print("\n\n User = $userModelList \n\n Space1 = $space1 \n\n Space2 = $space2 \n\n CompLab = $computerLab \n\n")
+           print("\n\n User = $userModelList \n\n Space1 = $space1 \n\n Space2 = $space2 \n\n")
     }
 
 }
