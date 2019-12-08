@@ -1,6 +1,7 @@
 package com.pms.placemanagementsystemserverside.apicontroller.space
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
+import com.pms.placemanagementsystemserverside.dto.SpaceSoftwareDto
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.KeyResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.StatusResponseModel
@@ -9,8 +10,7 @@ import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.service.space.SpaceService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(value = ["/pms-api/space"])
@@ -56,6 +56,13 @@ class SpaceApiController : ApiController<SpaceModel> {
         return ApiResponseModel(20000, spaceModelList)
     }
 
+    @GetMapping(value = ["/space/{id}/software"])
+    fun readSoftwareBySpaceId(@PathVariable spaceId: Long): ApiResponseModel {
+        val softwareModelFilteredBySpaceList = spaceService.readSoftwareBySpaceId(spaceId)
+        logger.info("readActive::softwareModelFilteredBySpaceList: $softwareModelFilteredBySpaceList")
+        return ApiResponseModel(20000, softwareModelFilteredBySpaceList)
+    }
+
     override fun update(item: SpaceModel, id: Long): ApiResponseModel {
         return try {
             item.id = id
@@ -80,7 +87,38 @@ class SpaceApiController : ApiController<SpaceModel> {
         } catch (e: Exception) {
             ApiResponseModel()
         }
+    }
 
+    @DeleteMapping(value = ["/space/{id}/software/{id}"])
+    fun deleteSoftwareOfSpace(@PathVariable spaceId: Long, @PathVariable softwareId: Long): ApiResponseModel {
+        return try {
+            spaceService.deleteSoftwareOfSpace(SpaceSoftwareDto(spaceId = spaceId, softwareId = softwareId))
+            ApiResponseModel(
+                    20000,
+                    StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
+            )
+        } catch (e: Exception) {
+            ApiResponseModel(
+                    0,
+                    StatusResponseModel(StatusResponseTypeEnum.ERROR.status)
+            )
+        }
+    }
+
+    @PostMapping(value = ["/space/software"])
+    fun deleteSoftwareOfSpace(@RequestBody spaceSoftwareDto: SpaceSoftwareDto): ApiResponseModel {
+        return try {
+            spaceService.addSoftwareOfSpace(spaceSoftwareDto)
+            ApiResponseModel(
+                    20000,
+                    StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
+            )
+        } catch (e: Exception) {
+            ApiResponseModel(
+                    0,
+                    StatusResponseModel(StatusResponseTypeEnum.ERROR.status)
+            )
+        }
     }
 
 }

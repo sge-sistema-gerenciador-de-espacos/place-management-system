@@ -61,13 +61,6 @@ class SoftwareApiController : ApiController<SoftwareModel> {
         return ApiResponseModel(20000, softwareModelActiveList)
     }
 
-    @GetMapping(value = ["/software/space/{id}"])
-    fun readBySpace(@PathVariable labId: Long): ApiResponseModel {
-        val softwareModelFilteredBySpaceList = softwareService.readBySpace(labId)
-        logger.info("readActive::softwareModelFilteredBySpaceList: $softwareModelFilteredBySpaceList")
-        return ApiResponseModel(20000, softwareModelFilteredBySpaceList)
-    }
-
     override fun update(item: SoftwareModel, id: Long): ApiResponseModel {
         return try {
             item.id = id
