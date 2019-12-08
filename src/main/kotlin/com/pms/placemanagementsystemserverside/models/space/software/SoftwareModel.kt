@@ -21,6 +21,6 @@ data class SoftwareModel(
 
         var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN,
 
-        @ManyToOne(targetEntity = ComputerLabModel::class)
-        var computerLabModel: ComputerLabModel = ComputerLabModel()
+        @ManyToMany(targetEntity = ComputerLabModel::class)
+        var computerLabModelList: List<ComputerLabModel> = mutableListOf()
 )

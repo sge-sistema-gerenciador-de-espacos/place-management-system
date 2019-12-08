@@ -26,7 +26,7 @@ data class ComputerLabModel(
         var numberOfPcs: Int = 0,
 
         @ManyToMany
-        var softwares: MutableList<SoftwareModel> = mutableListOf()
+        var softwares: List<SoftwareModel> = mutableListOf()
 
 ) : SpaceModel(id = id, name = name, numberOfChairs = numberOfChairs, hasProjector = hasProjector,
         hasBoard = hasBoard, hasSmartBoard = hasSmartBoard, type = SpaceTypeEnum.COMPUTER_LAB)
