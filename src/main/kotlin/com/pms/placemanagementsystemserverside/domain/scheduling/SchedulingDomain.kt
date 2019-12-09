@@ -15,24 +15,25 @@ class SchedulingDomain {
                 return it
         }
 
-        return throw Exception("There is no space available for this scheduling")
+        throw Exception("There is no space available for this scheduling")
     }
 
     private fun checkSpaceAvailabilityBySchedulingDateIntentionList(
-            spaceFindedModel: SpaceModel, intentionSchedulingDateModels: List<SchedulingDateModel>
+            spaceFoundModel: SpaceModel, intentionSchedulingDateModels: List<SchedulingDateModel>
     ): Boolean {
 
-        val schedulingFoundModels = spaceFindedModel.schedulingModels
+        val schedulingFoundModels = spaceFoundModel.schedulingModels
 
         schedulingFoundModels.forEach { schedulingFoundModel ->
             schedulingFoundModel.schedulingDateModels.forEach { schedulingDateFoundModels ->
                 intentionSchedulingDateModels.forEach { intentionSchedulingDateModel ->
 
-                    if (schedulingDateFoundModels.startDate == intentionSchedulingDateModel.startDate ||
-                            schedulingDateFoundModels.startDate == intentionSchedulingDateModel.startDate) {
-                        return false
+                    if (schedulingDateFoundModels.date == intentionSchedulingDateModel.date) {
+                        if (schedulingDateFoundModels.startTime == intentionSchedulingDateModel.startTime ||
+                                schedulingDateFoundModels.startTime == intentionSchedulingDateModel.startTime) {
+                            return false
+                        }
                     }
-
                 }
 
             }
