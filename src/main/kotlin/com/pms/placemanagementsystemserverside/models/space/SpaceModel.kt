@@ -49,6 +49,6 @@ data class SpaceModel(
         @JsonProperty(value = "numberPc")
         var numberOfPcs: Int = 0,
 
-        @ManyToMany
+        @ManyToMany(targetEntity = SoftwareModel::class)
         var softwares: List<SoftwareModel> = mutableListOf()
 )

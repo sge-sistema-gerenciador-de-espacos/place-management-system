@@ -71,6 +71,7 @@ class SpaceServiceImpl : SpaceService {
         }
 
         spaceModel.softwares = softwareList.toList()
+        //TODO acertar isso, tema algum erro  nesse uptade, pode ser a anotacao do relacionamento
         spaceRepository.update(spaceModel)
     }
 

@@ -20,7 +20,7 @@ class SchedulingDomain {
         return spaceModel ?: throw Exception("There is no space available for this scheduling")
     }
 
-    fun checkSpaceAvailabilityBySchedulingDateIntentionList(
+    private fun checkSpaceAvailabilityBySchedulingDateIntentionList(
             spaceFindedModel: SpaceModel, intentionSchedulingDateModels: List<SchedulingDateModel>
     ): Boolean {
 
