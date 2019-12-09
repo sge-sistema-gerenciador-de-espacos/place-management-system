@@ -51,4 +51,16 @@ data class SpaceModel(
 
         @ManyToMany(targetEntity = SoftwareModel::class)
         var softwares: List<SoftwareModel> = mutableListOf()
-)
+) {
+
+    fun extraConditionToFilterSpaceIntention(anotherSpace: SpaceModel): Boolean {
+        return when (this.type) {
+            SpaceTypeEnum.CLASSROOM -> this.numberOfChairs >= anotherSpace.numberOfChairs
+            SpaceTypeEnum.COMPUTER_LAB -> this.numberOfPcs >= anotherSpace.numberOfPcs
+            else -> throw IllegalArgumentException(
+                    "Error in SpaceMode::extraConditionToFilterSpaceIntention"
+            )
+        }
+    }
+
+}

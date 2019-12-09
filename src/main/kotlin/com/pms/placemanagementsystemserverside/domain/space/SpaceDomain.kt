@@ -1,5 +1,6 @@
 package com.pms.placemanagementsystemserverside.domain.space
 
+import com.pms.placemanagementsystemserverside.models.enums.SpaceTypeEnum
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 
 class SpaceDomain {
@@ -12,40 +13,20 @@ class SpaceDomain {
             it.hasBoard == spaceIntentionModel.hasBoard &&
                     it.hasSmartBoard == spaceIntentionModel.hasSmartBoard &&
                     it.hasProjector == spaceIntentionModel.hasProjector &&
-                    it.numberOfChairs == spaceIntentionModel.numberOfChairs
+                    it.extraConditionToFilterSpaceIntention(spaceIntentionModel)
         }
 
-//        if (spaceIntentionModel.type == SpaceTypeEnum.COMPUTER_LAB) {
-//
-//            val filterComputerLabModels = mutableListOf<ComputerLabModel>()
-//
-//            filteredSpaceModels.forEach {
-//                if (it.type == SpaceTypeEnum.COMPUTER_LAB) {
-//                    filterComputerLabModels.add(it as ComputerLabModel)
-//                }
-//            }
-//
-//            filterComputerLabByFilteredSpaceModelList(
-//                    (spaceIntentionModel as ComputerLabModel),
-//                    filterComputerLabModels
-//            )
-//
-//        } else {
-//            return filteredSpaceModels
-//        }
+        if (filteredSpaceModels.isEmpty()) {
+            throw Exception("There is no space available for this intention!")
+        }
 
-        throw Exception("There is no space available for this intention!")
+        filteredSpaceModels.sortedBy {
+            if (it.type == SpaceTypeEnum.CLASSROOM)
+                it.numberOfChairs
+            else it.numberOfPcs
+        }
+
+        return filteredSpaceModels
     }
-
-    //TODO estou ignorando software no filtro
-//    private fun filterComputerLabByFilteredSpaceModelList(
-//            computerLab: ComputerLabModel, filteredComputerLabList: List<ComputerLabModel>): List<ComputerLabModel> {
-
-
-
-//        return filteredComputerLabList.filter {
-//            it.numberOfPcs == computerLab.numberOfPcs
-//        }
-//    }
 
 }

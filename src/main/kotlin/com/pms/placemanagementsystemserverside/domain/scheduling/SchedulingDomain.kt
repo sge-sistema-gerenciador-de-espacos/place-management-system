@@ -10,14 +10,12 @@ class SchedulingDomain {
             schedulingModel: SchedulingModel, filteredSpaceModels: List<SpaceModel>
     ): SpaceModel {
 
-        var spaceModel: SpaceModel? = null
-
         filteredSpaceModels.forEach {
             if (checkSpaceAvailabilityBySchedulingDateIntentionList(it, schedulingModel.schedulingDateModels))
-                spaceModel = it
+                return it
         }
 
-        return spaceModel ?: throw Exception("There is no space available for this scheduling")
+        return throw Exception("There is no space available for this scheduling")
     }
 
     private fun checkSpaceAvailabilityBySchedulingDateIntentionList(
