@@ -6,10 +6,13 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.pms.placemanagementsystemserverside.dto.SpaceItemDto
 import com.pms.placemanagementsystemserverside.extensions.deserializeToDayOfWeekEnum
+import com.pms.placemanagementsystemserverside.models.clazz.ClazzModel
 import com.pms.placemanagementsystemserverside.models.enums.SchedulingStatusEnum
+import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
 import com.pms.placemanagementsystemserverside.models.scheduling.date.SchedulingDateModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
+import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.service.clazz.ClazzService
 import com.pms.placemanagementsystemserverside.service.space.SpaceService
 import com.pms.placemanagementsystemserverside.service.user.UserService
@@ -36,25 +39,30 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
         val users = userService.read()
 
         val id = jsonNode.get("id").asLong()
+
         val statusString = jsonNode.get("status").asText()
+        val status =
+                if (statusString.isNullOrEmpty()) SchedulingStatusEnum.UNKNOWN
+                else SchedulingStatusEnum.valueOf(statusString)
 
-        val status = if (statusString.isNullOrEmpty()) {
-            SchedulingStatusEnum.UNKNOWN
-        } else {
-            SchedulingStatusEnum.valueOf(statusString)
-        }
+        val schedulerId = jsonNode.get("scheduler").get("id").asLong(0)
+        val scheduler =
+                if (schedulerId != 0L) users.find { it.id == schedulerId }!!
+                else UserModel(type = UserTypeEnum.UNKNOWN)
 
-//        val schedulerId = jsonNode.get("scheduler").get("id").asLong()
-//        val scheduler = users.find { it.id == schedulerId }!!
-        //TODO rever, esta vindo nulo
+        //TODO colocar os campos novos e bater o resto apiary
 
-        val itResponsibleId = jsonNode.get("it_responsible").get("id").asLong()
-        val itResponsible = users.find { it.id == itResponsibleId }!!
+//        val itResponsibleId = jsonNode.get("it_responsible").get("id").asLong(0)
+//        val itResponsible =
+//                if (itResponsibleId != 0L) users.find { it.id == itResponsibleId }!!
+//                else UserModel(type = UserTypeEnum.IT_SUPPORT)
 
 //        val itResponsibleMsg = jsonNode.get("it_responsible_msg").asText()
 
         val clazzId = jsonNode.get("classes").get("id").asLong()
-        val clazz = clazzService.read().findLast { it.id == clazzId }!!
+        val clazz =
+                if (clazzId != 0L) clazzService.read().findLast { it.id == clazzId }!!
+                else ClazzModel()
 
 //        val assistentId = jsonNode.get("")
 //        val assistent = users.find { it.id == id }
@@ -62,7 +70,9 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
 //        val assistentMsg = jsonNode.get("")
 
         val professorId = jsonNode.get("professor").get("id").asLong()
-        val professor = users.find { it.id == professorId }!!
+        val professor =
+                if (professorId != 0L) users.find { it.id == professorId }!!
+                else UserModel(type = UserTypeEnum.PROFESSOR)
 
         val startTimeString = jsonNode.get("start_time").asText()
         val endTimeString = jsonNode.get("end_time").asText()
@@ -72,7 +82,7 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
         val dayOfWeekEnum = jsonNode.get("weekDay").asInt().deserializeToDayOfWeekEnum()
 
 //        val dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-        val dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd");
+        val dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd")
         val startDateTime = dateFormat.parseDateTime("$startDateString $startTimeString")
         val endDateTime = dateFormat.parseDateTime("$endDateString $endTimeString")
 
@@ -103,7 +113,7 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
 
         return SchedulingModel(
                 id = id, status = status, schedulingDateModels = schedulingDateModelList,
-                clazz = clazz, professor = professor, spaceFound = spaceModelFound,
+                clazz = clazz, professor = professor, schedulerUser = scheduler, spaceFound = spaceModelFound,
                 hasProjector = spaceItemDto.hasProjector, numberOfChairs = spaceItemDto.numberOfChairs,
                 hasBoard = spaceItemDto.hasBoard, hasSmartBoard = spaceItemDto.hasSmartBoard,
                 numberOfPcs = spaceItemDto.numberOfPcs, spaceType = spaceItemDto.type
