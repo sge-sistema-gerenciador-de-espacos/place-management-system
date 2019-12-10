@@ -12,9 +12,10 @@ class SchedulingDomain {
     ): SpaceModel {
 
         filteredSpaceModels.forEach {
-            if (checkSpaceAvailabilityBySchedulingDateIntentionList(it, schedulingModel.schedulingDateModels))
+            if (checkSpaceAvailabilityBySchedulingDateIntentionList(it, schedulingModel.schedulingDateModels)) {
                 schedulingModel.status = SchedulingStatusEnum.ACCEPTED
-            return it
+                return it
+            }
         }
 
         schedulingModel.status = SchedulingStatusEnum.WAITING

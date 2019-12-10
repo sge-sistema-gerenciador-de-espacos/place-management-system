@@ -43,5 +43,7 @@ data class UserModel(
 
         var password: String = "",
 
-        var application: String = ""
+        var application: String = "",
+
+        var evasionDate: String = ""
 )

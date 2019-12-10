@@ -5,6 +5,8 @@ import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.repository.user.UserRepository
 import com.pms.placemanagementsystemserverside.service.user.UserService
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -29,6 +31,10 @@ class UserServiceImpl : UserService {
     }
 
     override fun update(userModel: UserModel) {
+        if(userModel.status == ActivationModelStatusEnum.INACTIVE) {
+            DateTimeFormat.forPattern("YY")
+//            user.
+        }
         userRepository.update(userModel)
     }
 
