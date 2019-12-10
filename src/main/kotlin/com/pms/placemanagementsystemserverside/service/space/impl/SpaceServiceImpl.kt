@@ -75,6 +75,6 @@ class SpaceServiceImpl : SpaceService {
         spaceRepository.update(spaceModel)
     }
 
-    private enum class ManipulationSoftwareOfSpaceType() { ADD, DELETE }
+    private enum class ManipulationSoftwareOfSpaceType { ADD, DELETE }
 
 }

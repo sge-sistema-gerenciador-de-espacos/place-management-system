@@ -22,7 +22,7 @@ class SchedulingServiceImpl : SchedulingService {
 
     override fun create(schedulingModel: SchedulingModel): SchedulingModel {
         //TODO fazer a parte de se enviar espaco
-        val filteredSpaces = spaceService.filterSpaceBySpaceIntention(schedulingModel.spaceIntention)
+        val filteredSpaces = spaceService.filterSpaceBySpaceIntention(schedulingModel.getSpaceIntention())
         val spaceModelFound = schedulingDomain.findSpaceToThisScheduling(schedulingModel, filteredSpaces)
         schedulingModel.schedulingDateModels.forEach { it.space = spaceModelFound }
         return schedulingRepository.create(schedulingModel)
