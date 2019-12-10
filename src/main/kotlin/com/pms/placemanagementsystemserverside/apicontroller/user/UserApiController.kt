@@ -2,6 +2,7 @@ package com.pms.placemanagementsystemserverside.apicontroller.user
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
 import com.pms.placemanagementsystemserverside.dto.ProfessorLackPostRequest
+import com.pms.placemanagementsystemserverside.dto.StudentEvasionResponse
 import com.pms.placemanagementsystemserverside.models.api.authenticator.AuthenticatorRequestModel
 import com.pms.placemanagementsystemserverside.models.api.authenticator.AuthenticatorResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
@@ -146,9 +147,17 @@ class UserApiController : ApiController<UserModel> {
         return "{\"code\":20000,\"data\":{\"roles\":[\"admin\"],\"introduction\":\"I am a super administrator\",\"avatar\":\"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif\",\"name\":\"Super Admin\"}}"
     }
 
-    @GetMapping(value = [""])
+    @GetMapping(value = ["/report/evasion"])
     fun getEvasionDate(): ApiResponseModel {
-        return read()
+        val list = userService.read()
+        val studentEvasionList: MutableList<StudentEvasionResponse.StudentEvasion> = mutableListOf()
+        list.forEach {
+            studentEvasionList.add(StudentEvasionResponse.StudentEvasion(
+                    it.name, it.evasionDate
+            ))
+        }
+
+        return ApiResponseModel(20000, StudentEvasionResponse(studentEvasionList.size, studentEvasionList))
     }
 
     @PostMapping(value = ["/lack"])
