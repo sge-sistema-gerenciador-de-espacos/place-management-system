@@ -36,7 +36,13 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
         val users = userService.read()
 
         val id = jsonNode.get("id").asLong()
-        val status = SchedulingStatusEnum.valueOf(jsonNode.get("status").asText())
+        val statusString = jsonNode.get("status").asText()
+
+        val status = if (statusString.isNullOrEmpty()) {
+            SchedulingStatusEnum.UNKNOWN
+        } else {
+            SchedulingStatusEnum.valueOf(statusString)
+        }
 
         val schedulerId = jsonNode.get("scheduler").get("id").asLong()
         val scheduler = users.find { it.id == schedulerId }!!
