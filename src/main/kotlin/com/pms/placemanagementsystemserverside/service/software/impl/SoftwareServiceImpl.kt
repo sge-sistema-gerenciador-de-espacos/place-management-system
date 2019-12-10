@@ -31,7 +31,7 @@ class SoftwareServiceImpl : SoftwareService {
 
     override fun readBySpace(labId: Long): List<SoftwareModel> {
         val computerLabModel = spaceRepository.read().find { it.id == labId }
-        return computerLabModel?.softwares ?: mutableListOf()
+        return computerLabModel?.softwares?.toList() ?: mutableListOf()
     }
 
     override fun update(softwareModel: SoftwareModel) {

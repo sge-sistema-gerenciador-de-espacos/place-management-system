@@ -70,8 +70,7 @@ class SpaceServiceImpl : SpaceService {
             softwareList.remove(softwareModel)
         }
 
-        spaceModel.softwares = softwareList.toList()
-        //TODO acertar isso, tema algum erro  nesse uptade, pode ser a anotacao do relacionamento
+        spaceModel.softwares = softwareList.toMutableSet()
         spaceRepository.update(spaceModel)
     }
 

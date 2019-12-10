@@ -69,7 +69,7 @@ data class SchedulingModel(
         var numberOfPcs: Int = 0,
 
         @ManyToMany
-        var softwares: List<SoftwareModel> = mutableListOf(),
+        var softwares: MutableSet<SoftwareModel> = mutableSetOf(),
 
         @ManyToOne(targetEntity = SpaceModel::class)
         var spaceFound: SpaceModel = SpaceModel()

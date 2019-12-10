@@ -11,6 +11,8 @@ import javax.persistence.*
 @Entity(name = "software")
 @JsonSerialize(using = SoftwareSerialize::class)
 @JsonDeserialize(using = SoftwareDeserialize::class)
+
+
 data class SoftwareModel(
 
         @Id
@@ -20,7 +22,4 @@ data class SoftwareModel(
         var name: String = "",
 
         var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN
-
-//        @ManyToMany(targetEntity = SpaceModel::class)
-//        var computerLabModelList: List<SpaceModel> = mutableListOf()
 )

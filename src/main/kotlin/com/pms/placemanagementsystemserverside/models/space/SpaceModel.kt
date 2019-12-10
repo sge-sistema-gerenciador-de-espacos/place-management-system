@@ -51,7 +51,7 @@ data class SpaceModel(
                 joinColumns = [JoinColumn(name = "space_id")],
                 inverseJoinColumns = [JoinColumn(name = "software_id")]
         )
-        var softwares: List<SoftwareModel> = mutableListOf()
+        var softwares: MutableSet<SoftwareModel> = mutableSetOf()
 ) {
 
     fun extraConditionToFilterSpaceIntention(anotherSpace: SpaceModel): Boolean {
