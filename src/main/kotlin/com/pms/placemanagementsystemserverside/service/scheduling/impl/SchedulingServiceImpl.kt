@@ -2,6 +2,7 @@ package com.pms.placemanagementsystemserverside.service.scheduling.impl
 
 import com.pms.placemanagementsystemserverside.domain.scheduling.SchedulingDomain
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
+import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.repository.scheduling.SchedulingRepository
 import com.pms.placemanagementsystemserverside.service.scheduling.SchedulingService
 import com.pms.placemanagementsystemserverside.service.space.SpaceService
@@ -21,11 +22,12 @@ class SchedulingServiceImpl : SchedulingService {
 
 
     override fun create(schedulingModel: SchedulingModel): SchedulingModel {
-        //TODO fazer a parte de se enviar espaco
-        // TODO verificar se spaceFound id é diferente de 0 antes de fazer a logica
-        val filteredSpaces = spaceService.filterSpaceBySpaceIntention(schedulingModel.getSpaceIntention())
+
+        val filteredSpaces: List<SpaceModel> =
+                if (schedulingModel.spaceFound.id != 0L) listOf(schedulingModel.spaceFound)
+                else spaceService.filterSpaceBySpaceIntention(schedulingModel.getSpaceIntention())
+
         val spaceModelFound = schedulingDomain.findSpaceToThisScheduling(schedulingModel, filteredSpaces)
-//        schedulingModel.schedulingDateModels.forEach { it.space = spaceModelFound }
         schedulingModel.spaceFound = spaceModelFound
         return schedulingRepository.create(schedulingModel)
     }
