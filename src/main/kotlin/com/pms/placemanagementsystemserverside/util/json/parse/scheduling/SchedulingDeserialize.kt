@@ -44,8 +44,9 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
             SchedulingStatusEnum.valueOf(statusString)
         }
 
-        val schedulerId = jsonNode.get("scheduler").get("id").asLong()
-        val scheduler = users.find { it.id == schedulerId }!!
+//        val schedulerId = jsonNode.get("scheduler").get("id").asLong()
+//        val scheduler = users.find { it.id == schedulerId }!!
+        //TODO rever, esta vindo nulo
 
         val itResponsibleId = jsonNode.get("it_responsible").get("id").asLong()
         val itResponsible = users.find { it.id == itResponsibleId }!!
@@ -101,7 +102,7 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
         }
 
         return SchedulingModel(
-                id = id, status = status, schedulerUser = scheduler, schedulingDateModels = schedulingDateModelList,
+                id = id, status = status, schedulingDateModels = schedulingDateModelList,
                 clazz = clazz, professor = professor, spaceFound = spaceModelFound,
                 hasProjector = spaceItemDto.hasProjector, numberOfChairs = spaceItemDto.numberOfChairs,
                 hasBoard = spaceItemDto.hasBoard, hasSmartBoard = spaceItemDto.hasSmartBoard,
