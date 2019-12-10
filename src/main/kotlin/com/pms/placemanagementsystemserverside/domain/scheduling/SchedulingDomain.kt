@@ -1,5 +1,6 @@
 package com.pms.placemanagementsystemserverside.domain.scheduling
 
+import com.pms.placemanagementsystemserverside.models.enums.SchedulingStatusEnum
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
 import com.pms.placemanagementsystemserverside.models.scheduling.date.SchedulingDateModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
@@ -12,10 +13,12 @@ class SchedulingDomain {
 
         filteredSpaceModels.forEach {
             if (checkSpaceAvailabilityBySchedulingDateIntentionList(it, schedulingModel.schedulingDateModels))
-                return it
+                schedulingModel.status = SchedulingStatusEnum.ACCEPTED
+            return it
         }
 
-        throw Exception("There is no space available for this scheduling")
+        schedulingModel.status = SchedulingStatusEnum.DENIED
+        return SpaceModel()
     }
 
     private fun checkSpaceAvailabilityBySchedulingDateIntentionList(
