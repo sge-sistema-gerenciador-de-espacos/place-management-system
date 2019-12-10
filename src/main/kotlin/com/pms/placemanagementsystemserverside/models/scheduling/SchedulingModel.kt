@@ -27,7 +27,7 @@ data class SchedulingModel(
         @ManyToOne(targetEntity = UserModel::class)
         var schedulerUser: UserModel? = null,
 
-        @OneToMany(targetEntity = SchedulingDateModel::class)
+        @OneToMany(targetEntity = SchedulingDateModel::class, cascade = [CascadeType.ALL])
         var schedulingDateModels: MutableList<SchedulingDateModel> = mutableListOf(),
 
         @ManyToOne(targetEntity = UserModel::class)

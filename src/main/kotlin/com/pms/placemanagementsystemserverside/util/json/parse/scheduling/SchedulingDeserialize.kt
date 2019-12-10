@@ -6,13 +6,9 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.pms.placemanagementsystemserverside.dto.SpaceItemDto
 import com.pms.placemanagementsystemserverside.extensions.deserializeToDayOfWeekEnum
-import com.pms.placemanagementsystemserverside.models.clazz.ClazzModel
-import com.pms.placemanagementsystemserverside.models.enums.SchedulingStatusEnum
-import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
 import com.pms.placemanagementsystemserverside.models.scheduling.date.SchedulingDateModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
-import com.pms.placemanagementsystemserverside.models.user.UserModel
 import com.pms.placemanagementsystemserverside.service.clazz.ClazzService
 import com.pms.placemanagementsystemserverside.service.space.SpaceService
 import com.pms.placemanagementsystemserverside.service.user.UserService
@@ -40,15 +36,13 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
 
         val id = jsonNode.get("id").asLong()
 
-        val statusString = jsonNode.get("status").asText()
-        val status =
-                if (statusString.isNullOrEmpty()) SchedulingStatusEnum.UNKNOWN
-                else SchedulingStatusEnum.valueOf(statusString)
+//        val statusString = jsonNode.get("status").asText()
+//        val status =
+//                if (statusString.isNullOrEmpty()) SchedulingStatusEnum.UNKNOWN
+//                else SchedulingStatusEnum.valueOf(statusString)
 
         val schedulerId = jsonNode.get("scheduler").get("id").asLong(0)
-        val scheduler =
-                if (schedulerId != 0L) users.find { it.id == schedulerId }!!
-                else UserModel(type = UserTypeEnum.UNKNOWN)
+        val scheduler = users.find { it.id == schedulerId }
 
 //        val itResponsibleId = jsonNode.get("it_responsable").get("id").asLong(0)
 //        val itResponsible =
@@ -57,10 +51,8 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
 
 //        val itResponsibleMsg = jsonNode.get("it_responsible_msg").asText()
 
-        val clazzId = jsonNode.get("classes").get("id").asLong()
-        val clazz =
-                if (clazzId != 0L) clazzService.read().findLast { it.id == clazzId }!!
-                else ClazzModel()
+        val clazzId = jsonNode.get("classes").get("id").asLong(0)
+        val clazz = clazzService.read().findLast { it.id == clazzId }
 
 //        val assistentId = jsonNode.get("")
 //        val assistent = users.find { it.id == id }
@@ -68,9 +60,7 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
 //        val assistentMsg = jsonNode.get("")
 
         val professorId = jsonNode.get("professor").get("id").asLong(0)
-        val professor =
-                if (professorId != 0L) users.find { it.id == professorId }!!
-                else UserModel(type = UserTypeEnum.PROFESSOR)
+        val professor = users.find { it.id == professorId }
 
         val startTimeString = jsonNode.get("initialtime").asText()
         val endTimeString = jsonNode.get("endtime").asText()
@@ -96,7 +86,7 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
             if (referredDay.dayOfWeek == dayOfWeekEnum.dateTimeConstants) {
                 schedulingDateModelList.add(
                         SchedulingDateModel(
-                                startTime = startTime, endTime = endTime, date = referredDay
+                                startTime = startTimeString, endTime = endTimeString, date = dateFormat.print(referredDay)
                         )
                 )
             }
@@ -110,12 +100,11 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
         if (spaceId != 0L) {
             spaceModelFound = spaceService.read().find { it.id == spaceId }!!
         } else {
-            SpaceModel()
             spaceItemDto = SpaceItemJsonParser().deserialize(jsonNode.get("space_item"))
         }
 
         return SchedulingModel(
-                id = id, status = status, schedulingDateModels = schedulingDateModelList,
+                id = id, schedulingDateModels = schedulingDateModelList,
                 clazz = clazz, professor = professor, schedulerUser = scheduler, spaceFound = spaceModelFound,
                 hasProjector = spaceItemDto.hasProjector, numberOfChairs = spaceItemDto.numberOfChairs,
                 hasBoard = spaceItemDto.hasBoard, hasSmartBoard = spaceItemDto.hasSmartBoard,

@@ -33,7 +33,7 @@ class SchedulingDomain {
 
                     if (schedulingDateFoundModels.date == intentionSchedulingDateModel.date) {
                         if (schedulingDateFoundModels.startTime == intentionSchedulingDateModel.startTime ||
-                                schedulingDateFoundModels.startTime == intentionSchedulingDateModel.startTime) {
+                                schedulingDateFoundModels.endTime == intentionSchedulingDateModel.endTime) {
                             return false
                         }
                     }

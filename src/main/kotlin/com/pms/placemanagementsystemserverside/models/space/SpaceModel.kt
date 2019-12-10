@@ -39,7 +39,7 @@ data class SpaceModel(
 
         var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN,
 
-        @OneToMany(targetEntity = SchedulingModel::class)
+        @OneToMany(targetEntity = SchedulingModel::class, cascade = [CascadeType.ALL])
         val schedulingModels: MutableList<SchedulingModel> = mutableListOf(),
 
         @Column(name = "number_pc")
