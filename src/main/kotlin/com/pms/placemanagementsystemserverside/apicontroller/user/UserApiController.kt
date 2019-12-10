@@ -1,6 +1,7 @@
 package com.pms.placemanagementsystemserverside.apicontroller.user
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
+import com.pms.placemanagementsystemserverside.dto.ProfessorLackPostRequest
 import com.pms.placemanagementsystemserverside.models.api.authenticator.AuthenticatorRequestModel
 import com.pms.placemanagementsystemserverside.models.api.authenticator.AuthenticatorResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
@@ -143,6 +144,20 @@ class UserApiController : ApiController<UserModel> {
     fun getInfo(@RequestParam token: String): String {
         logger.info("info")
         return "{\"code\":20000,\"data\":{\"roles\":[\"admin\"],\"introduction\":\"I am a super administrator\",\"avatar\":\"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif\",\"name\":\"Super Admin\"}}"
+    }
+
+    @GetMapping(value = [""])
+    fun getEvasionDate(): ApiResponseModel {
+        return read()
+    }
+
+    @PostMapping(value = ["/lack"])
+    fun professorLack(@RequestBody professorLackPostRequest: ProfessorLackPostRequest): ApiResponseModel {
+        userService.professorLack(professorLackPostRequest)
+        return ApiResponseModel(
+                20000,
+                StatusResponseModel(StatusResponseTypeEnum.SUCCESS.status)
+        )
     }
 
 }

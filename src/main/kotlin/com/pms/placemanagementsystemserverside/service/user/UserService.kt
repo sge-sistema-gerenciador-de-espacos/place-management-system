@@ -1,5 +1,6 @@
 package com.pms.placemanagementsystemserverside.service.user
 
+import com.pms.placemanagementsystemserverside.dto.ProfessorLackPostRequest
 import com.pms.placemanagementsystemserverside.models.enums.UserTypeEnum
 import com.pms.placemanagementsystemserverside.models.user.UserModel
 
@@ -9,4 +10,5 @@ interface UserService {
     fun readActiveByType(userTypeEnum: UserTypeEnum): List<UserModel>
     fun update(userModel: UserModel)
     fun delete(id: Long)
+    fun professorLack(professorLackPostRequest: ProfessorLackPostRequest)
 }
