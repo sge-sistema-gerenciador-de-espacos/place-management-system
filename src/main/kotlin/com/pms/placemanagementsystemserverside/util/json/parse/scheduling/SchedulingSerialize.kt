@@ -19,7 +19,7 @@ class SchedulingSerialize : StdSerializer<SchedulingModel> {
         gen.writeStartObject()
 
         gen.writeNumberField("id", value.id)
-        gen.writeStringField("status", value.status.name)
+        gen.writeStringField("status_scheduling", value.status.name)
 
         //TODO converter pra pegar dia da semana
 //        gen.writeNumberField("weekDay", value.schedulingDateModels[0].)
