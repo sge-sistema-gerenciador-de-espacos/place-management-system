@@ -19,6 +19,7 @@ class SpaceSerializer : StdSerializer<SpaceModel> {
         gen.writeNumberField("id", value.id)
         gen.writeStringField("name", value.name)
         SpaceItemJsonParser().serialize(value, gen)
+        gen.writeNumberField("frequency_count", value.frequencyCount)
 
         gen.writeEndObject()
     }

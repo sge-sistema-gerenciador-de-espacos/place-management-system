@@ -30,7 +30,7 @@ class SchedulingApiController : ApiController<SchedulingModel> {
             )
         } catch (e: Exception) {
             logger.error("create", e)
-            ApiResponseModel(code = -1, data = "")
+            ApiResponseModel(code = -1, data = "Não existe espaço para essa solicitação!")
         }
     }
 

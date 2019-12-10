@@ -45,6 +45,8 @@ data class SpaceModel(
         @Column(name = "number_pc")
         var numberOfPcs: Int = 0,
 
+        var frequencyCount: Int = 0,
+
         @ManyToMany
         @JoinTable(
                 name = "space_soft",

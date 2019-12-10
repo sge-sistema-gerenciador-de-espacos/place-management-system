@@ -121,4 +121,15 @@ class SpaceApiController : ApiController<SpaceModel> {
         }
     }
 
+    @GetMapping(value = ["/report/frequency"])
+    fun reportFrequency(): ApiResponseModel {
+        return ApiResponseModel(20000, spaceService.read().let { list ->
+            list.forEach { space ->
+                space.schedulingModels.forEach { scheduling ->
+                    space.frequencyCount = scheduling.schedulingDateModels.size
+                }
+            }
+        })
+    }
+
 }
