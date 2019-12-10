@@ -19,8 +19,8 @@ data class SoftwareModel(
 
         var name: String = "",
 
-        var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN,
+        var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN
 
-        @ManyToMany(targetEntity = SpaceModel::class)
-        var computerLabModelList: List<SpaceModel> = mutableListOf()
+//        @ManyToMany(targetEntity = SpaceModel::class)
+//        var computerLabModelList: List<SpaceModel> = mutableListOf()
 )
