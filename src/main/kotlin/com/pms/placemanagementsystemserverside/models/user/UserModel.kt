@@ -47,5 +47,5 @@ data class UserModel(
 
         var evasionDate: String = "",
 
-        var professorLack: String
+        var professorLack: String = ""
 )
