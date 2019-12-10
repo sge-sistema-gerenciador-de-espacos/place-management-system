@@ -68,7 +68,7 @@ data class SchedulingModel(
         @Column(name = "number_pc")
         var numberOfPcs: Int = 0,
 
-        @ManyToMany(targetEntity = SoftwareModel::class)
+        @ManyToMany
         var softwares: List<SoftwareModel> = mutableListOf(),
 
         @ManyToOne(targetEntity = SpaceModel::class)

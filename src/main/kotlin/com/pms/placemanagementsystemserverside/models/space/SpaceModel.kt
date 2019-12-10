@@ -1,7 +1,5 @@
 package com.pms.placemanagementsystemserverside.models.space
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
@@ -42,14 +40,17 @@ data class SpaceModel(
         var status: ActivationModelStatusEnum = ActivationModelStatusEnum.UNKNOWN,
 
         @OneToMany(targetEntity = SchedulingModel::class)
-        @JsonIgnoreProperties
         val schedulingModels: MutableList<SchedulingModel> = mutableListOf(),
 
         @Column(name = "number_pc")
-        @JsonProperty(value = "numberPc")
         var numberOfPcs: Int = 0,
 
-        @ManyToMany(targetEntity = SoftwareModel::class)
+        @ManyToMany
+        @JoinTable(
+                name = "space_soft",
+                joinColumns = [JoinColumn(name = "space_id")],
+                inverseJoinColumns = [JoinColumn(name = "software_id")]
+        )
         var softwares: List<SoftwareModel> = mutableListOf()
 ) {
 
