@@ -17,8 +17,14 @@ class SchedulingDomain {
             return it
         }
 
-        schedulingModel.status = SchedulingStatusEnum.DENIED
-        return SpaceModel()
+        schedulingModel.status = SchedulingStatusEnum.WAITING
+        return filteredSpaceModels.let {
+            if (it.isEmpty()) {
+                SpaceModel()
+            } else {
+                it[0]
+            }
+        }
     }
 
     private fun checkSpaceAvailabilityBySchedulingDateIntentionList(

@@ -1,8 +1,8 @@
 package com.pms.placemanagementsystemserverside.apicontroller.scheduling
 
 import com.pms.placemanagementsystemserverside.apicontroller.contract.ApiController
+import com.pms.placemanagementsystemserverside.dto.SchedulingPostResponseDto
 import com.pms.placemanagementsystemserverside.models.api.response.ApiResponseModel
-import com.pms.placemanagementsystemserverside.models.api.response.KeyResponseModel
 import com.pms.placemanagementsystemserverside.models.api.response.StatusResponseModel
 import com.pms.placemanagementsystemserverside.models.enums.StatusResponseTypeEnum
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
@@ -25,10 +25,12 @@ class SchedulingApiController : ApiController<SchedulingModel> {
         return try {
             logger.info("create::item: $item")
             val itemUpdated = schedulingService.create(item)
-            ApiResponseModel(20000, KeyResponseModel(itemUpdated.id))
+            ApiResponseModel(
+                    20000, SchedulingPostResponseDto(item.id, item.status.name, item.spaceFound)
+            )
         } catch (e: Exception) {
             logger.error("create", e)
-            ApiResponseModel()
+            ApiResponseModel(code = -1, data = "")
         }
     }
 
