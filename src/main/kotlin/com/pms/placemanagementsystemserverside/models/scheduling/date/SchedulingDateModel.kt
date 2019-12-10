@@ -22,9 +22,6 @@ data class SchedulingDateModel(
         //TODO criar no banco
         var date: DateTime = DateTime(),
 
-        @ManyToOne(targetEntity = SpaceModel::class)
-        var space: SpaceModel = SpaceModel(),
-
         @ManyToOne
         var schedulingDateModel: SchedulingModel = SchedulingModel(),
 

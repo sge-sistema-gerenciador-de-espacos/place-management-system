@@ -69,7 +69,10 @@ data class SchedulingModel(
         var numberOfPcs: Int = 0,
 
         @ManyToMany(targetEntity = SoftwareModel::class)
-        var softwares: List<SoftwareModel> = mutableListOf()
+        var softwares: List<SoftwareModel> = mutableListOf(),
+
+        @ManyToOne(targetEntity = SpaceModel::class)
+        var spaceFound: SpaceModel = SpaceModel()
 ) {
 
     fun getSpaceIntention() = SpaceModel(

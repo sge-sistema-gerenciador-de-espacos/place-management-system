@@ -4,14 +4,16 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
+import com.pms.placemanagementsystemserverside.dto.SpaceItemDto
 import com.pms.placemanagementsystemserverside.extensions.deserializeToDayOfWeekEnum
 import com.pms.placemanagementsystemserverside.models.enums.SchedulingStatusEnum
 import com.pms.placemanagementsystemserverside.models.scheduling.SchedulingModel
 import com.pms.placemanagementsystemserverside.models.scheduling.date.SchedulingDateModel
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 import com.pms.placemanagementsystemserverside.service.clazz.ClazzService
+import com.pms.placemanagementsystemserverside.service.space.SpaceService
 import com.pms.placemanagementsystemserverside.service.user.UserService
-import com.pms.placemanagementsystemserverside.util.json.parse.space.SpaceDeserializer
+import com.pms.placemanagementsystemserverside.util.json.parse.space.SpaceItemJsonParser
 import org.joda.time.format.DateTimeFormat
 import org.springframework.beans.factory.annotation.Autowired
 
@@ -25,6 +27,9 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
 
     @Autowired
     private lateinit var clazzService: ClazzService
+
+    @Autowired
+    private lateinit var spaceService: SpaceService
 
     override fun deserialize(jsonParser: JsonParser, ctxt: DeserializationContext): SchedulingModel {
         val jsonNode = jsonParser.codec.readTree<JsonNode>(jsonParser)
@@ -52,8 +57,6 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
         val professorId = jsonNode.get("professor").get("id").asLong()
         val professor = users.find { it.id == professorId }!!
 
-        val spaceToFind = SpaceDeserializer(SpaceModel::class.java).deserialize(jsonParser, ctxt)
-
         val startTimeString = jsonNode.get("start_time").asText()
         val endTimeString = jsonNode.get("end_time").asText()
         val filterDateJsonNodeArray = jsonNode.withArray("filter_date")
@@ -73,17 +76,30 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
             if (starDateTimeToUseInRage.dayOfWeek == dayOfWeekEnum.dateTimeConstants) {
                 schedulingDateModelList.add(
                         SchedulingDateModel(
-                                startTime = startDateTime, endTime = endDateTime, date = starDateTimeToUseInRage,
-                                space = spaceToFind
+                                startTime = startDateTime, endTime = endDateTime, date = starDateTimeToUseInRage
                         )
                 )
             }
             starDateTimeToUseInRage = starDateTimeToUseInRage.plusDays(1)
         }
 
+        val spaceId = jsonNode.get("space").get("id").asLong(0)
+        var spaceModelFound = SpaceModel()
+        var spaceItemDto = SpaceItemDto()
+
+        if (spaceId != 0L) {
+            spaceModelFound = spaceService.read().find { it.id == spaceId }!!
+        } else {
+            SpaceModel()
+            spaceItemDto = SpaceItemJsonParser().deserialize(jsonNode.get("space_item"))
+        }
+
         return SchedulingModel(
                 id = id, status = status, schedulerUser = scheduler, schedulingDateModels = schedulingDateModelList,
-                clazz = clazz, professor = professor
+                clazz = clazz, professor = professor, spaceFound = spaceModelFound,
+                hasProjector = spaceItemDto.hasProjector, numberOfChairs = spaceItemDto.numberOfChairs,
+                hasBoard = spaceItemDto.hasBoard, hasSmartBoard = spaceItemDto.hasSmartBoard,
+                numberOfPcs = spaceItemDto.numberOfPcs, spaceType = spaceItemDto.type
         )
     }
 }
