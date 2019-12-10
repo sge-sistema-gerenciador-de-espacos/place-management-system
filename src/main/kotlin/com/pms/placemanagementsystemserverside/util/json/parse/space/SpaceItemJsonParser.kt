@@ -7,6 +7,7 @@ import com.pms.placemanagementsystemserverside.extensions.deserializeToActivatio
 import com.pms.placemanagementsystemserverside.extensions.deserializeToSpaceEnumType
 import com.pms.placemanagementsystemserverside.extensions.oneOrZero
 import com.pms.placemanagementsystemserverside.extensions.trueOrFalse
+import com.pms.placemanagementsystemserverside.models.enums.ActivationModelStatusEnum
 import com.pms.placemanagementsystemserverside.models.space.SpaceModel
 
 class SpaceItemJsonParser {
@@ -28,12 +29,13 @@ class SpaceItemJsonParser {
         val hasBoard = jsonNode.get("board").asInt().trueOrFalse()
         val hasSmartBoard = jsonNode.get("smartBoard").asInt().trueOrFalse()
         val type = jsonNode.get("type").asText().deserializeToSpaceEnumType()
-        val status = jsonNode.get("status").asInt().deserializeToActivationModelStatusEnum()
+        val status = jsonNode.get("status")?.asInt(0)?.deserializeToActivationModelStatusEnum()
         val numberOfPcs = jsonNode.get("numberPc").asInt()
 
         return SpaceItemDto(
                 numberOfChairs = numberOfChairs, hasProjector = hasProjector, hasBoard = hasBoard,
-                hasSmartBoard = hasSmartBoard, type = type, status = status, numberOfPcs = numberOfPcs
+                hasSmartBoard = hasSmartBoard, type = type, status = status ?: ActivationModelStatusEnum.UNKNOWN,
+                numberOfPcs = numberOfPcs
         )
     }
 

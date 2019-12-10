@@ -27,6 +27,7 @@ class SchedulingApiController : ApiController<SchedulingModel> {
             val itemUpdated = schedulingService.create(item)
             ApiResponseModel(20000, KeyResponseModel(itemUpdated.id))
         } catch (e: Exception) {
+            logger.error("create", e)
             ApiResponseModel()
         }
     }

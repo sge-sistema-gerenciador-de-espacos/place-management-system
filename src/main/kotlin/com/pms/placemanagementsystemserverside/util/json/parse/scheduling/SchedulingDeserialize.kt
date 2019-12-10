@@ -50,9 +50,7 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
                 if (schedulerId != 0L) users.find { it.id == schedulerId }!!
                 else UserModel(type = UserTypeEnum.UNKNOWN)
 
-        //TODO colocar os campos novos e bater o resto apiary
-
-//        val itResponsibleId = jsonNode.get("it_responsible").get("id").asLong(0)
+//        val itResponsibleId = jsonNode.get("it_responsable").get("id").asLong(0)
 //        val itResponsible =
 //                if (itResponsibleId != 0L) users.find { it.id == itResponsibleId }!!
 //                else UserModel(type = UserTypeEnum.IT_SUPPORT)
@@ -69,35 +67,40 @@ class SchedulingDeserialize : StdDeserializer<SchedulingModel> {
 
 //        val assistentMsg = jsonNode.get("")
 
-        val professorId = jsonNode.get("professor").get("id").asLong()
+        val professorId = jsonNode.get("professor").get("id").asLong(0)
         val professor =
                 if (professorId != 0L) users.find { it.id == professorId }!!
                 else UserModel(type = UserTypeEnum.PROFESSOR)
 
-        val startTimeString = jsonNode.get("start_time").asText()
-        val endTimeString = jsonNode.get("end_time").asText()
-        val filterDateJsonNodeArray = jsonNode.withArray("filter_date")
+        val startTimeString = jsonNode.get("initialtime").asText()
+        val endTimeString = jsonNode.get("endtime").asText()
+
+        val timeFormat = DateTimeFormat.forPattern("HH:mm");
+        val startTime = timeFormat.parseDateTime(startTimeString)
+        val endTime = timeFormat.parseDateTime(endTimeString)
+
+        val filterDateJsonNodeArray = jsonNode.withArray("filterdate")
         val startDateString = filterDateJsonNodeArray[0].asText()
         val endDateString = filterDateJsonNodeArray[1].asText()
+
         val dayOfWeekEnum = jsonNode.get("weekDay").asInt().deserializeToDayOfWeekEnum()
 
-//        val dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
         val dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd")
-        val startDateTime = dateFormat.parseDateTime("$startDateString $startTimeString")
-        val endDateTime = dateFormat.parseDateTime("$endDateString $endTimeString")
+        val startDateTime = dateFormat.parseDateTime(startDateString)
+        val endDateTime = dateFormat.parseDateTime(endDateString)
 
         val schedulingDateModelList = mutableListOf<SchedulingDateModel>()
-        var starDateTimeToUseInRage = startDateTime
+        var referredDay = startDateTime
 
-        while (starDateTimeToUseInRage.isBefore(endDateTime)) {
-            if (starDateTimeToUseInRage.dayOfWeek == dayOfWeekEnum.dateTimeConstants) {
+        while (referredDay.isBefore(endDateTime)) {
+            if (referredDay.dayOfWeek == dayOfWeekEnum.dateTimeConstants) {
                 schedulingDateModelList.add(
                         SchedulingDateModel(
-                                startTime = startDateTime, endTime = endDateTime, date = starDateTimeToUseInRage
+                                startTime = startTime, endTime = endTime, date = referredDay
                         )
                 )
             }
-            starDateTimeToUseInRage = starDateTimeToUseInRage.plusDays(1)
+            referredDay = referredDay.plusDays(1)
         }
 
         val spaceId = jsonNode.get("space").get("id").asLong(0)

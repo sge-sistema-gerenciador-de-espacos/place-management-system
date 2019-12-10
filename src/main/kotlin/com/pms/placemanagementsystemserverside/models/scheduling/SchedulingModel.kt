@@ -25,27 +25,27 @@ data class SchedulingModel(
         var status: SchedulingStatusEnum = SchedulingStatusEnum.UNKNOWN,
 
         @ManyToOne(targetEntity = UserModel::class)
-        var schedulerUser: UserModel = UserModel(),
+        var schedulerUser: UserModel? = null,
 
         @OneToMany(targetEntity = SchedulingDateModel::class)
         var schedulingDateModels: MutableList<SchedulingDateModel> = mutableListOf(),
 
         @ManyToOne(targetEntity = UserModel::class)
-        var itResponsible: UserModel = UserModel(),
+        var itResponsible: UserModel? = null,
 
         @Column(name = "it_responsible_msg")
         var itResponsibleMsg: String = "",
 
         @ManyToOne(targetEntity = ClazzModel::class)
-        var clazz: ClazzModel = ClazzModel(),
+        var clazz: ClazzModel? = null,
 
         @ManyToOne(targetEntity = UserModel::class)
-        var assistent: UserModel = UserModel(),
+        var assistent: UserModel? = null,
 
         var assistentMsg: String = "",
 
         @ManyToOne
-        var professor: UserModel = UserModel(),
+        var professor: UserModel? = null,
 
 
         // ============ space intention ==========
